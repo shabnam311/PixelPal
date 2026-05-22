@@ -27,7 +27,7 @@ class TerminalUI:
         purple = "#9b5de5"
         
         # Build Title
-        title_text = Text("[ GUARDIAN v1.0 ] 👾", style=f"bold {green}")
+        title_text = Text("[ PIXELPAL v1.0 ] 👾", style=f"bold {green}")
         
         # Build Session Row
         state = session_status["state"].upper()

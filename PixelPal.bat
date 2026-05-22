@@ -1,7 +1,7 @@
 @echo off
-title Guardian Launcher 👾
+title PixelPal Launcher 👾
 echo =========================================
-echo  👾 BOOTING GUARDIAN FOCUS COMPANION...  
+echo  👾 BOOTING PIXELPAL FOCUS COMPANION...  
 echo =========================================
 echo.
 
@@ -33,7 +33,7 @@ if "%PYTHON_CMD%"=="" (
 
 if %errorlevel% neq 0 (
     echo.
-    echo [ERROR] Guardian exited with code %errorlevel%.
+    echo [ERROR] PixelPal exited with code %errorlevel%.
     echo Make sure you installed all requirements by running:
     echo %PYTHON_CMD% -m pip install -r requirements.txt
     echo.

@@ -18,11 +18,11 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler(os.path.join("data", "guardian.log") if os.path.exists("data") else "guardian.log"),
+        logging.FileHandler(os.path.join("data", "pixelpal.log") if os.path.exists("data") else "pixelpal.log"),
         logging.StreamHandler(sys.stdout)
     ]
 )
-logger = logging.getLogger("GuardianMain")
+logger = logging.getLogger("PixelPalMain")
 
 # Import Core Components
 from core.logger import init_folders, load_stats, save_stats, log_event
@@ -77,7 +77,7 @@ active_alert = None
 websocket_clients = []
 
 # FastAPI Application Definition
-app = FastAPI(title="Guardian Retro API")
+app = FastAPI(title="PixelPal Retro API")
 
 # Serve Web UI files
 @app.get("/")
@@ -369,7 +369,7 @@ def state_change_callback(status):
 def cleanup_and_exit():
     global running
     running = False
-    logger.info("Shutting down Guardian app...")
+    logger.info("Shutting down PixelPal app...")
     
     # Close monitors
     gaze_monitor.close()
@@ -408,7 +408,7 @@ if __name__ == "__main__":
         }
         
     # Setup argument parser
-    parser = argparse.ArgumentParser(description="GUARDIAN - Retro Pixel Focus App")
+    parser = argparse.ArgumentParser(description="PIXELPAL - Retro Pixel Focus App")
     parser.add_argument("mode", choices=["start", "pomodoro", "watch", "stats", "calibrate"], nargs="?", default="watch",
                         help="Action mode: start (standard timer), pomodoro (work/break loops), watch (monitor only), stats (view metrics), calibrate (posture baseline)")
     parser.add_argument("minutes", type=int, nargs="?", default=config["session"]["default_minutes"],
@@ -439,7 +439,7 @@ if __name__ == "__main__":
     # Parse and Execute Initial Action Modes
     if args.mode == "stats":
         stats = load_stats()
-        print("\n=== GUARDIAN HABIT STATS ===")
+        print("\n=== PIXELPAL HABIT STATS ===")
         print(f"🔥 Current Focus Streak: {stats['current_streak']} days")
         print(f"📦 Focus Sessions Completed Today: {stats['sessions_completed_today']}")
         print(f"⌛ Total Focus Time Today: {stats['total_focus_minutes_today']} minutes")
@@ -536,9 +536,9 @@ if __name__ == "__main__":
 
         # Start desktop app window
         try:
-            logger.info("Guardian GUI dashboard window booting...")
+            logger.info("PixelPal GUI dashboard window booting...")
             webview.create_window(
-                "GUARDIAN v1.0 👾", 
+                "PIXELPAL v1.0 👾", 
                 "http://localhost:8000", 
                 width=1000, 
                 height=780, 
@@ -561,7 +561,7 @@ if __name__ == "__main__":
             pass
 
         # Main UI Event Loop (Terminal display + keyboard controls)
-        logger.info("Guardian Terminal dashboard booted. Type [q] to quit, [p] to pause.")
+        logger.info("PixelPal Terminal dashboard booted. Type [q] to quit, [p] to pause.")
         
         try:
             while running:

@@ -133,7 +133,7 @@ setInterval(() => {
 setInterval(() => {
     // Logo glitch
     const logo = document.getElementById('logo-glitch');
-    const origText = "👾 GUARDIAN SYSTEM";
+    const origText = "👾 PIXELPAL SYSTEM";
     const chars = "!@#$%^&*()<>{}[]X";
     
     // Briefly swap a random character
@@ -275,16 +275,16 @@ function updateUI(data) {
     document.getElementById('tab-phone').innerHTML = `📱 ${data.stats.phone_pickups_today}`;
 
     // Totoro Sprite
-    const sprite = document.getElementById('guardian-sprite');
+    const sprite = document.getElementById('pixelpal-sprite');
     const caption = document.getElementById('sprite-caption');
     const eyeL = document.getElementById('pupil-l');
     const eyeR = document.getElementById('pupil-r');
     
     let mood = "happy";
-    let captionText = "GUARDIAN TOTORO IS CONTENT";
+    let captionText = "PIXELPAL TOTORO IS CONTENT";
     
     if (session.state === "idle" && time_left === 0) {
-        mood = "sleep"; captionText = "GUARDIAN TOTORO IS ASLEEP";
+        mood = "sleep"; captionText = "PIXELPAL TOTORO IS ASLEEP";
     } else if (isAlertActive) {
         if (data.phone === "detected" || data.specs === "off") { mood = "critical"; captionText = "PANIC! PHONE OR NO SPECS"; }
         else { mood = "warning"; captionText = "WARNING! LOOK SCREEN OR POSTURE"; }

@@ -26,7 +26,7 @@ def build():
         "--clean",
         "--noconsole",
         "--onefile",
-        "--name", "Guardian",
+        "--name", "PixelPal",
         "--add-data", add_data_ui,
         "--add-data", add_data_config,
         "--collect-all", "mediapipe",
@@ -41,8 +41,8 @@ def build():
     try:
         subprocess.check_call(cmd)
         print("\n=============================================")
-        print("[SUCCESS] Guardian successfully built!")
-        print(f"Executable is located in: {os.path.abspath('dist/Guardian.exe')}")
+        print("[SUCCESS] PixelPal successfully built!")
+        print(f"Executable is located in: {os.path.abspath('dist/PixelPal.exe')}")
         print("=============================================")
     except subprocess.CalledProcessError as e:
         print(f"\n[ERROR] Build failed with exit code {e.returncode}")

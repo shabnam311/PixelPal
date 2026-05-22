@@ -20,7 +20,7 @@ def show_popup(title, message, severity="WARN"):
 def self_contained_popup_thread(title, message, severity):
     try:
         root = tk.Tk()
-        root.title("Guardian Alert")
+        root.title("PixelPal Alert")
         
         # Retro color scheme based on severity
         bg_color = "#0d0d0d"

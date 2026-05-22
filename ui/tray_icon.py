@@ -97,13 +97,13 @@ class TrayIcon:
                 item("Pause / Resume", toggle_pause),
                 item("Take Break (10 min)", take_break),
                 pystray.Menu.SEPARATOR,
-                item("Quit Guardian", quit_app)
+                item("Quit PixelPal", quit_app)
             )
 
             self.icon = pystray.Icon(
-                "guardian",
+                "pixelpal",
                 icon=self.icons["happy"],
-                title="GUARDIAN 👾 Focus Monitor",
+                title="PIXELPAL 👾 Focus Monitor",
                 menu=menu
             )
         except Exception as e:
