@@ -1,0 +1,43 @@
+{
+  "session": {
+    "default_minutes": 45,
+    "break_minutes": 10,
+    "pomodoro_work": 25,
+    "pomodoro_break": 5
+  },
+  "gaze": {
+    "grace_seconds": 10,
+    "soft_warn_seconds": 10,
+    "hard_warn_seconds": 30,
+    "pause_session_seconds": 60,
+    "check_interval_seconds": 2,
+    "enabled": true
+  },
+  "posture": {
+    "slouch_threshold_percent": 15,
+    "check_interval_seconds": 5,
+    "cooldown_minutes": 2,
+    "enabled": true
+  },
+  "specs": {
+    "check_every_minutes": 5,
+    "ollama_model": "llava",
+    "enabled": true
+  },
+  "phone": {
+    "check_every_minutes": 3,
+    "enabled": true
+  },
+  "alerts": {
+    "sound_enabled": true,
+    "popup_enabled": true,
+    "max_warnings_before_cooldown": 3,
+    "quiet_hours_start": "22:00",
+    "quiet_hours_end": "08:00"
+  },
+  "ui": {
+    "theme": "neon_green",
+    "tray_icon_enabled": true,
+    "terminal_refresh_seconds": 1
+  }
+}

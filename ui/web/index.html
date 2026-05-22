@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUARDIAN v1.0 👾 Focus Companion</title>
+    <!-- Retro Pixel Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Courier+Prime&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Ambient Overlays -->
+    <div class="power-on-flash" id="power-on-flash"></div>
+    <div class="scanlines"></div>
+    <div class="scanline-sweep"></div>
+    
+    <!-- True 100vw/100vh CSS Grid Dual Screen layout -->
+    <div class="app-container">
+        <!-- Physical Handheld Console Casing -->
+        <div class="console-casing">
+            
+            <!-- Corner Screws -->
+            <div class="screw screw-tl"></div>
+            <div class="screw screw-tr"></div>
+            <div class="screw screw-bl"></div>
+            <div class="screw screw-br"></div>
+
+            <!-- LED Accent Strips -->
+            <div class="led-strip strip-top"></div>
+            <div class="led-strip strip-bottom"></div>
+
+            <!-- TOP HALF: 55% Height Screen Panel -->
+            <div class="console-panel top-panel-case">
+                <div class="screen-bezel top-bezel">
+                    <div class="screen-inner top-screen" id="top-screen">
+                        
+                        <!-- CRT Screen Glare, Vignette, Particles -->
+                        <div class="screen-glare"></div>
+                        <div class="vignette"></div>
+                        <div class="particles">
+                            <div class="particle p1"></div><div class="particle p2"></div>
+                            <div class="particle p3"></div><div class="particle p4"></div>
+                            <div class="particle p5"></div><div class="particle p6"></div>
+                            <div class="particle p7"></div><div class="particle p8"></div>
+                        </div>
+
+                        <div class="screen-header">
+                            <span class="pulse-icon">●</span> MONITOR FEED
+                            <span class="active-tab-title" id="top-tab-title">TAB: RETRO PET</span>
+                            <button id="btn-mute" class="mute-btn" title="Toggle Sound">🔊</button>
+                        </div>
+
+                        <!-- TOP SCREEN CONTENT AREA -->
+                        <div class="top-screen-content">
+                            <!-- View 1: Companion View -->
+                            <div id="view-companion" class="screen-view active-view">
+                                <div class="pixel-viewport">
+                                    <div id="guardian-sprite" class="sprite-happy">
+                                        <!-- Dynamic Sweat Drops -->
+                                        <div class="sweat-drop s1"></div>
+                                        <div class="sweat-drop s2"></div>
+                                        <div class="sweat-drop s3"></div>
+
+                                        <!-- Massive 220x220 Totoro Pixel Character -->
+                                        <svg viewBox="0 0 16 16" width="220" height="220" shape-rendering="crispEdges">
+                                            <!-- Ears -->
+                                            <rect x="4" y="1" width="1" height="2" fill="#7f7f7f" />
+                                            <rect x="3" y="2" width="2" height="1" fill="#7f7f7f" />
+                                            <rect x="11" y="1" width="1" height="2" fill="#7f7f7f" />
+                                            <rect x="11" y="2" width="2" height="1" fill="#7f7f7f" />
+                                            <!-- Body -->
+                                            <rect x="4" y="3" width="8" height="1" fill="#7f7f7f" />
+                                            <rect x="3" y="4" width="10" height="1" fill="#7f7f7f" />
+                                            <rect x="2" y="5" width="12" height="9" fill="#7f7f7f" />
+                                            <rect x="3" y="14" width="10" height="1" fill="#7f7f7f" />
+                                            <!-- Feet -->
+                                            <rect x="3" y="15" width="2" height="1" fill="#555555" />
+                                            <rect x="11" y="15" width="2" height="1" fill="#555555" />
+                                            <!-- White Tummy -->
+                                            <rect x="5" y="8" width="6" height="1" fill="#f5f2e9" />
+                                            <rect x="4" y="9" width="8" height="5" fill="#f5f2e9" />
+                                            <!-- Markings -->
+                                            <rect x="5" y="10" width="1" height="1" fill="#595959" />
+                                            <rect x="7" y="10" width="2" height="1" fill="#595959" />
+                                            <rect x="10" y="10" width="1" height="1" fill="#595959" />
+                                            <rect x="6" y="12" width="1" height="1" fill="#595959" />
+                                            <rect x="9" y="12" width="1" height="1" fill="#595959" />
+                                            <!-- Eyes -->
+                                            <g id="totoro-eyes">
+                                                <rect x="4" y="5" width="2" height="2" fill="#ffffff" />
+                                                <rect x="5" y="6" width="1" height="1" fill="#0d0d0d" id="pupil-l" />
+                                                <rect x="10" y="5" width="2" height="2" fill="#ffffff" />
+                                                <rect x="10" y="6" width="1" height="1" fill="#0d0d0d" id="pupil-r" />
+                                            </g>
+                                            <!-- Nose -->
+                                            <rect x="7" y="6" width="2" height="1" fill="#0d0d0d" />
+                                            <!-- Cheeks -->
+                                            <rect x="3" y="7" width="1" height="1" fill="#ff9ebb" class="rosy-cheeks" />
+                                            <rect x="12" y="7" width="1" height="1" fill="#ff9ebb" class="rosy-cheeks" />
+                                            <!-- Whiskers -->
+                                            <rect x="1" y="6" width="2" height="1" fill="#444444" />
+                                            <rect x="1" y="8" width="2" height="1" fill="#444444" />
+                                            <rect x="13" y="6" width="2" height="1" fill="#444444" />
+                                            <rect x="13" y="8" width="2" height="1" fill="#444444" />
+                                        </svg>
+                                    </div>
+                                    <div id="sprite-caption" class="retro-caption">GUARDIAN TOTORO IS ASLEEP</div>
+                                </div>
+                            </div>
+
+                            <!-- View 2: Sensors -->
+                            <div id="view-sensors" class="screen-view">
+                                <div class="sensors-list-hud">
+                                    <div class="hud-card" id="card-gaze"><div class="hud-label">GAZE TRACKER</div><div class="hud-status" id="status-gaze">👁️ TRACKING</div></div>
+                                    <div class="hud-card" id="card-posture"><div class="hud-label">POSTURE CHECK</div><div class="hud-status" id="status-posture">🧍 GOOD</div></div>
+                                    <div class="hud-card" id="card-specs"><div class="hud-label">UV GLASSES</div><div class="hud-status" id="status-specs">👓 ON</div></div>
+                                    <div class="hud-card" id="card-phone"><div class="hud-label">PHONE DETECT</div><div class="hud-status" id="status-phone">📵 CLEAR</div></div>
+                                </div>
+                            </div>
+
+                            <!-- View 3: Stats -->
+                            <div id="view-stats" class="screen-view">
+                                <div class="detailed-stats-tab">
+                                    <div class="stats-grid">
+                                        <div class="stat-box"><div class="stat-num text-yellow" id="tab-streak">🔥 0</div><div class="stat-lbl">DAILY STREAK</div></div>
+                                        <div class="stat-box"><div class="stat-num text-green" id="tab-sessions">📦 0</div><div class="stat-lbl">SESSIONS TODAY</div></div>
+                                        <div class="stat-box"><div class="stat-num text-purple" id="tab-posture">🧍 0</div><div class="stat-lbl">SLOUCH WARNS</div></div>
+                                        <div class="stat-box"><div class="stat-num text-pink" id="tab-phone">📱 0</div><div class="stat-lbl">PHONE PICKUPS</div></div>
+                                    </div>
+                                    <div class="trophies-badge-row" id="trophies-container"><span class="locked-lbl">TROPHIES: [ NONE YET ]</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHYSICAL CENTER HINGE -->
+            <div class="console-hinge">
+                <div class="hinge-bar"></div>
+            </div>
+
+            <!-- BOTTOM HALF: 45% Height Controls & HUD -->
+            <div class="console-panel bottom-panel-case">
+                
+                <!-- Left D-Pad Controls -->
+                <div class="case-side-left">
+                    <!-- Left Speaker Grills -->
+                    <div class="speaker-grill grill-left"><span></span><span></span><span></span><span></span></div>
+                    
+                    <div class="dpad-container">
+                        <div class="dpad-btn dpad-up" id="dpad-up"></div>
+                        <div class="dpad-btn dpad-left" id="dpad-left"></div>
+                        <div class="dpad-center"></div>
+                        <div class="dpad-btn dpad-right" id="dpad-right"></div>
+                        <div class="dpad-btn dpad-down" id="dpad-down"></div>
+                    </div>
+                </div>
+
+                <!-- Center Touch Screen -->
+                <div class="screen-bezel bottom-bezel">
+                    <div class="screen-inner bottom-screen">
+                        <div class="screen-glare"></div>
+                        
+                        <div class="timer-hud-container">
+                            <div class="hearts-row">
+                                <span class="hearts-label font-pixel">HP</span>
+                                <div id="hearts-container" class="hearts-box">
+                                    <div class="pixel-heart full"></div><div class="pixel-heart full"></div>
+                                    <div class="pixel-heart full"></div><div class="pixel-heart full"></div>
+                                    <div class="pixel-heart full"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="timer-digits-container">
+                                <div id="timer-display" class="timer-digits">45:00</div>
+                                <div id="session-state-badge" class="state-badge badge-idle">IDLE</div>
+                            </div>
+                        </div>
+
+                        <div class="console-box">
+                            <div class="console-title">SYSTEM LOGS</div>
+                            <div id="console-logs" class="console-content">
+                                <div class="log-line text-purple typewriter">[SYSTEM] System initialized. Ready.</div>
+                            </div>
+                        </div>
+
+                        <div class="hud-buttons-row">
+                            <button class="pixel-btn btn-green" id="btn-start">START FOCUS</button>
+                            <button class="pixel-btn btn-purple" id="btn-pomo">POMODORO</button>
+                            <button class="pixel-btn btn-yellow" id="btn-pause" disabled>PAUSE</button>
+                            <button class="pixel-btn btn-pink" id="btn-calibrate">CALIBRATE</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Action Buttons -->
+                <div class="case-side-right">
+                    <!-- Right Speaker Grills -->
+                    <div class="speaker-grill grill-right"><span></span><span></span><span></span><span></span></div>
+
+                    <div class="abxy-group">
+                        <div class="abxy-btn btn-x" id="btn-console-x"><span>X</span><div class="dot"></div></div>
+                        <div class="abxy-btn btn-y" id="btn-console-y"><span>Y</span><div class="dot"></div></div>
+                        <div class="abxy-btn btn-a" id="btn-console-a"><span>A</span><div class="dot"></div></div>
+                        <div class="abxy-btn btn-b" id="btn-console-b"><span>B</span><div class="dot"></div></div>
+                    </div>
+                    
+                    <div class="hardware-led-container">
+                        <div class="led-label">PWR</div>
+                        <div class="led-light online" id="led-power"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Lower Edge Row -->
+            <div class="console-lower-edge">
+                <div class="menu-btn-container">
+                    <button class="oval-btn" id="btn-console-select"><span>SELECT</span></button>
+                    <button class="oval-btn" id="btn-console-start"><span>START</span></button>
+                </div>
+                <!-- Glitch Marquee Text -->
+                <div class="branding-text" id="logo-glitch">👾 GUARDIAN SYSTEM</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Alert Dialog -->
+    <div id="alert-overlay" class="hidden-alert">
+        <div class="alert-dialog-wrapper">
+            <div class="alert-dialog">
+                <div class="dialog-corner corner-tl"></div><div class="dialog-corner corner-tr"></div>
+                <div class="dialog-corner corner-bl"></div><div class="dialog-corner corner-br"></div>
+                <h2 id="alert-title">⚠️ ALERT</h2>
+                <p id="alert-desc">Alert message</p>
+                <div class="dialog-button-row">
+                    <button class="pixel-btn btn-green" id="btn-alert-dismiss">[ DISMISS ]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boot sequence unlocker -->
+    <div id="audio-unlock-overlay">
+        <div class="unlock-prompt">
+            <h2 class="blink-fast">BOOT SYSTEM</h2>
+            <p>CLICK TO INITIALIZE</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

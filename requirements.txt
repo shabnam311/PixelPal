@@ -1,0 +1,10 @@
+opencv-python
+mediapipe
+Pillow
+rich
+pystray
+ollama
+websockets
+fastapi
+uvicorn
+pywebview
