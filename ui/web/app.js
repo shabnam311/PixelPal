@@ -414,3 +414,15 @@ document.getElementById('dpad-up').addEventListener('click', () => switchTab(vie
 document.getElementById('dpad-down').addEventListener('click', () => switchTab(views[(activeViewIndex + 1) % views.length]));
 
 connectWebSocket();
+
+// Global Escape Key to Exit Fullscreen App
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        playClickSound();
+        fetch('/api/shutdown', { method: 'POST' }).then(() => {
+            setTimeout(() => { window.close(); }, 500);
+        }).catch(() => {
+            window.close();
+        });
+    }
+});

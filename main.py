@@ -132,6 +132,15 @@ def api_dismiss_alert():
     active_alert = None
     return {"status": "success"}
 
+@app.post("/api/shutdown")
+def api_shutdown():
+    logger.info("Shutdown requested via Web UI (Escape key)")
+    def delayed_exit():
+        time.sleep(0.5)
+        cleanup_and_exit()
+    threading.Thread(target=delayed_exit).start()
+    return {"status": "success"}
+
 # WebSocket server handler
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
