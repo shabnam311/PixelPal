@@ -561,7 +561,6 @@ if __name__ == "__main__":
         # Start desktop app window
         try:
             logger.info("PixelPal GUI dashboard window booting...")
-            global gui_window
             gui_window = webview.create_window(
                 "PIXELPAL v1.0 👾", 
                 "http://localhost:8000", 
