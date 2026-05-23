@@ -75,6 +75,7 @@ active_alert = None
 
 # WebSocket clients list
 websocket_clients = []
+gui_window = None
 
 # FastAPI Application Definition
 app = FastAPI(title="PixelPal Retro API")
@@ -139,6 +140,20 @@ def api_shutdown():
         time.sleep(0.5)
         cleanup_and_exit()
     threading.Thread(target=delayed_exit).start()
+    return {"status": "success"}
+
+@app.post("/api/minimize")
+def api_minimize():
+    global gui_window
+    if gui_window:
+        gui_window.minimize()
+    return {"status": "success"}
+
+@app.post("/api/maximize")
+def api_maximize():
+    global gui_window
+    if gui_window:
+        gui_window.toggle_fullscreen()
     return {"status": "success"}
 
 # WebSocket server handler
@@ -546,7 +561,8 @@ if __name__ == "__main__":
         # Start desktop app window
         try:
             logger.info("PixelPal GUI dashboard window booting...")
-            webview.create_window(
+            global gui_window
+            gui_window = webview.create_window(
                 "PIXELPAL v1.0 👾", 
                 "http://localhost:8000", 
                 width=1000, 

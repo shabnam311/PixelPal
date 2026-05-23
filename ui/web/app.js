@@ -426,3 +426,21 @@ document.addEventListener('keydown', (e) => {
         });
     }
 });
+
+// OS Window Controls
+document.getElementById('btn-os-minimize').addEventListener('click', () => {
+    playClickSound();
+    fetch('/api/minimize', { method: 'POST' });
+});
+document.getElementById('btn-os-maximize').addEventListener('click', () => {
+    playClickSound();
+    fetch('/api/maximize', { method: 'POST' });
+});
+document.getElementById('btn-os-close').addEventListener('click', () => {
+    playClickSound();
+    fetch('/api/shutdown', { method: 'POST' }).then(() => {
+        setTimeout(() => { window.close(); }, 500);
+    }).catch(() => {
+        window.close();
+    });
+});
