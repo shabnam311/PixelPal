@@ -1245,6 +1245,23 @@ updateUI = function(data) {
     // Point 48: Next Break Countdown
     const nextBreak = document.getElementById('next-break-display');
     const nextBreakTime = document.getElementById('next-break-time');
+    if (document.getElementById('session-state-badge').innerText.toUpperCase() === 'FOCUS' && data.session_state !== 'FOCUS') {
+        triggerBreakOverlay();
+        
+        // Point 52: Desktop Notification on Break
+        if ("Notification" in window && Notification.permission === "granted") {
+            new Notification("PixelPal Session Complete!", {
+                body: "Great job! Time to take a quick break.",
+                icon: "ui/web/pixelpal_icon.png"
+            });
+        } else if ("Notification" in window && Notification.permission !== "denied") {
+            Notification.requestPermission().then(function (permission) {
+                if (permission === "granted") {
+                    new Notification("PixelPal Session Complete!", { body: "Great job! Time to take a quick break." });
+                }
+            });
+        }
+    }
     if(nextBreak && nextBreakTime) {
         if(data.session_state === 'FOCUS') {
             nextBreak.style.display = 'block';
