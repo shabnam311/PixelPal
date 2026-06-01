@@ -2662,3 +2662,20 @@ setInterval(() => {
         }
     }, 1000);
 })();
+
+// Point 143: Pet Context Menu
+(function() {
+    const pet = document.getElementById('pixelpal-sprite');
+    const ctx = document.getElementById('pet-context-menu');
+    if(pet && ctx) {
+        pet.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            ctx.style.display = 'block';
+            ctx.style.left = e.pageX + 'px';
+            ctx.style.top = e.pageY + 'px';
+        });
+        document.addEventListener('click', () => {
+            ctx.style.display = 'none';
+        });
+    }
+})();
