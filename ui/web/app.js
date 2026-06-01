@@ -3213,3 +3213,21 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 177: Neon Overload Easter Egg
+(function() {
+    let nCode = ['n','e','o','n'];
+    let nIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === nCode[nIdx]) {
+            nIdx++;
+            if(nIdx === nCode.length) {
+                document.body.classList.toggle('neon-overload');
+                showToast("MAXIMUM OVERDRIVE", "Neon intensity 300%.", "info");
+                nIdx = 0;
+            }
+        } else {
+            nIdx = 0;
+        }
+    });
+})();

@@ -1434,3 +1434,6 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 
 /* Point 176: Ghost Pet */
 .pet-ghost { opacity: 0.2 !important; transition: opacity 1s; }
+
+/* Point 177: Neon Overload */
+.neon-overload * { text-shadow: 0 0 20px var(--neon-green), 0 0 30px var(--neon-cyan) !important; }
