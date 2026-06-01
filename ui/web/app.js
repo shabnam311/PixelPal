@@ -1610,7 +1610,7 @@ function playTypewriterSound() {
         if(e.altKey && e.key === '4') document.body.setAttribute('data-theme', 'cyberpunk-yellow');
         
         // Point 49: Alt+B Boss Mode Toggle
-        if(e.altKey && e.key === 'b') {
+        if(e.altKey && e.key === 'b' && document.getElementById('toggle-boss-mode') && document.getElementById('toggle-boss-mode').checked) {
             const ui = document.querySelector('.main-ui');
             if(ui.style.display === 'none') {
                 ui.style.display = 'block';
