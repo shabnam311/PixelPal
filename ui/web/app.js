@@ -1538,7 +1538,7 @@ function playTypewriterSound() {
             const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
             if (badge && badge.innerText.toUpperCase() === 'FOCUS') {
                 togglePause(); // pause the session
-                showToast("AFK DETECTED", "You were gone for 15 minutes. Session auto-paused.", "warn");
+                showToast("AFK DETECTED", "You were gone for 15 minutes. Session auto-paused. <button onclick=\\"togglePause(); this.parentElement.parentElement.remove();\\" style=\\"background:var(--neon-green); color:black; border:none; padding:2px 5px; cursor:pointer; margin-top:5px;\\">Forgive & Resume</button>", "warn");
             }
         }, 900000); // 15 mins for AFK
     }
