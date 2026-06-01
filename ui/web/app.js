@@ -1131,3 +1131,31 @@ function playTypewriterSound() {
         }
     }, 1000);
 })();
+
+// Point 28: Daily Affirmations/Insults
+(function() {
+    const goodQuotes = ["You're doing great!", "Keep it up!", "Stay frosty.", "Pixel perfect!", "Focus level: over 9000!"];
+    const badQuotes = ["Stop slacking!", "Eyes on the screen!", "Are you even trying?", "Posture check!", "Put the phone away!"];
+    
+    setInterval(() => {
+        const bubble = document.getElementById('pet-speech-bubble');
+        const badge = document.getElementById('session-state-badge');
+        if(!bubble || !badge) return;
+        
+        if (Math.random() < 0.2) { // 20% chance every 10s to show bubble
+            const state = badge.innerText.toUpperCase();
+            bubble.style.display = 'block';
+            if (state.includes('WARN') || state.includes('CRITICAL')) {
+                bubble.innerText = badQuotes[Math.floor(Math.random() * badQuotes.length)];
+                bubble.style.color = "red";
+            } else {
+                bubble.innerText = goodQuotes[Math.floor(Math.random() * goodQuotes.length)];
+                bubble.style.color = "black";
+            }
+            
+            setTimeout(() => {
+                if(bubble) bubble.style.display = 'none';
+            }, 4000);
+        }
+    }, 10000);
+})();
