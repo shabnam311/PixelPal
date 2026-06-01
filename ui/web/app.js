@@ -1555,6 +1555,23 @@ function playTypewriterSound() {
             }
         }
     });
+
+    // Point 51: Konami Code Secret Rainbow Theme
+    let konamiCode = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let konamiIndex = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key === konamiCode[konamiIndex]) {
+            konamiIndex++;
+            if(konamiIndex === konamiCode.length) {
+                document.body.style.animation = 'rainbow-bg 5s infinite';
+                showToast("SECRET", "RAINBOW MODE UNLOCKED", "info");
+                playLevelUpSound();
+                konamiIndex = 0;
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
 })();
 
 // Point 41: Click Pet to Shake Screen
