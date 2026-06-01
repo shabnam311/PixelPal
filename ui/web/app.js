@@ -1504,6 +1504,17 @@ function playTypewriterSound() {
         pet.style.cursor = 'grab';
     }
 
+    // Point 59: Pet Wanders Automatically
+    setInterval(() => {
+        if(!isDragging && !pet.classList.contains('anim-sleep') && Math.random() < 0.3) {
+            const wanderX = (Math.random() - 0.5) * 100;
+            pet.style.transition = 'transform 2s ease-in-out';
+            xOffset += wanderX;
+            pet.style.transform = "translate3d(" + xOffset + "px, " + yOffset + "px, 0)";
+            setTimeout(() => pet.style.transition = 'none', 2000);
+        }
+    }, 10000);
+
     // Point 50: Pet Falls Asleep on Idle
     let idleTimer;
     document.addEventListener('mousemove', resetIdle);
