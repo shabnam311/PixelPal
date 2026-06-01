@@ -252,6 +252,32 @@
         </div>
     </div>
 
+    <!-- Onboarding First-Run Wizard (Point 11) -->
+    <div id="onboarding-overlay" class="onboarding-overlay" style="display:none;">
+        <div class="onboarding-dialog">
+            <div class="onboarding-border-corner ob-tl"></div>
+            <div class="onboarding-border-corner ob-tr"></div>
+            <div class="onboarding-border-corner ob-bl"></div>
+            <div class="onboarding-border-corner ob-br"></div>
+            <div class="onboarding-step-indicator">
+                <span class="ob-dot ob-dot-active" id="ob-dot-0"></span>
+                <span class="ob-dot" id="ob-dot-1"></span>
+                <span class="ob-dot" id="ob-dot-2"></span>
+                <span class="ob-dot" id="ob-dot-3"></span>
+            </div>
+            <div id="onboarding-content" class="onboarding-content">
+                <div class="ob-icon">⚔️</div>
+                <h2 id="ob-title" class="ob-title"></h2>
+                <p id="ob-desc" class="ob-desc"></p>
+            </div>
+            <div class="onboarding-actions">
+                <button id="ob-btn-back" class="pixel-btn btn-yellow ob-btn" style="display:none;">◀ BACK</button>
+                <button id="ob-btn-next" class="pixel-btn btn-green ob-btn">NEXT ▶</button>
+            </div>
+            <div class="ob-hint">▼ PRESS A TO CONTINUE ▼</div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

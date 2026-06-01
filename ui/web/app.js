@@ -472,3 +472,81 @@ document.addEventListener('DOMContentLoaded', () => {
     if(fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
 });
 
+// ==========================================
+// POINT 11: ONBOARDING FIRST-RUN WIZARD
+// ==========================================
+const onboardingSteps = [
+    { icon: '⚔️', title: 'A new adventure begins...', desc: 'Welcome, Trainer! Your PixelPal awaits.' },
+    { icon: '🧍', title: 'Calibrate your posture', desc: 'Sit straight & click CALIBRATE to set baseline.' },
+    { icon: '🎨', title: 'Choose your theme', desc: 'Neon green, cyberpunk pink, or retro purple!' },
+    { icon: '🐾', title: 'Meet your PixelPal!', desc: 'Totoro will guard your focus. Let\'s go!' }
+];
+let obStep = 0;
+
+function showOnboarding() {
+    if (localStorage.getItem('pixelpal_onboarded') === 'true') return;
+    const overlay = document.getElementById('onboarding-overlay');
+    if (!overlay) return;
+    overlay.style.display = 'flex';
+    obStep = 0;
+    renderObStep();
+}
+
+function renderObStep() {
+    const step = onboardingSteps[obStep];
+    const icon = document.querySelector('.ob-icon');
+    const title = document.getElementById('ob-title');
+    const desc = document.getElementById('ob-desc');
+    const btnBack = document.getElementById('ob-btn-back');
+    const btnNext = document.getElementById('ob-btn-next');
+
+    icon.textContent = step.icon;
+    // Typewriter effect: reset animations
+    title.style.animation = 'none';
+    desc.style.animation = 'none';
+    void title.offsetHeight; // trigger reflow
+    title.textContent = step.title;
+    desc.textContent = step.desc;
+    title.style.animation = 'ob-typing 2s steps(40, end), ob-cursor-blink 0.7s step-end infinite';
+    desc.style.animation = 'ob-typing 2.5s steps(40, end) 0.5s both';
+
+    // Update dots
+    for (let i = 0; i < 4; i++) {
+        const dot = document.getElementById('ob-dot-' + i);
+        dot.className = 'ob-dot';
+        if (i < obStep) dot.classList.add('ob-dot-complete');
+        else if (i === obStep) dot.classList.add('ob-dot-active');
+    }
+
+    btnBack.style.display = obStep === 0 ? 'none' : 'inline-block';
+    btnNext.textContent = obStep === onboardingSteps.length - 1 ? 'START! ✨' : 'NEXT ▶';
+}
+
+document.getElementById('ob-btn-next')?.addEventListener('click', () => {
+    playClickSound();
+    if (obStep < onboardingSteps.length - 1) {
+        obStep++;
+        renderObStep();
+    } else {
+        localStorage.setItem('pixelpal_onboarded', 'true');
+        document.getElementById('onboarding-overlay').style.display = 'none';
+    }
+});
+
+document.getElementById('ob-btn-back')?.addEventListener('click', () => {
+    playClickSound();
+    if (obStep > 0) {
+        obStep--;
+        renderObStep();
+    }
+});
+
+// Hook onboarding to boot sequence completion
+(function() {
+    const origBootClick = document.getElementById('audio-unlock-overlay');
+    if (origBootClick) {
+        origBootClick.addEventListener('click', () => {
+            setTimeout(showOnboarding, 1800);
+        });
+    }
+})();
