@@ -78,6 +78,12 @@
                             <!-- Point 26: Weather Layer -->
                             <div id="weather-layer" class="weather-layer"></div>
                             
+                            <!-- Point 30: System Stats Monitor -->
+                            <div id="sys-stats" style="position: absolute; top: 10px; left: 10px; z-index: 50; font-family: 'Courier New', monospace; font-size: 10px; color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); pointer-events: none;">
+                                <div>SYS_PWR: <span id="fake-pwr">98%</span></div>
+                                <div>MEM_USG: <span id="fake-mem">42%</span></div>
+                            </div>
+
                             <!-- View 1: Companion View -->
                             <div id="view-companion" class="screen-view active-view">
                                 <div class="pixel-viewport">

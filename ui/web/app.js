@@ -1159,3 +1159,15 @@ function playTypewriterSound() {
         }
     }, 10000);
 })();
+
+// Point 30: System Stats Monitor Flicker
+(function() {
+    setInterval(() => {
+        const pwr = document.getElementById('fake-pwr');
+        const mem = document.getElementById('fake-mem');
+        if(!pwr || !mem) return;
+        
+        pwr.innerText = (95 + Math.floor(Math.random() * 5)) + "%";
+        mem.innerText = (40 + Math.floor(Math.random() * 20)) + "%";
+    }, 2500);
+})();
