@@ -2630,3 +2630,21 @@ setInterval(() => {
         }, 100);
     }
 })();
+
+// Point 141: Sonic Easter Egg
+(function() {
+    let sonicCode = ['s','o','n','i','c'];
+    let sonicIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === sonicCode[sonicIdx]) {
+            sonicIdx++;
+            if(sonicIdx === sonicCode.length) {
+                showToast("GOTTA GO FAST", "Sonic mode activated!", "info");
+                document.querySelector('.timer-digits').style.animation = 'focusFire 0.1s infinite';
+                sonicIdx = 0;
+            }
+        } else {
+            sonicIdx = 0;
+        }
+    });
+})();
