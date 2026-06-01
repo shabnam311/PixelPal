@@ -569,7 +569,7 @@ if __name__ == "__main__":
                 min_size=(520, 760),
                 resizable=False,
                 fullscreen=False,
-                frameless=False,
+                frameless=True,
                 background_color="#0d1117",
             )
             webview.start()

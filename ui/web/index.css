@@ -558,3 +558,45 @@ body {
 .unlock-prompt { text-align: center; color: var(--neon-green); text-shadow: 0 0 20px currentColor; }
 .unlock-prompt h2 { font-size: 30px; margin-bottom: 30px; }
 .blink-fast { animation: blinker 0.5s step-start infinite; }
+
+.os-window-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #0d1117;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+}
+
+.traffic-lights {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.os-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.mac-close { background: #ff5f56; }
+.mac-close:hover { background: #ff3b30; }
+
+.mac-minimize { background: #ffbd2e; }
+.mac-minimize:hover { background: #ffcc00; }
+
+.mac-maximize { background: #27c93f; }
+.mac-maximize:hover { background: #28cd41; }
+
+.window-title {
+    font-size: 10px;
+    color: #666;
+    user-select: none;
+}
+
