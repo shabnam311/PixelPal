@@ -1577,6 +1577,13 @@ function playTypewriterSound() {
     }, 500);
 
     document.addEventListener('keydown', (e) => {
+        // Point 66: Esc Key Violation during Focus
+        const badge = document.getElementById('session-state-badge');
+        if (e.key === 'Escape' && badge && badge.innerText.toUpperCase() === 'FOCUS') {
+            if (typeof triggerViolationFlash === 'function') triggerViolationFlash();
+            showToast("VIOLATION", "Stay focused! No escaping!", "crit");
+        }
+
         // Point 37: Ctrl+M to toggle sound
         if(e.ctrlKey && e.key === 'm') {
             soundEnabled = !soundEnabled;
