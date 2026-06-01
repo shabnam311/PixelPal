@@ -2598,3 +2598,17 @@ setInterval(() => {
         }
     }
 }, 60000);
+
+// Point 138: Focus Fire Effect
+(function() {
+    setInterval(() => {
+        const timer = document.querySelector('.timer-digits');
+        if(timer && lastKnownState && lastKnownState.session) {
+            if(lastKnownState.session.state === 'focus' && lastKnownState.session.remaining_sec <= 60 && lastKnownState.session.remaining_sec > 0) {
+                timer.classList.add('focus-fire-active');
+            } else {
+                timer.classList.remove('focus-fire-active');
+            }
+        }
+    }, 1000);
+})();

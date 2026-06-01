@@ -1354,3 +1354,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 136: Crosshair Cursor */
 .app-container { cursor: crosshair; }
 .app-container a, .app-container button, .app-container input, .app-container .level-badge { cursor: pointer; }
+
+/* Point 138: Focus Fire Pulse */
+@keyframes focusFire { 0% { box-shadow: 0 0 5px orange; border-color: orange; } 50% { box-shadow: 0 0 20px red; border-color: red; } 100% { box-shadow: 0 0 5px orange; border-color: orange; } }
+.focus-fire-active { animation: focusFire 0.5s infinite; color: orange !important; }
