@@ -1330,3 +1330,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 119: Ambient Window Borders */
 @keyframes ambientBorder { 0% { box-shadow: inset 0 0 10px var(--neon-cyan); } 50% { box-shadow: inset 0 0 30px var(--neon-purple); } 100% { box-shadow: inset 0 0 10px var(--neon-cyan); } }
 .app-container { animation: ambientBorder 10s infinite alternate; }
+
+/* Point 121: Level Up Flash */
+@keyframes levelUpFlash { 0% { background-color: rgba(255,255,255,0); } 10% { background-color: rgba(255,255,255,1); } 100% { background-color: rgba(255,255,255,0); } }
+.level-up-flash-active { animation: levelUpFlash 1.5s ease-out; pointer-events: none; z-index: 9999; position: fixed; top:0; left:0; right:0; bottom:0; }

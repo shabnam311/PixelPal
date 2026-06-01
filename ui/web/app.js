@@ -1776,11 +1776,11 @@ function playStartSound() {
             const currentXp = parseFloat(xpFill.style.width);
             if (lastXp !== -1 && currentXp < lastXp && currentXp === 0) {
                 // If it wrapped around to 0, it means a level up
-                showToast("LEVEL UP!", "Your focus rank increased!", "info");
+                showToast("LEVEL UP!", "Your focus rank increased!", "info");`n                // Point 121: Level Up Flash`n                const flashOverlay = document.getElementById('level-up-flash-overlay');`n                if(flashOverlay) {`n                    flashOverlay.classList.remove('level-up-flash-active');`n                    void flashOverlay.offsetWidth;`n                    flashOverlay.classList.add('level-up-flash-active');`n                }
                 playLevelUpSound();
             }
             if (lastXp !== -1 && currentXp > lastXp && lastXp > 95 && currentXp >= 100) {
-                showToast("LEVEL UP!", "Your focus rank increased!", "info");
+                showToast("LEVEL UP!", "Your focus rank increased!", "info");`n                // Point 121: Level Up Flash`n                const flashOverlay = document.getElementById('level-up-flash-overlay');`n                if(flashOverlay) {`n                    flashOverlay.classList.remove('level-up-flash-active');`n                    void flashOverlay.offsetWidth;`n                    flashOverlay.classList.add('level-up-flash-active');`n                }
                 playLevelUpSound();
                 xpFill.style.width = '0%';
             }
