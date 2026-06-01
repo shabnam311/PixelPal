@@ -1259,3 +1259,6 @@ body {
 /* Point 81: Matrix Rain Background */
 .matrix-rain-active { background: url('https://upload.wikimedia.org/wikipedia/commons/e/e6/Matrix_falling_code.jpg') !important; background-size: cover !important; animation: scanlines 1s linear infinite; }
 .matrix-rain-active * { text-shadow: 0 0 10px #0f0 !important; color: #0f0 !important; }
+
+/* Point 82: Pet Sad Frame */
+.anim-sad { filter: grayscale(80%) sepia(50%) hue-rotate(300deg) drop-shadow(0 0 10px red); }

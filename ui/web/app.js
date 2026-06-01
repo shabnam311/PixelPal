@@ -249,17 +249,17 @@ function updateUI(data) {
         document.getElementById('btn-start').disabled = false;
         document.getElementById('btn-pomo').disabled = false;
         document.getElementById('btn-pause').disabled = true;
-        document.getElementById('btn-pause').innerText = "PAUSE";
+        document.getElementById('btn-pause').innerText = "PAUSE";`n        // Point 82: Remove Pet Sad Frame`n        const p = document.getElementById('pixelpal-sprite');`n        if(p) p.classList.remove('anim-sad');
     } else if (session.state === "paused") {
         document.getElementById('btn-start').disabled = true;
         document.getElementById('btn-pomo').disabled = true;
         document.getElementById('btn-pause').disabled = false;
-        document.getElementById('btn-pause').innerText = "RESUME";
+        document.getElementById('btn-pause').innerText = "RESUME";`n        // Point 82: Pet Sad Frame`n        const p = document.getElementById('pixelpal-sprite');`n        if(p) p.classList.add('anim-sad');
     } else {
         document.getElementById('btn-start').disabled = true;
         document.getElementById('btn-pomo').disabled = true;
         document.getElementById('btn-pause').disabled = false;
-        document.getElementById('btn-pause').innerText = "PAUSE";
+        document.getElementById('btn-pause').innerText = "PAUSE";`n        // Point 82: Remove Pet Sad Frame`n        const p = document.getElementById('pixelpal-sprite');`n        if(p) p.classList.remove('anim-sad');
     }
 
     // Sensors
