@@ -2533,3 +2533,20 @@ if(originalShowToast) {
         }
     }, 2000);
 })();
+
+// Point 133: Zzz Particles
+(function() {
+    setInterval(() => {
+        const pet = document.getElementById('pixelpal-sprite');
+        if(pet && pet.classList.contains('anim-sleep')) {
+            const z = document.createElement('div');
+            z.className = 'zzz-particle';
+            z.innerText = 'Z';
+            const rect = pet.getBoundingClientRect();
+            z.style.left = (rect.left + rect.width/2 + (Math.random()*20-10)) + 'px';
+            z.style.top = (rect.top - 10) + 'px';
+            document.body.appendChild(z);
+            setTimeout(() => z.remove(), 2000);
+        }
+    }, 1200);
+})();
