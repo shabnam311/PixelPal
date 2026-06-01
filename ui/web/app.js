@@ -3251,3 +3251,17 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 179: Bongo Typing Animation
+(function() {
+    document.addEventListener('keydown', (e) => {
+        if(lastKnownState && lastKnownState.session && lastKnownState.session.state === 'focus') {
+            const pet = document.getElementById('pixelpal-sprite');
+            if(pet) {
+                pet.classList.remove('bongo-active');
+                void pet.offsetWidth; // trigger reflow
+                pet.classList.add('bongo-active');
+            }
+        }
+    });
+})();

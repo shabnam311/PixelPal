@@ -1441,3 +1441,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 178: Quest Giver Exclamation */
 .quest-mark { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 24px; color: yellow; text-shadow: 0 0 10px orange; animation: questBounce 1s infinite alternate; font-weight: bold; pointer-events: none; z-index: 1000; }
 @keyframes questBounce { 0% { transform: translate(-50%, 0); } 100% { transform: translate(-50%, -10px); } }
+
+/* Point 179: Bongo Typing */
+@keyframes bongoBob { 0% { transform: translateY(0); } 50% { transform: translateY(2px); } 100% { transform: translateY(0); } }
+.bongo-active { animation: bongoBob 0.1s linear !important; }
