@@ -2351,3 +2351,18 @@ setInterval(() => {
         xpContainer.setAttribute('title', \\$\{cur\} / \$\{max\} XP\);
     }
 }, 1000);
+
+// Point 117: Custom Boot Text
+(function() {
+    const btIn = document.getElementById('boot-text-input');
+    if(btIn) {
+        const savedBt = localStorage.getItem('pixelpal_boot_text') || '';
+        btIn.value = savedBt;
+        if(savedBt) {
+            setTimeout(() => logToConsole("BOOT OVERRIDE: " + savedBt, "cyan"), 1500);
+        }
+        btIn.addEventListener('input', (e) => {
+            localStorage.setItem('pixelpal_boot_text', e.target.value);
+        });
+    }
+})();
