@@ -1891,3 +1891,16 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 75: Pet Window Scaling
+(function() {
+    function scalePet() {
+        const pet = document.getElementById('pixelpal-sprite');
+        if(pet) {
+            const scale = Math.max(0.5, Math.min(1.5, window.innerHeight / 800));
+            pet.style.transform = \scale(\)\;
+        }
+    }
+    window.addEventListener('resize', scalePet);
+    setTimeout(scalePet, 1000);
+})();
