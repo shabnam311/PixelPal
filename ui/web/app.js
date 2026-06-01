@@ -1835,3 +1835,9 @@ function playStartSound() {
     }, 15000);
     console.log("[Point 200] All 200 points loaded successfully in single stretch.");
 })();
+
+// Point 67: Real-Time HUD Clock
+setInterval(() => {
+    const clock = document.getElementById('live-clock');
+    if(clock) clock.innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
+}, 1000);
