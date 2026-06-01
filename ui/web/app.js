@@ -2957,3 +2957,26 @@ setInterval(() => {
         if(!el.title) el.title = 'Adjust this setting to customize your experience';
     });
 })();
+
+// Point 161: Matrix Rain Easter Egg
+(function() {
+    let mCode = ['m','a','t','r','i','x'];
+    let mIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === mCode[mIdx]) {
+            mIdx++;
+            if(mIdx === mCode.length) {
+                const m = document.createElement('div');
+                m.style.position = 'fixed'; m.style.top = '0'; m.style.left = '0'; m.style.width = '100vw'; m.style.height = '100vh';
+                m.style.background = 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCI+PHRleHQgeT0iMjUiIGZpbGw9IiMwZjAiPjEwMTE8L3RleHQ+PC9zdmc+) repeat';
+                m.style.opacity = '0.3'; m.style.pointerEvents = 'none'; m.style.animation = 'moveBg 5s linear infinite'; m.style.zIndex = '9999';
+                document.body.appendChild(m);
+                showToast("THE MATRIX", "Follow the white rabbit.", "info");
+                setTimeout(() => m.remove(), 10000);
+                mIdx = 0;
+            }
+        } else {
+            mIdx = 0;
+        }
+    });
+})();

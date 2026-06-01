@@ -1394,3 +1394,6 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 159: Time Travel Easter Egg */
 .fire-trail { position: fixed; top: 50%; left: -100px; width: 100px; height: 10px; background: linear-gradient(90deg, transparent, orange, red); box-shadow: 0 0 20px red; z-index: 10000; pointer-events: none; animation: shootAcross 1s cubic-bezier(.11,-0.03,.97,.5) forwards; }
 @keyframes shootAcross { 0% { left: -100px; } 100% { left: 110vw; } }
+
+/* Point 161: Matrix bg animation */
+@keyframes moveBg { from { background-position: 0 0; } to { background-position: 0 100vh; } }
