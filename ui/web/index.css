@@ -1386,3 +1386,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 154: Screen Shake */
 @keyframes screenShake { 0% { transform: translate(0, 0); } 20% { transform: translate(-10px, 5px); } 40% { transform: translate(10px, -5px); } 60% { transform: translate(-10px, -5px); } 80% { transform: translate(10px, 5px); } 100% { transform: translate(0, 0); } }
 .screen-shake-active { animation: screenShake 0.4s ease-in-out !important; }
+
+/* Point 157: Pet Wandering */
+@keyframes petWander { 0% { transform: translateX(0); } 25% { transform: translateX(-30px); } 50% { transform: translateX(0); } 75% { transform: translateX(30px); } 100% { transform: translateX(0); } }
+.pet-wander-active { animation: petWander 10s linear infinite !important; }

@@ -2894,3 +2894,20 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 157: Idle Pet Wandering
+(function() {
+    let idleTicks = 0;
+    setInterval(() => {
+        const pet = document.getElementById('pixelpal-sprite');
+        if(pet && lastKnownState && lastKnownState.session) {
+            if(lastKnownState.session.state === 'idle') {
+                idleTicks++;
+                if(idleTicks > 60) pet.classList.add('pet-wander-active');
+            } else {
+                idleTicks = 0;
+                pet.classList.remove('pet-wander-active');
+            }
+        }
+    }, 1000);
+})();
