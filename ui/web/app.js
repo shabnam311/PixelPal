@@ -2322,3 +2322,21 @@ setInterval(() => {
         }
     }, 500);
 })();
+
+// Point 112: Retro Easter Egg
+(function() {
+    let retroCode = ['r','e','t','r','o'];
+    let retroIndex = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === retroCode[retroIndex]) {
+            retroIndex++;
+            if(retroIndex === retroCode.length) {
+                document.body.classList.toggle('retro-filter-active');
+                showToast("RETRO MODE", "Welcome to the 80s!", "info");
+                retroIndex = 0;
+            }
+        } else {
+            retroIndex = 0;
+        }
+    });
+})();
