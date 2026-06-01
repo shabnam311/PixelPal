@@ -401,7 +401,7 @@ function addLogLine(source, text) {
 // Button Hooks
 function startFocus() { playStartSound(); fetch('/api/start?minutes=45', { method: 'POST' }); }
 function startPomodoro() { playStartSound(); fetch('/api/pomodoro', { method: 'POST' }); }
-function togglePause() {
+function togglePause() {`n    // Point 102: Strict Mode Check`n    const sm = document.getElementById('toggle-strict-mode');`n    if(sm && sm.checked && lastKnownState && lastKnownState.session.state === 'focus') {`n        showToast('STRICT MODE', 'Pausing is disabled. Keep focusing!', 'error');`n        document.body.classList.add('screen-shake-active');`n        setTimeout(() => document.body.classList.remove('screen-shake-active'), 500);`n        return;`n    }
     playClickSound();
     const isPaused = lastKnownState && lastKnownState.session.state === "paused";
     fetch(isPaused ? '/api/resume' : '/api/pause', { method: 'POST' });
