@@ -2925,3 +2925,28 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 159: Time Travel Easter Egg
+(function() {
+    let mphCode = ['8','8','m','p','h'];
+    let mphIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === mphCode[mphIdx]) {
+            mphIdx++;
+            if(mphIdx === mphCode.length) {
+                const ft = document.createElement('div');
+                ft.className = 'fire-trail';
+                document.body.appendChild(ft);
+                const ft2 = document.createElement('div');
+                ft2.className = 'fire-trail';
+                ft2.style.top = '60%';
+                document.body.appendChild(ft2);
+                setTimeout(() => { ft.remove(); ft2.remove(); }, 1200);
+                showToast("OUTATIME", "Where we're going, we don't need roads.", "info");
+                mphIdx = 0;
+            }
+        } else {
+            mphIdx = 0;
+        }
+    });
+})();

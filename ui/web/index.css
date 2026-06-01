@@ -1390,3 +1390,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 157: Pet Wandering */
 @keyframes petWander { 0% { transform: translateX(0); } 25% { transform: translateX(-30px); } 50% { transform: translateX(0); } 75% { transform: translateX(30px); } 100% { transform: translateX(0); } }
 .pet-wander-active { animation: petWander 10s linear infinite !important; }
+
+/* Point 159: Time Travel Easter Egg */
+.fire-trail { position: fixed; top: 50%; left: -100px; width: 100px; height: 10px; background: linear-gradient(90deg, transparent, orange, red); box-shadow: 0 0 20px red; z-index: 10000; pointer-events: none; animation: shootAcross 1s cubic-bezier(.11,-0.03,.97,.5) forwards; }
+@keyframes shootAcross { 0% { left: -100px; } 100% { left: 110vw; } }
