@@ -2115,3 +2115,20 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 95: XP Multiplier Weekend Bonus
+setInterval(() => {
+    const xpMult = document.getElementById('xp-multiplier');
+    if(xpMult) {
+        const day = new Date().getDay();
+        if(day === 0 || day === 6) {
+            xpMult.innerText = '1.5x XP (WEEKEND)';
+            xpMult.style.color = 'var(--neon-purple)';
+            xpMult.style.textShadow = '0 0 5px var(--neon-purple)';
+        } else {
+            xpMult.innerText = '1.0x XP';
+            xpMult.style.color = 'yellow';
+            xpMult.style.textShadow = '0 0 5px yellow';
+        }
+    }
+}, 60000);
