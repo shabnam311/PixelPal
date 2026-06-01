@@ -3156,3 +3156,26 @@ setInterval(() => {
         }
     }, 60000);
 })();
+
+// Point 174: Confetti on XP Bar
+(function() {
+    const xp = document.querySelector('.xp-bar');
+    if(xp) {
+        xp.addEventListener('dblclick', (e) => {
+            const rect = xp.getBoundingClientRect();
+            for(let i=0; i<30; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti-particle';
+                c.style.left = e.pageX + 'px';
+                c.style.top = e.pageY + 'px';
+                c.style.setProperty('--tx', (Math.random()*200 - 100) + 'px');
+                c.style.setProperty('--ty', (Math.random()*200 - 100) + 'px');
+                const colors = ['var(--neon-green)', 'var(--neon-purple)', 'var(--neon-cyan)', 'yellow'];
+                c.style.background = colors[Math.floor(Math.random()*colors.length)];
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 1000);
+            }
+            showToast('CONFETTI', 'Celebrate the little wins!', 'info');
+        });
+    }
+})();
