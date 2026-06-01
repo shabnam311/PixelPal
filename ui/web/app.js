@@ -1547,10 +1547,29 @@ function playTypewriterSound() {
 
 // Point 37 & 38: Quick Mute & Theme Hotkeys
 (function() {
+    // Point 58: Dynamic Mute Icon
+    function updateMuteIcon() {
+        const btn = document.getElementById('btn-mute');
+        if (btn) btn.innerText = soundEnabled ? '🔊' : '🔇';
+    }
+    
+    // Bind click event to mute button
+    setTimeout(() => {
+        const btn = document.getElementById('btn-mute');
+        if(btn) {
+            btn.addEventListener('click', () => {
+                soundEnabled = !soundEnabled;
+                updateMuteIcon();
+                showToast("AUDIO", "Sound " + (soundEnabled ? "ON" : "OFF"), "info");
+            });
+        }
+    }, 500);
+
     document.addEventListener('keydown', (e) => {
         // Point 37: Ctrl+M to toggle sound
         if(e.ctrlKey && e.key === 'm') {
             soundEnabled = !soundEnabled;
+            updateMuteIcon();
             showToast("AUDIO", "Sound " + (soundEnabled ? "ON" : "OFF"), "info");
         }
         
