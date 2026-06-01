@@ -1104,3 +1104,15 @@ function playTypewriterSound() {
         osc.stop(now + 0.05);
     } catch(e) {}
 }
+
+// Point 24: Boss Key Screen Overlay
+(function() {
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const overlay = document.getElementById('boss-key-overlay');
+            if (overlay) {
+                overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+    });
+})();
