@@ -1981,3 +1981,18 @@ setInterval(() => {
         }
     }, 1000);
 })();
+
+// Point 85: Hyper Focus Toggle
+(function() {
+    const toggle = document.getElementById('toggle-hyper-focus');
+    if(toggle) {
+        toggle.addEventListener('change', (e) => {
+            if(e.target.checked) {
+                document.body.classList.add('hyper-focus');
+                showToast('HYPER FOCUS', 'Distractions minimized.', 'info');
+            } else {
+                document.body.classList.remove('hyper-focus');
+            }
+        });
+    }
+})();

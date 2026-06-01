@@ -1262,3 +1262,10 @@ body {
 
 /* Point 82: Pet Sad Frame */
 .anim-sad { filter: grayscale(80%) sepia(50%) hue-rotate(300deg) drop-shadow(0 0 10px red); }
+
+/* Point 85: Hyper Focus Mode */
+body.hyper-focus .console-casing { opacity: 0.1; }
+body.hyper-focus .hud-card { opacity: 0.1; }
+body.hyper-focus .main-controls { opacity: 0.1; }
+body.hyper-focus #timer-display { transform: scale(1.5); }
+body.hyper-focus #pixelpal-sprite { transform: scale(1.5); }
