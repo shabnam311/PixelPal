@@ -3313,3 +3313,13 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 183: Total XP Tooltip
+(function() {
+    setInterval(() => {
+        const xp = document.querySelector('.xp-bar');
+        if(xp && lastKnownState && lastKnownState.user && lastKnownState.user.xp !== undefined) {
+            xp.title = lastKnownState.user.xp + ' Total XP';
+        }
+    }, 1000);
+})();
