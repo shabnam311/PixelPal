@@ -1374,3 +1374,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 147: Paused Breathing Effect */
 @keyframes textBreathe { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.98); } }
 .timer-paused { animation: textBreathe 3s ease-in-out infinite; color: var(--text-dim) !important; }
+
+/* Point 149: Pet Dance */
+@keyframes petDance { 0% { transform: scale(1) translateY(0) rotate(0deg); } 25% { transform: scale(1.1) translateY(-20px) rotate(-15deg); } 50% { transform: scale(1.1) translateY(0) rotate(15deg); } 75% { transform: scale(1.1) translateY(-20px) rotate(-15deg); } 100% { transform: scale(1) translateY(0) rotate(0deg); } }
+.pet-dance-active { animation: petDance 1s ease-in-out !important; }

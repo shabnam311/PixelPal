@@ -2751,3 +2751,25 @@ setInterval(() => {
         }
     }, 500);
 })();
+
+// Point 149: Dance Easter Egg
+(function() {
+    let dCode = ['d','a','n','c','e'];
+    let dIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === dCode[dIdx]) {
+            dIdx++;
+            if(dIdx === dCode.length) {
+                const pet = document.getElementById('pixelpal-sprite');
+                if(pet) {
+                    pet.classList.add('pet-dance-active');
+                    setTimeout(() => pet.classList.remove('pet-dance-active'), 1000);
+                }
+                showToast("DANCE PARTY", "Groovy!", "info");
+                dIdx = 0;
+            }
+        } else {
+            dIdx = 0;
+        }
+    });
+})();
