@@ -339,6 +339,11 @@ function updateUI(data) {
                 consoleLogs.appendChild(div);
             });
             
+            // Point 23: Typewriter Sound Hook
+            if (data.logs.length > (lastKnownState ? lastKnownState.logs.length : 0)) {
+                playTypewriterSound();
+            }
+            
             const cursor = document.createElement('div');
             cursor.className = 'blinking-cursor';
             cursor.innerText = '█';
@@ -1081,3 +1086,21 @@ updateUI = function(data) {
         root.style.setProperty('--py', `${y}px`);
     });
 })();
+
+// Point 23: Typewriter Sound for Logs
+function playTypewriterSound() {
+    if (!audioCtx || !soundEnabled) return;
+    try {
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(400 + Math.random() * 200, now);
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+    } catch(e) {}
+}
