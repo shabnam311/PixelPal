@@ -2340,3 +2340,14 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 115: Hover XP Tooltip
+setInterval(() => {
+    const xpContainer = document.querySelector('.xp-bar-container');
+    if(xpContainer && typeof lastKnownState !== 'undefined' && lastKnownState && lastKnownState.stats) {
+        const lvl = lastKnownState.stats.level || 1;
+        const max = lvl * 1000;
+        const cur = lastKnownState.stats.xp_current || 0;
+        xpContainer.setAttribute('title', \\$\{cur\} / \$\{max\} XP\);
+    }
+}, 1000);
