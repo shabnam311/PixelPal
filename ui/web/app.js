@@ -399,8 +399,8 @@ function addLogLine(source, text) {
 }
 
 // Button Hooks
-function startFocus() { playClickSound(); fetch('/api/start?minutes=45', { method: 'POST' }); }
-function startPomodoro() { playClickSound(); fetch('/api/pomodoro', { method: 'POST' }); }
+function startFocus() { playStartSound(); fetch('/api/start?minutes=45', { method: 'POST' }); }
+function startPomodoro() { playStartSound(); fetch('/api/pomodoro', { method: 'POST' }); }
 function togglePause() {
     playClickSound();
     const isPaused = lastKnownState && lastKnownState.session.state === "paused";
@@ -1692,10 +1692,27 @@ function playWaterSound() {
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
         osc.start(now);
         osc.stop(now + 0.3);
+// Point 64: Focus Start Sound Effect
+function playStartSound() {
+    if (!audioCtx || !soundEnabled) return;
+    try {
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(200, now);
+        osc.frequency.linearRampToValueAtTime(400, now + 0.2);
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.1, now + 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+        osc.start(now);
+        osc.stop(now + 0.5);
     } catch(e) {}
 }
 
-    // Point 53 & 60: Battery API Polling & Fake System Bars
+// Point 53 & 60: Battery API Polling & Fake System Bars
 (function() {
     if ('getBattery' in navigator) {
         navigator.getBattery().then(function(battery) {
