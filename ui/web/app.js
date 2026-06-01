@@ -1627,7 +1627,7 @@ function playTypewriterSound() {
     }, 1000);
 })();
 
-// Point 47: Water Droplet Sound Effect
+    // Point 47: Water Droplet Sound Effect
 function playWaterSound() {
     if (!audioCtx || !soundEnabled) return;
     try {
@@ -1646,6 +1646,24 @@ function playWaterSound() {
         osc.stop(now + 0.3);
     } catch(e) {}
 }
+
+// Point 53: Battery API Polling
+(function() {
+    if ('getBattery' in navigator) {
+        navigator.getBattery().then(function(battery) {
+            function updateBatteryUI() {
+                const b = document.getElementById('real-battery');
+                if(b) b.innerText = Math.round(battery.level * 100) + '%';
+            }
+            updateBatteryUI();
+            battery.addEventListener('levelchange', updateBatteryUI);
+        });
+    } else {
+        // Mock if not supported
+        const b = document.getElementById('real-battery');
+        if(b) b.innerText = '100% (AC)';
+    }
+})();
 
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
