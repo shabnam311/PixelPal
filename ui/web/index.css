@@ -1013,3 +1013,25 @@ body {
 .settings-range { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 8px; align-items: center; }
 .settings-input { background: #000; border: 1px solid #333; color: var(--neon-green); width: 50px; font-family: inherit; font-size: 10px; padding: 2px; text-align: center; }
 
+
+/* Point 13: Pixel Terminal Logs */
+.blinking-cursor {
+    display: inline-block;
+    color: var(--neon-green);
+    animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.text-cyan { color: #00e5ff; text-shadow: 0 0 5px #00e5ff; }
+.new-logs-badge {
+    display: none;
+    position: absolute;
+    bottom: 10px; right: 10px;
+    background: var(--neon-pink);
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+

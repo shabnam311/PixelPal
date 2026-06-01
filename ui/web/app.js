@@ -322,9 +322,9 @@ function updateUI(data) {
 
     // Logs (Typewriter style append)
     if (data.logs && data.logs.length > 0) {
-        // Only append new logs to prevent re-rendering everything
         if (!lastKnownState || lastKnownState.logs.length !== data.logs.length) {
             const consoleLogs = document.getElementById('console-logs');
+            const isScrolledUp = consoleLogs.scrollTop < (consoleLogs.scrollHeight - consoleLogs.clientHeight - 10);
             consoleLogs.innerHTML = '';
             data.logs.forEach(line => {
                 const div = document.createElement('div');
@@ -332,12 +332,24 @@ function updateUI(data) {
                 if (line.includes('[VIOLATION]') || line.includes('[ALERT]') || line.includes('[CRITICAL]')) div.classList.add('text-pink');
                 else if (line.includes('[SESSION_START]') || line.includes('[SESSION_COMPLETE]') || line.includes('[MILESTONE]')) div.classList.add('text-green');
                 else if (line.includes('[CALIBRATION]') || line.includes('[WARNING]')) div.classList.add('text-yellow');
-                else div.classList.add('text-purple');
+                else if (line.includes('[SYSTEM]')) div.classList.add('text-cyan');
+                else div.classList.add('text-green');
                 
                 div.innerText = line;
                 consoleLogs.appendChild(div);
             });
-            consoleLogs.scrollTop = consoleLogs.scrollHeight;
+            
+            const cursor = document.createElement('div');
+            cursor.className = 'blinking-cursor';
+            cursor.innerText = '█';
+            consoleLogs.appendChild(cursor);
+
+            if (!isScrolledUp) {
+                consoleLogs.scrollTop = consoleLogs.scrollHeight;
+            } else {
+                const badge = document.getElementById('new-logs-badge');
+                if (badge) badge.style.display = 'block';
+            }
         }
     }
     
