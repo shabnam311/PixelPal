@@ -971,3 +971,23 @@ function spawnConfetti() {
         container.appendChild(confetti);
     }
 }
+
+// Point 16: Monitor Status Icons
+const originalUpdateUIForIcons = updateUI;
+updateUI = function(data) {
+    originalUpdateUIForIcons(data);
+    
+    const updatePip = (id, status) => {
+        const pip = document.getElementById(id);
+        if(!pip) return;
+        pip.className = 'status-pip';
+        if(status === 'good' || status === 'looking' || status === 'on' || status === 'not_detected') pip.classList.add('status-ok');
+        else if(status === 'away' || status === 'slouching' || status === 'detected' || status === 'off') pip.classList.add('status-crit');
+        else pip.classList.add('status-warn');
+    };
+    
+    updatePip('pip-gaze', data.gaze);
+    updatePip('pip-posture', data.posture);
+    updatePip('pip-specs', data.specs);
+    updatePip('pip-phone', data.phone);
+}

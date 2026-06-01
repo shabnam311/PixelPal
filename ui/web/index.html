@@ -55,7 +55,17 @@
                         </div>
 
                         <div class="screen-header">
-                            <span class="pulse-icon">●</span> MONITOR FEED
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span class="pulse-icon">●</span>
+                                <span>MONITOR FEED</span>
+                                <!-- Point 16: Monitor Status Icons -->
+                                <div class="header-status-icons" id="header-status-icons">
+                                    <div class="status-pip" id="pip-gaze" title="Gaze">👁️</div>
+                                    <div class="status-pip" id="pip-posture" title="Posture">🧍</div>
+                                    <div class="status-pip" id="pip-specs" title="Specs">👓</div>
+                                    <div class="status-pip" id="pip-phone" title="Phone">📱</div>
+                                </div>
+                            </div>
                             <span class="active-tab-title" id="top-tab-title">TAB: RETRO PET</span>
                             <div class="header-actions">
                                 <button id="btn-mute" class="mute-btn" title="Toggle Sound">🔊</button>

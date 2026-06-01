@@ -1082,3 +1082,17 @@ body {
     0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
     100% { transform: translateY(100vh) rotate(360deg); opacity: 1; }
 }
+
+/* Point 16: Header Status Icons */
+.header-status-icons {
+    display: flex; gap: 5px;
+    background: rgba(0,0,0,0.5);
+    padding: 2px 5px; border-radius: 4px;
+    border: 1px solid #333;
+}
+.status-pip {
+    font-size: 8px; filter: grayscale(1); opacity: 0.3; transition: all 0.3s;
+}
+.status-pip.status-ok { filter: grayscale(0) drop-shadow(0 0 5px var(--neon-green)); opacity: 1; }
+.status-pip.status-warn { filter: grayscale(0) drop-shadow(0 0 5px var(--neon-yellow)); opacity: 1; }
+.status-pip.status-crit { filter: grayscale(0) drop-shadow(0 0 5px var(--neon-pink)); opacity: 1; }
