@@ -696,7 +696,7 @@ function heartFill(element) {
                 try {
                     const data = JSON.parse(event.data);
                     if(data.stats && data.stats.total_focus_minutes_today !== undefined) {
-                        const mins = data.stats.total_focus_minutes_today;
+                        const mins = data.stats.total_focus_minutes_today;`n                        const sCount = document.getElementById('session-count');`n                        if(sCount && data.stats.sessions_completed !== undefined) sCount.innerText = data.stats.sessions_completed;
                         const xpPct = (mins % 60) / 60 * 100;
                         const xpFill = document.getElementById('xp-bar-fill');
                         if(xpFill) xpFill.style.width = xpPct + '%';
@@ -891,7 +891,7 @@ function heartFill(element) {
                 try {
                     const data = JSON.parse(event.data);
                     if(data.stats && data.stats.total_focus_minutes_today !== undefined) {
-                        const mins = data.stats.total_focus_minutes_today;
+                        const mins = data.stats.total_focus_minutes_today;`n                        const sCount = document.getElementById('session-count');`n                        if(sCount && data.stats.sessions_completed !== undefined) sCount.innerText = data.stats.sessions_completed;
                         const xpPct = (mins % 60) / 60 * 100;
                         const xpFill = document.getElementById('xp-bar-fill');
                         if(xpFill) xpFill.style.width = xpPct + '%';
