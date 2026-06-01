@@ -1367,3 +1367,6 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 .focus-shield { position: absolute; width: 80px; height: 80px; border: 2px solid var(--neon-cyan); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 15px var(--neon-cyan), inset 0 0 10px var(--neon-cyan); z-index: 2; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
 .focus-shield-active { opacity: 0.6; animation: rotateShield 4s linear infinite; }
 @keyframes rotateShield { 0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); } 50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.05); } 100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); } }
+
+/* Point 144: Pacman Cursor */
+.pacman-cursor, .pacman-cursor * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size:24px"><text y="20">??</text></svg>'), auto !important; }

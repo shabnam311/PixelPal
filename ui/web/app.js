@@ -2679,3 +2679,22 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 144: Pacman Cursor Easter Egg
+(function() {
+    let pacCode = ['p','a','c','m','a','n'];
+    let pacIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === pacCode[pacIdx]) {
+            pacIdx++;
+            if(pacIdx === pacCode.length) {
+                document.body.classList.add('pacman-cursor');
+                showToast("WAKA WAKA", "Cursor changed for 10 seconds.", "info");
+                setTimeout(() => document.body.classList.remove('pacman-cursor'), 10000);
+                pacIdx = 0;
+            }
+        } else {
+            pacIdx = 0;
+        }
+    });
+})();
