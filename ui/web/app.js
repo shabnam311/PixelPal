@@ -1242,6 +1242,18 @@ updateUI = function(data) {
         }
     }
     
+    // Point 48: Next Break Countdown
+    const nextBreak = document.getElementById('next-break-display');
+    const nextBreakTime = document.getElementById('next-break-time');
+    if(nextBreak && nextBreakTime) {
+        if(data.session_state === 'FOCUS') {
+            nextBreak.style.display = 'block';
+            nextBreakTime.innerText = data.time_remaining || "--:--";
+        } else {
+            nextBreak.style.display = 'none';
+        }
+    }
+
     // Point 19: Hourglass toggle
     const hourglass = document.getElementById('break-hourglass');
     if (hourglass) {
