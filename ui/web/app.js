@@ -3192,3 +3192,24 @@ setInterval(() => {
         }
     }, 60000);
 })();
+
+// Point 176: Ghost Easter Egg
+(function() {
+    let ghCode = ['g','h','o','s','t'];
+    let ghIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === ghCode[ghIdx]) {
+            ghIdx++;
+            if(ghIdx === ghCode.length) {
+                const pet = document.getElementById('pixelpal-sprite');
+                if(pet) {
+                    pet.classList.toggle('pet-ghost');
+                    showToast("SPOOKY", "Ghost mode toggled.", "info");
+                }
+                ghIdx = 0;
+            }
+        } else {
+            ghIdx = 0;
+        }
+    });
+})();

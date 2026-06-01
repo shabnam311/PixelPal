@@ -1431,3 +1431,6 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 175: Pet Glitch */
 @keyframes petGlitch { 0% { transform: translate(0) skew(0deg); } 20% { transform: translate(-5px, 5px) skew(10deg); filter: hue-rotate(90deg); } 40% { transform: translate(5px, -5px) skew(-10deg); filter: invert(100%); } 60% { transform: translate(-5px, -5px) skew(20deg); filter: none; } 80% { transform: translate(5px, 5px) skew(-20deg); filter: contrast(200%); } 100% { transform: translate(0) skew(0deg); filter: none; } }
 .pet-glitch-active { animation: petGlitch 0.2s linear infinite !important; }
+
+/* Point 176: Ghost Pet */
+.pet-ghost { opacity: 0.2 !important; transition: opacity 1s; }
