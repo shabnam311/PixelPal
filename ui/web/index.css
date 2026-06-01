@@ -1400,3 +1400,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 
 /* Point 163: Barrel Roll */
 .barrel-roll { transition: transform 2s ease-in-out; transform: rotate(360deg) !important; }
+
+/* Point 164: Custom Selection Color */
+::selection { background: var(--neon-green); color: black; }
+::-moz-selection { background: var(--neon-green); color: black; }
