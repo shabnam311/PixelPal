@@ -1996,3 +1996,15 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 86: Focus EQ Visualizer Animation
+setInterval(() => {
+    const bars = document.querySelectorAll('.eq-bar');
+    if(bars.length > 0 && document.getElementById('session-state-badge') && document.getElementById('session-state-badge').innerText.toUpperCase() === 'FOCUS') {
+        bars.forEach(bar => {
+            bar.style.height = (Math.random() * 80 + 20) + '%';
+        });
+    } else if(bars.length > 0) {
+        bars.forEach(bar => { bar.style.height = '10%'; });
+    }
+}, 200);
