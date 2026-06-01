@@ -1,6 +1,6 @@
 // Global Audio Context variables
 let audioCtx = null;
-let soundEnabled = true;
+let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
 
 // Initialize Web Audio Context on boot overlay click
 document.getElementById('audio-unlock-overlay').addEventListener('click', () => {
@@ -21,7 +21,7 @@ document.getElementById('audio-unlock-overlay').addEventListener('click', () => 
 
 // Sound toggle
 document.getElementById('btn-mute').addEventListener('click', (e) => {
-    soundEnabled = !soundEnabled;
+    soundEnabled = !soundEnabled; localStorage.setItem('soundEnabled', soundEnabled);
     e.target.innerText = soundEnabled ? '🔊' : '🔇';
 });
 
@@ -1569,7 +1569,7 @@ function playTypewriterSound() {
         const btn = document.getElementById('btn-mute');
         if(btn) {
             btn.addEventListener('click', () => {
-                soundEnabled = !soundEnabled;
+                soundEnabled = !soundEnabled; localStorage.setItem('soundEnabled', soundEnabled);
                 updateMuteIcon();
                 showToast("AUDIO", "Sound " + (soundEnabled ? "ON" : "OFF"), "info");
             });
@@ -1586,7 +1586,7 @@ function playTypewriterSound() {
 
         // Point 37: Ctrl+M to toggle sound
         if(e.ctrlKey && e.key === 'm') {
-            soundEnabled = !soundEnabled;
+            soundEnabled = !soundEnabled; localStorage.setItem('soundEnabled', soundEnabled);
             updateMuteIcon();
             showToast("AUDIO", "Sound " + (soundEnabled ? "ON" : "OFF"), "info");
         }
@@ -1824,7 +1824,7 @@ function playStartSound() {
         if(e.altKey && e.key === '2') document.body.setAttribute('data-theme', 'synthwave-purple');
         if(e.altKey && e.key === '3') document.body.setAttribute('data-theme', 'arcade-red');
         if(e.altKey && e.key === '4') document.body.setAttribute('data-theme', 'cyberpunk-yellow');
-        if(e.ctrlKey && e.key === 'm') { soundEnabled = !soundEnabled; showToast("AUDIO", "Sound " + (soundEnabled ? "ON" : "OFF"), "info"); }
+        if(e.ctrlKey && e.key === 'm') { soundEnabled = !soundEnabled; localStorage.setItem('soundEnabled', soundEnabled); showToast("AUDIO", "Sound " + (soundEnabled ? "ON" : "OFF"), "info"); }
     });
     setInterval(() => {
         const pet = document.getElementById('pixelpal-sprite');
