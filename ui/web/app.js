@@ -1525,6 +1525,18 @@ function playTypewriterSound() {
         if(e.altKey && e.key === '2') document.body.setAttribute('data-theme', 'synthwave-purple');
         if(e.altKey && e.key === '3') document.body.setAttribute('data-theme', 'arcade-red');
         if(e.altKey && e.key === '4') document.body.setAttribute('data-theme', 'cyberpunk-yellow');
+        
+        // Point 49: Alt+B Boss Mode Toggle
+        if(e.altKey && e.key === 'b') {
+            const ui = document.querySelector('.main-ui');
+            if(ui.style.display === 'none') {
+                ui.style.display = 'block';
+                showToast("SYSTEM", "Boss Mode Deactivated", "info");
+            } else {
+                ui.style.display = 'none';
+                showToast("SYSTEM", "Boss Mode Activated", "info");
+            }
+        }
     });
 })();
 
