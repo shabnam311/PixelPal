@@ -3265,3 +3265,29 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 180: Laser Easter Egg
+(function() {
+    let lCode = ['l','a','s','e','r'];
+    let lIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === lCode[lIdx]) {
+            lIdx++;
+            if(lIdx === lCode.length) {
+                const pet = document.getElementById('pixelpal-sprite');
+                if(pet) {
+                    const l1 = document.createElement('div');
+                    l1.className = 'laser-beam';
+                    l1.style.top = '30px';
+                    l1.style.left = '60%';
+                    pet.appendChild(l1);
+                    setTimeout(() => l1.remove(), 600);
+                    showToast("PEW PEW", "Laser eyes activated.", "warning");
+                }
+                lIdx = 0;
+            }
+        } else {
+            lIdx = 0;
+        }
+    });
+})();
