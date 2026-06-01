@@ -3291,3 +3291,25 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 182: Nuke Flash
+(function() {
+    let nkCode = ['n','u','k','e'];
+    let nkIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === nkCode[nkIdx]) {
+            nkIdx++;
+            if(nkIdx === nkCode.length) {
+                const f = document.createElement('div');
+                f.style.position = 'fixed'; f.style.top = '0'; f.style.left = '0'; f.style.width = '100vw'; f.style.height = '100vh';
+                f.style.background = 'white'; f.style.zIndex = '99999'; f.style.pointerEvents = 'none';
+                document.body.appendChild(f);
+                f.animate([{opacity:1}, {opacity:0}], {duration:3000, easing:'ease-out'}).onfinish = () => f.remove();
+                showToast("TACTICAL NUKE", "Incoming!", "error");
+                nkIdx = 0;
+            }
+        } else {
+            nkIdx = 0;
+        }
+    });
+})();
