@@ -1160,3 +1160,11 @@ body {
     50% { transform: rotate(180deg) scale(1.5); }
     100% { transform: rotate(360deg) scale(1); }
 }
+
+/* Point 22: Parallax Mouse Tracking */
+:root { --px: 0px; --py: 0px; }
+.hud-card, .console-panel {
+    transform: perspective(1000px) rotateY(calc(var(--px) * 0.5deg)) rotateX(calc(var(--py) * -0.5deg));
+    box-shadow: calc(var(--px) * -1) calc(var(--py) * -1) 20px rgba(0, 0, 0, 0.5) !important;
+    transition: transform 0.1s linear, box-shadow 0.1s linear;
+}

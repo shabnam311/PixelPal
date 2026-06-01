@@ -1070,3 +1070,14 @@ updateUI = function(data) {
         }
     });
 })();
+
+// Point 22: Parallax Mouse Tracking on HUD
+(function() {
+    document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 10;
+        const y = (e.clientY / window.innerHeight - 0.5) * 10;
+        const root = document.documentElement;
+        root.style.setProperty('--px', `${x}px`);
+        root.style.setProperty('--py', `${y}px`);
+    });
+})();
