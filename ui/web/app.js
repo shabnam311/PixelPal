@@ -2812,3 +2812,25 @@ setInterval(() => {
         lastClick = now;
     });
 })();
+
+// Point 152: Invert Easter Egg
+(function() {
+    let invCode = ['i','n','v','e','r','t'];
+    let invIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === invCode[invIdx]) {
+            invIdx++;
+            if(invIdx === invCode.length) {
+                if(document.body.style.filter.includes('invert')) {
+                    document.body.style.filter = '';
+                } else {
+                    document.body.style.filter = 'invert(100%) hue-rotate(180deg)';
+                }
+                showToast("INVERTED", "Visuals flipped.", "info");
+                invIdx = 0;
+            }
+        } else {
+            invIdx = 0;
+        }
+    });
+})();
