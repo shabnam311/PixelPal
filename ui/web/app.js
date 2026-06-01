@@ -1753,6 +1753,18 @@ function playWaterSound() {
     }, 1000);
 })();
 
+// Point 62: Background Mouse Parallax
+(function() {
+    document.addEventListener('mousemove', (e) => {
+        const bg = document.querySelector('.top-screen-content');
+        if (bg) {
+            const moveX = (e.clientX - window.innerWidth / 2) * -0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * -0.01;
+            bg.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`;
+        }
+    });
+})();
+
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
     console.log("[Point 31-200] Loading massive feature set...");
