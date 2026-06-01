@@ -1214,3 +1214,8 @@ body {
 .crt-vignette { position: absolute; top:0; left:0; width:100%; height:100%; box-shadow: 0 0 100px rgba(0,0,0,0.9) inset; pointer-events:none; z-index: 90; }
 .matrix-rain { position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:5; opacity: 0.1; background: repeating-linear-gradient(0deg, transparent, #0f0 2px, transparent 4px); animation: rainFall 5s linear infinite; }
 .blinking-led { width: 10px; height: 10px; border-radius: 50%; background: red; box-shadow: 0 0 10px red; animation: blink 1s infinite; display: inline-block; }
+
+/* Point 55: Toast Typewriter CSS */
+.toast-typewriter { display: inline-block; overflow: hidden; white-space: nowrap; border-right: 2px solid var(--neon-green); animation: typing 1s steps(40, end), blink-caret .75s step-end infinite; }
+@keyframes typing { from { width: 0 } to { width: 100% } }
+@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--neon-green); } }

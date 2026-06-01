@@ -756,7 +756,7 @@ function showToast(title, message, severity = 'info') {
     
     const toast = document.createElement('div');
     toast.className = `toast toast-${severity}`;
-    toast.innerHTML = `<strong>${title}</strong><br>${message}`;
+    toast.innerHTML = `<strong>${title}</strong><br><span class="toast-typewriter">${message}</span>`;
     
     container.appendChild(toast);
     
@@ -951,7 +951,7 @@ function showToast(title, message, severity = 'info') {
     
     const toast = document.createElement('div');
     toast.className = `toast toast-${severity}`;
-    toast.innerHTML = `<strong>${title}</strong><br>${message}`;
+    toast.innerHTML = `<strong>${title}</strong><br><span class="toast-typewriter">${message}</span>`;
     
     container.appendChild(toast);
     
