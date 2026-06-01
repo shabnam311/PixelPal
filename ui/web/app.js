@@ -2911,3 +2911,17 @@ setInterval(() => {
         }
     }, 1000);
 })();
+
+// Point 158: Clear Console on Click
+(function() {
+    const conBox = document.querySelector('.console-box');
+    if(conBox) {
+        conBox.addEventListener('click', () => {
+            const logs = document.querySelector('.console-logs');
+            if(logs) {
+                logs.innerHTML = '';
+                logToConsole('SYS: Console cleared by user.', 'cyan');
+            }
+        });
+    }
+})();
