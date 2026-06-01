@@ -1953,3 +1953,16 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 83: Clear Console Log
+(function() {
+    const btn = document.getElementById('btn-clear-console');
+    const consoleOutput = document.getElementById('console-output');
+    if(btn && consoleOutput) {
+        btn.addEventListener('click', () => {
+            consoleOutput.innerHTML = '';
+            logToConsole('SYSTEM: Terminal cleared.', 'cyan');
+            playClickSound();
+        });
+    }
+})();
