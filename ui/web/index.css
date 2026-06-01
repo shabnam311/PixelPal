@@ -1352,7 +1352,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 @keyframes zzzFloat { 0% { opacity: 0; transform: translateY(0) scale(0.5); } 20% { opacity: 1; transform: translateY(-10px) translateX(-5px) scale(1); } 100% { opacity: 0; transform: translateY(-40px) translateX(10px) scale(1.5); } }
 
 /* Point 136: Crosshair Cursor */
-.app-container { cursor: crosshair; }
+.app-container { cursor: default; }
 .app-container a, .app-container button, .app-container input, .app-container .level-badge { cursor: pointer; }
 
 /* Point 138: Focus Fire Pulse */
