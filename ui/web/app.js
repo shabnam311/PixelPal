@@ -1916,3 +1916,22 @@ setInterval(() => {
     window.addEventListener('resize', scalePet);
     setTimeout(scalePet, 1000);
 })();
+
+// Point 80: Barrel Roll Easter Egg
+(function() {
+    let barrelCode = ['b','a','r','r','e','l'];
+    let barrelIndex = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === barrelCode[barrelIndex]) {
+            barrelIndex++;
+            if(barrelIndex === barrelCode.length) {
+                document.body.classList.add('do-a-barrel-roll');
+                setTimeout(() => document.body.classList.remove('do-a-barrel-roll'), 2500);
+                showToast("STAR FOX", "DO A BARREL ROLL!", "info");
+                barrelIndex = 0;
+            }
+        } else {
+            barrelIndex = 0;
+        }
+    });
+})();
