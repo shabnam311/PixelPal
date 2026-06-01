@@ -2413,3 +2413,27 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 124: Toast Typing Sound
+const originalShowToast = window.showToast;
+if(originalShowToast) {
+    window.showToast = function(title, msg, sev) {
+        originalShowToast(title, msg, sev);
+        if(soundEnabled && window.AudioContext) {
+            try {
+                const ac = new (window.AudioContext || window.webkitAudioContext)();
+                for(let i=0; i<6; i++) {
+                    setTimeout(() => {
+                        const osc = ac.createOscillator();
+                        const gain = ac.createGain();
+                        osc.type = 'square'; osc.frequency.setValueAtTime(800 + Math.random()*200, ac.currentTime);
+                        gain.gain.setValueAtTime(0.05 * (window.SFX_VOLUME || 1.0), ac.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.05);
+                        osc.connect(gain); gain.connect(ac.destination);
+                        osc.start(); osc.stop(ac.currentTime + 0.05);
+                    }, i * 50);
+                }
+            } catch(e) {}
+        }
+    };
+}
