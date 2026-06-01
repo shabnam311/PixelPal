@@ -1269,3 +1269,7 @@ body.hyper-focus .hud-card { opacity: 0.1; }
 body.hyper-focus .main-controls { opacity: 0.1; }
 body.hyper-focus #timer-display { transform: scale(1.5); }
 body.hyper-focus #pixelpal-sprite { transform: scale(1.5); }
+
+/* Point 87: Custom Tooltip */
+.custom-tooltip { position: absolute; background: black; color: white; border: 1px solid var(--neon-green); padding: 4px 8px; font-size: 10px; font-family: 'Courier New', monospace; z-index: 10000; pointer-events: none; opacity: 0; transition: opacity 0.2s; white-space: nowrap; box-shadow: 0 0 5px var(--neon-green); }
+.custom-tooltip.show { opacity: 1; }

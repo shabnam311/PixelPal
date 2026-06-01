@@ -2008,3 +2008,31 @@ setInterval(() => {
         bars.forEach(bar => { bar.style.height = '10%'; });
     }
 }, 200);
+
+// Point 87: Custom Tooltip Styling
+(function() {
+    const tt = document.createElement('div');
+    tt.className = 'custom-tooltip';
+    document.body.appendChild(tt);
+    document.addEventListener('mouseover', (e) => {
+        if(e.target.title) {
+            e.target.dataset.title = e.target.title;
+            e.target.removeAttribute('title');
+        }
+        if(e.target.dataset.title) {
+            tt.innerText = e.target.dataset.title;
+            tt.classList.add('show');
+        }
+    });
+    document.addEventListener('mousemove', (e) => {
+        if(tt.classList.contains('show')) {
+            tt.style.left = (e.clientX + 10) + 'px';
+            tt.style.top = (e.clientY + 10) + 'px';
+        }
+    });
+    document.addEventListener('mouseout', (e) => {
+        if(e.target.dataset.title) {
+            tt.classList.remove('show');
+        }
+    });
+})();
