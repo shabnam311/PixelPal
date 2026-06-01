@@ -3144,3 +3144,15 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 173: Uptime Counter
+(function() {
+    const start = Date.now();
+    setInterval(() => {
+        const uc = document.getElementById('uptime-counter');
+        if(uc) {
+            const mins = Math.floor((Date.now() - start) / 60000);
+            uc.innerText = 'UPTIME: ' + mins + 'm';
+        }
+    }, 60000);
+})();
