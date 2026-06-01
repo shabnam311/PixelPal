@@ -1096,3 +1096,19 @@ body {
 .status-pip.status-ok { filter: grayscale(0) drop-shadow(0 0 5px var(--neon-green)); opacity: 1; }
 .status-pip.status-warn { filter: grayscale(0) drop-shadow(0 0 5px var(--neon-yellow)); opacity: 1; }
 .status-pip.status-crit { filter: grayscale(0) drop-shadow(0 0 5px var(--neon-pink)); opacity: 1; }
+
+/* Point 17: Stats & Achievements Panel */
+.trophies-badge-row {
+    display: flex; gap: 10px; margin-top: 15px; justify-content: center;
+}
+.pixel-medal {
+    width: 32px; height: 32px;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 16 16" fill="gold" xmlns="http://www.w3.org/2000/svg"><path d="M2 0h12v4L8 16 2 4V0z"/></svg>') no-repeat center center;
+    background-size: contain;
+    filter: drop-shadow(0 0 5px gold);
+    animation: bounceMedal 2s infinite;
+}
+@keyframes bounceMedal {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}

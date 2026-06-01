@@ -990,4 +990,20 @@ updateUI = function(data) {
     updatePip('pip-posture', data.posture);
     updatePip('pip-specs', data.specs);
     updatePip('pip-phone', data.phone);
+    
+    // Point 17: Trophies
+    if(data.stats && data.stats.total_focus_minutes_today !== undefined) {
+        const trophies = document.getElementById('trophies-container');
+        if(trophies) {
+            const numTrophies = Math.floor(data.stats.total_focus_minutes_today / 60);
+            if(numTrophies > 0) {
+                trophies.innerHTML = '';
+                for(let i=0; i<numTrophies; i++) {
+                    const medal = document.createElement('div');
+                    medal.className = 'pixel-medal';
+                    trophies.appendChild(medal);
+                }
+            }
+        }
+    }
 }
