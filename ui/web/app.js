@@ -717,3 +717,32 @@ function toggleSettingsDrawer() {
 }
 document.getElementById('btn-settings')?.addEventListener('click', toggleSettingsDrawer);
 
+// Point 14: Toast Notifications
+function showToast(title, message, severity = 'info') {
+    const container = document.getElementById('toast-container');
+    if(!container) return;
+    
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${severity}`;
+    toast.innerHTML = `<strong>${title}</strong><br>${message}`;
+    
+    container.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.add('fade-out');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
+// Override alert popups with toasts
+const originalUpdateUIForToasts = updateUI;
+updateUI = function(data) {
+    originalUpdateUIForToasts(data);
+    if(data.active_alert && (!lastKnownState || !lastKnownState.active_alert || lastKnownState.active_alert.message !== data.active_alert.message)) {
+        const isCritical = data.phone === "detected" || data.specs === "off";
+        showToast(data.active_alert.title, data.active_alert.message, isCritical ? 'critical' : 'warning');
+        
+        // Hide the blocking alert overlay automatically since we're using toasts now
+        document.getElementById('alert-overlay').classList.add('hidden-alert');
+    }
+}
