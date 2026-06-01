@@ -2698,3 +2698,16 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 145: Save Indicator
+(function() {
+    const origSetItem = localStorage.setItem;
+    localStorage.setItem = function(key, value) {
+        origSetItem.apply(this, arguments);
+        const ind = document.getElementById('save-indicator');
+        if(ind) {
+            ind.style.opacity = '1';
+            setTimeout(() => ind.style.opacity = '0', 1000);
+        }
+    };
+})();
