@@ -2550,3 +2550,18 @@ if(originalShowToast) {
         }
     }, 1200);
 })();
+
+// Point 134: Custom Break Duration
+(function() {
+    const durIn = document.getElementById('custom-break-duration');
+    if(durIn) {
+        const savedDur = localStorage.getItem('pixelpal_break_duration') || '5';
+        durIn.value = savedDur;
+        durIn.addEventListener('change', (e) => {
+            const val = parseInt(e.target.value) || 5;
+            localStorage.setItem('pixelpal_break_duration', val);
+            fetch('/api/settings', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ break_duration_minutes: val }) });
+            showToast('DURATION UPDATED', 'Break duration set to ' + val + ' minutes.', 'info');
+        });
+    }
+})();
