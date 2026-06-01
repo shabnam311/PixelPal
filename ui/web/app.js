@@ -1849,3 +1849,31 @@ setInterval(() => {
         setTimeout(() => document.body.classList.remove('crt-flicker-active'), 200);
     }
 }, 3000);
+
+// Point 71: Terminal Boot Sequence Effect
+(function() {
+    const overlay = document.getElementById('boot-overlay');
+    const textEl = document.getElementById('boot-text');
+    if(overlay && textEl) {
+        const lines = [
+            'PIXELPAL OS v1.0.0 initializing...',
+            'Loading neural network...',
+            'Establishing connection...',
+            'Connecting to UI core...',
+            'ACCESS GRANTED.'
+        ];
+        let i = 0;
+        function nextLine() {
+            if(i < lines.length) {
+                textEl.innerHTML += lines[i] + '<br>';
+                i++;
+                setTimeout(nextLine, 300 + Math.random() * 400);
+            } else {
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 500);
+            }
+        }
+        setTimeout(nextLine, 500);
+    }
+})();
