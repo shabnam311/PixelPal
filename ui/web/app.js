@@ -2448,3 +2448,24 @@ if(originalShowToast) {
         }
     });
 })();
+
+// Point 126: Coffee Easter Egg
+(function() {
+    let cfCode = ['c','o','f','f','e','e'];
+    let cfIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === cfCode[cfIdx]) {
+            cfIdx++;
+            if(cfIdx === cfCode.length) {
+                if(lastKnownState && lastKnownState.session.state === 'focus') {
+                    sessionStartTime -= 300000; // Push start back 5 mins
+                    showToast("COFFEE BREAK", "Added 5 minutes to the timer!", "info");
+                    playLevelUpSound();
+                }
+                cfIdx = 0;
+            }
+        } else {
+            cfIdx = 0;
+        }
+    });
+})();
