@@ -1492,6 +1492,17 @@ function playTypewriterSound() {
     });
 })();
 
+// Point 41: Click Pet to Shake Screen
+(function() {
+    const pet = document.getElementById('pixelpal-sprite');
+    if (pet) {
+        pet.addEventListener('click', () => {
+            document.body.classList.add('anim-glitch');
+            setTimeout(() => { document.body.classList.remove('anim-glitch'); }, 300);
+        });
+    }
+})();
+
 // Point 39: Jello and RubberBand Button Interactions
 (function() {
     setTimeout(() => {
