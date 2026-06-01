@@ -1492,6 +1492,31 @@ function playTypewriterSound() {
     });
 })();
 
+// Point 39: Jello and RubberBand Button Interactions
+(function() {
+    setTimeout(() => {
+        document.querySelectorAll('button').forEach((b, i) => {
+            if(i % 2 === 0) b.classList.add('anim-jello');
+            else b.classList.add('anim-rubber');
+        });
+    }, 1000);
+})();
+
+// Point 40: Blinking REC light toggle on session state
+(function() {
+    setInterval(() => {
+        const badge = document.getElementById('session-state-badge');
+        const rec = document.querySelector('.blinking-led');
+        if(!badge || !rec) return;
+        const stateText = badge.innerText.toUpperCase();
+        if (stateText.includes('FOCUS')) {
+            rec.style.display = 'inline-block';
+        } else {
+            rec.style.display = 'none';
+        }
+    }, 1000);
+})();
+
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
     console.log("[Point 31-200] Loading massive feature set...");
