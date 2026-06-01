@@ -864,3 +864,29 @@ body {
     font-size: 8px; color: #555; margin-top: 20px;
     animation: blinker 1s step-start infinite;
 }
+
+/* Point 4: CSS Sprite Pet Animation Enhancement */
+@keyframes petBreathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02) translateY(-2px); }
+}
+@keyframes idleBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+.sprite-happy {
+    animation: idleBob 2.8s infinite ease-in-out, petBreathe 3s infinite ease-in-out;
+}
+.sprite-celebrate {
+    animation: idleBob 1.5s infinite ease-in-out, petBreathe 1s infinite ease-in-out;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+}
+.sprite-celebrate svg rect[fill='#7f7f7f'] { fill: var(--neon-yellow); }
+@keyframes warningEdgeFlash {
+    0%, 100% { box-shadow: inset 0 0 0px transparent; }
+    50% { box-shadow: inset 0 0 50px rgba(255,0,0,0.5); }
+}
+.top-screen-content.warning-flash {
+    animation: warningEdgeFlash 1s infinite;
+}
+
