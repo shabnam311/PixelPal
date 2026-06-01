@@ -3017,3 +3017,14 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 165: Critical Health Heartbeat
+(function() {
+    setInterval(() => {
+        const hc = document.querySelector('.hearts-container');
+        if(hc && lastKnownState && lastKnownState.user && lastKnownState.user.hp !== undefined) {
+            if(lastKnownState.user.hp <= 1) hc.classList.add('hearts-critical');
+            else hc.classList.remove('hearts-critical');
+        }
+    }, 1000);
+})();

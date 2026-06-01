@@ -1404,3 +1404,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 164: Custom Selection Color */
 ::selection { background: var(--neon-green); color: black; }
 ::-moz-selection { background: var(--neon-green); color: black; }
+
+/* Point 165: Heartbeat on Critical */
+@keyframes heartBeatScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); filter: drop-shadow(0 0 10px red); } }
+.hearts-critical { animation: heartBeatScale 0.8s infinite !important; color: red !important; }
