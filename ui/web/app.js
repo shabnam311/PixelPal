@@ -3049,3 +3049,14 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 167: Start Pulse
+(function() {
+    const btnStart = document.getElementById('btn-start');
+    if(btnStart) {
+        btnStart.addEventListener('click', () => {
+            document.body.classList.add('start-pulse-active');
+            setTimeout(() => document.body.classList.remove('start-pulse-active'), 800);
+        });
+    }
+})();
