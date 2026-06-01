@@ -2132,3 +2132,24 @@ setInterval(() => {
         }
     }
 }, 60000);
+
+// Point 97: Pet Petting (5 Clicks = Hearts)
+(function() {
+    const p = document.getElementById('pixelpal-sprite');
+    let clicks = 0;
+    let clickTimer;
+    if(p) {
+        p.addEventListener('click', () => {
+            clicks++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => clicks = 0, 1000);
+            if(clicks >= 5) {
+                clicks = 0;
+                p.classList.add('anim-celebrate');
+                setTimeout(() => p.classList.remove('anim-celebrate'), 2000);
+                showToast('PET PETTED', 'Your PixelPal loves you!', 'info');
+                playLevelUpSound();
+            }
+        });
+    }
+})();
