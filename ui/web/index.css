@@ -1334,3 +1334,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 121: Level Up Flash */
 @keyframes levelUpFlash { 0% { background-color: rgba(255,255,255,0); } 10% { background-color: rgba(255,255,255,1); } 100% { background-color: rgba(255,255,255,0); } }
 .level-up-flash-active { animation: levelUpFlash 1.5s ease-out; pointer-events: none; z-index: 9999; position: fixed; top:0; left:0; right:0; bottom:0; }
+
+/* Point 122: Custom Text Selection */
+::selection { background: var(--neon-green); color: black; }
+::-moz-selection { background: var(--neon-green); color: black; }
