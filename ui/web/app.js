@@ -3231,3 +3231,23 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 178: Shift Click Pet Quest Giver
+(function() {
+    const pet = document.getElementById('pixelpal-sprite');
+    if(pet) {
+        pet.addEventListener('click', (e) => {
+            if(e.shiftKey) {
+                let qm = pet.querySelector('.quest-mark');
+                if(qm) {
+                    qm.remove();
+                } else {
+                    qm = document.createElement('div');
+                    qm.className = 'quest-mark';
+                    qm.innerText = '!';
+                    pet.appendChild(qm);
+                }
+            }
+        });
+    }
+})();

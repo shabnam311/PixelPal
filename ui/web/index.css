@@ -1437,3 +1437,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 
 /* Point 177: Neon Overload */
 .neon-overload * { text-shadow: 0 0 20px var(--neon-green), 0 0 30px var(--neon-cyan) !important; }
+
+/* Point 178: Quest Giver Exclamation */
+.quest-mark { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 24px; color: yellow; text-shadow: 0 0 10px orange; animation: questBounce 1s infinite alternate; font-weight: bold; pointer-events: none; z-index: 1000; }
+@keyframes questBounce { 0% { transform: translate(-50%, 0); } 100% { transform: translate(-50%, -10px); } }
