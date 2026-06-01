@@ -1419,6 +1419,51 @@ function playTypewriterSound() {
     });
 })();
 
+// Point 35: Draggable Pet Sprite
+(function() {
+    const pet = document.getElementById('pixelpal-sprite');
+    if (!pet) return;
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    pet.addEventListener("mousedown", dragStart);
+    document.addEventListener("mouseup", dragEnd);
+    document.addEventListener("mousemove", drag);
+
+    function dragStart(e) {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+        if (e.target === pet || pet.contains(e.target)) {
+            isDragging = true;
+            pet.style.cursor = 'grabbing';
+        }
+    }
+
+    function dragEnd(e) {
+        initialX = currentX;
+        initialY = currentY;
+        isDragging = false;
+        pet.style.cursor = 'grab';
+    }
+
+    function drag(e) {
+        if (isDragging) {
+            e.preventDefault();
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+            xOffset = currentX;
+            yOffset = currentY;
+            pet.style.transform = "translate3d(" + currentX + "px, " + currentY + "px, 0)";
+        }
+    }
+    pet.style.cursor = 'grab';
+})();
+
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
     console.log("[Point 31-200] Loading massive feature set...");
