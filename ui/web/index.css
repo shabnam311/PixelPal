@@ -972,3 +972,20 @@ body {
     transition: width 0.5s ease-out;
 }
 
+
+/* Point 10: Scene Backgrounds */
+.scene-focus {
+    background: radial-gradient(circle at 50% 80%, #3e2723, #1b0000) !important;
+}
+.scene-break {
+    background: linear-gradient(180deg, #4fc3f7, #0288d1) !important;
+}
+.scene-warning {
+    background: radial-gradient(circle at 50% 50%, #b71c1c, #4a0000) !important;
+    animation: stormyFlash 2s infinite;
+}
+@keyframes stormyFlash { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+.scene-idle {
+    background: radial-gradient(circle at 50% 0%, #1a237e, #000000) !important;
+}
+

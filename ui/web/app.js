@@ -663,3 +663,27 @@ function heartFill(element) {
     }, 1000);
 })();
 
+
+// Point 10: Scene Backgrounds
+(function() {
+    setInterval(() => {
+        const topScreen = document.querySelector('.top-screen-content');
+        if(!topScreen) return;
+        const badge = document.getElementById('session-state-badge');
+        if(!badge) return;
+        const stateText = badge.innerText.toUpperCase();
+        
+        topScreen.classList.remove('scene-focus', 'scene-break', 'scene-warning', 'scene-idle');
+        
+        if (stateText.includes('FOCUS')) {
+            topScreen.classList.add('scene-focus');
+        } else if (stateText.includes('BREAK')) {
+            topScreen.classList.add('scene-break');
+        } else if (stateText.includes('WARN')) {
+            topScreen.classList.add('scene-warning');
+        } else {
+            topScreen.classList.add('scene-idle');
+        }
+    }, 1000);
+})();
+
