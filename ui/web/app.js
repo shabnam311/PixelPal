@@ -1044,3 +1044,29 @@ updateUI = function(data) {
         }
     }
 }
+
+// Point 21: Konami Code Easter Egg
+(function() {
+    let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+    document.addEventListener('keydown', (e) => {
+        if (e.key === konamiCode[konamiIndex] || e.key.toLowerCase() === konamiCode[konamiIndex]) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+                // Trigger Easter Egg
+                playLevelUpSound();
+                document.body.classList.add('konami-rainbow');
+                const pet = document.getElementById('pixelpal-sprite');
+                if(pet) pet.classList.add('konami-spin');
+                setTimeout(() => {
+                    document.body.classList.remove('konami-rainbow');
+                    if(pet) pet.classList.remove('konami-spin');
+                }, 5000);
+                showToast("CHEAT CODE ACTIVATED", "God mode enabled... just kidding.", "info");
+                konamiIndex = 0;
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+})();

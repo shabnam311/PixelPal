@@ -1143,3 +1143,20 @@ body {
     50% { transform: scale(1.2); opacity: 1; }
     100% { transform: scale(1); opacity: 0; }
 }
+
+/* Point 21: Konami Easter Egg */
+.konami-rainbow {
+    animation: rainbowFlash 0.5s infinite;
+}
+@keyframes rainbowFlash {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+.konami-spin {
+    animation: barrelRoll 1s forwards ease-in-out;
+}
+@keyframes barrelRoll {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.5); }
+    100% { transform: rotate(360deg) scale(1); }
+}
