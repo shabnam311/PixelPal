@@ -2862,3 +2862,14 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 155: Double Click Pet to Calibrate
+(function() {
+    const pet = document.getElementById('pixelpal-sprite');
+    if(pet) {
+        pet.addEventListener('dblclick', () => {
+            showToast('CALIBRATING', 'Posture reset requested!', 'info');
+            fetch('/api/calibrate', { method: 'POST' });
+        });
+    }
+})();
