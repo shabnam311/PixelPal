@@ -2213,3 +2213,28 @@ e the one that has to walk through it."', '"Ignorance is bliss."'];
         p.classList.add('anim-blink');
     }
 })();
+
+// Point 105: Zen Mode Ambient Rain
+(function() {
+    let rainAudio = null;
+    setInterval(() => {
+        const zm = document.getElementById('toggle-zen-mode');
+        if(zm && zm.checked && lastKnownState && lastKnownState.session.state === 'focus') {
+            if(!rainAudio && window.AudioContext) {
+                // Generate white noise for rain
+                const ac = new (window.AudioContext || window.webkitAudioContext)();
+                const bufferSize = 2 * ac.sampleRate, noiseBuffer = ac.createBuffer(1, bufferSize, ac.sampleRate), output = noiseBuffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
+                const wNoise = ac.createBufferSource(); wNoise.buffer = noiseBuffer; wNoise.loop = true;
+                const filter = ac.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 1000;
+                const gain = ac.createGain(); gain.gain.value = 0.1 * (window.SFX_VOLUME || 1.0);
+                wNoise.connect(filter); filter.connect(gain); gain.connect(ac.destination);
+                wNoise.start(0);
+                rainAudio = { src: wNoise, ac: ac, gain: gain };
+            }
+            if(rainAudio) rainAudio.gain.gain.value = 0.1 * (window.SFX_VOLUME || 1.0);
+        } else {
+            if(rainAudio) { rainAudio.src.stop(); rainAudio.ac.close(); rainAudio = null; }
+        }
+    }, 1000);
+})();
