@@ -2873,3 +2873,24 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 156: Randomize Colors
+(function() {
+    let cCode = ['c','o','l','o','r'];
+    let cIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === cCode[cIdx]) {
+            cIdx++;
+            if(cIdx === cCode.length) {
+                const r = () => Math.floor(Math.random() * 255);
+                document.documentElement.style.setProperty('--neon-green', \gb(\$\{r()\}, \$\{r()\}, \$\{r()\})\);
+                document.documentElement.style.setProperty('--neon-purple', \gb(\$\{r()\}, \$\{r()\}, \$\{r()\})\);
+                document.documentElement.style.setProperty('--neon-cyan', \gb(\$\{r()\}, \$\{r()\}, \$\{r()\})\);
+                showToast("PALETTE SCRAMBLED", "Colors randomized!", "info");
+                cIdx = 0;
+            }
+        } else {
+            cIdx = 0;
+        }
+    });
+})();
