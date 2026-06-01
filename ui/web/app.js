@@ -2036,3 +2036,15 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 89: Midnight Mode
+setInterval(() => {
+    const hr = new Date().getHours();
+    if(hr >= 0 && hr <= 4) {
+        document.body.setAttribute('data-theme', 'midnight');
+    } else {
+        if(document.body.getAttribute('data-theme') === 'midnight') {
+            document.body.setAttribute('data-theme', localStorage.getItem('pixelpal_theme') || 'neon-green');
+        }
+    }
+}, 60000);
