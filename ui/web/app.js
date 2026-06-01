@@ -2834,3 +2834,18 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 153: Minimal HUD Toggle
+(function() {
+    const tMin = document.getElementById('toggle-minimal-hud');
+    if(tMin) {
+        const isMin = localStorage.getItem('pixelpal_minimal_hud') === 'true';
+        tMin.checked = isMin;
+        if(isMin) document.body.classList.add('minimal-hud');
+        tMin.addEventListener('change', (e) => {
+            localStorage.setItem('pixelpal_minimal_hud', e.target.checked);
+            if(e.target.checked) document.body.classList.add('minimal-hud');
+            else document.body.classList.remove('minimal-hud');
+        });
+    }
+})();
