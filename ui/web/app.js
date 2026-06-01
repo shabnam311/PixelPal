@@ -1163,6 +1163,201 @@ function playTypewriterSound() {
 // Point 30: System Stats Monitor Flicker
 (function() {
     setInterval(() => {
+        
+        // Hide the blocking alert overlay automatically since we're using toasts now
+        document.getElementById('alert-overlay').classList.add('hidden-alert');
+    }
+    
+    // Point 15: Session Celebration
+    if (data.session.state === 'idle' && lastKnownState && lastKnownState.session.state === 'focus' && lastKnownState.session.time_left > 0 && data.session.time_left === 0) {
+        showCelebration();
+    }
+}
+
+// Point 15: Celebration Screen Trigger
+function showCelebration() {
+    const overlay = document.getElementById('celebration-overlay');
+    if(overlay) {
+        overlay.classList.remove('hidden-alert');
+        playLevelUpSound();
+        spawnConfetti();
+    }
+}
+function spawnConfetti() {
+    const container = document.querySelector('.confetti-container');
+    if(!container) return;
+    container.innerHTML = '';
+    const colors = ['#39ff14', '#ff2d78', '#ffd700', '#00e5ff', '#9b5de5'];
+    for(let i=0; i<50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        container.appendChild(confetti);
+    }
+}
+
+// Point 16: Monitor Status Icons
+const originalUpdateUIForIcons = updateUI;
+updateUI = function(data) {
+    originalUpdateUIForIcons(data);
+    
+    const updatePip = (id, status) => {
+        const pip = document.getElementById(id);
+        if(!pip) return;
+        pip.className = 'status-pip';
+        if(status === 'good' || status === 'looking' || status === 'on' || status === 'not_detected') pip.classList.add('status-ok');
+        else if(status === 'away' || status === 'slouching' || status === 'detected' || status === 'off') pip.classList.add('status-crit');
+        else pip.classList.add('status-warn');
+    };
+    
+    updatePip('pip-gaze', data.gaze);
+    updatePip('pip-posture', data.posture);
+    updatePip('pip-specs', data.specs);
+    updatePip('pip-phone', data.phone);
+    
+    // Point 17: Trophies
+    if(data.stats && data.stats.total_focus_minutes_today !== undefined) {
+        const trophies = document.getElementById('trophies-container');
+        if(trophies) {
+            const numTrophies = Math.floor(data.stats.total_focus_minutes_today / 60);
+            if(numTrophies > 0) {
+                trophies.innerHTML = '';
+                for(let i=0; i<numTrophies; i++) {
+                    const medal = document.createElement('div');
+                    medal.className = 'pixel-medal';
+                    trophies.appendChild(medal);
+                }
+            }
+        }
+    }
+    
+    // Point 19: Hourglass toggle
+    const hourglass = document.getElementById('break-hourglass');
+    if (hourglass) {
+        if (data.session.state === 'break') {
+            hourglass.style.display = 'block';
+        } else {
+            hourglass.style.display = 'none';
+        }
+    }
+}
+
+// Point 21: Konami Code Easter Egg
+(function() {
+    let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+    document.addEventListener('keydown', (e) => {
+        if (e.key === konamiCode[konamiIndex] || e.key.toLowerCase() === konamiCode[konamiIndex]) {
+            konamiIndex++;
+            if (konamiIndex === konamiCode.length) {
+                // Trigger Easter Egg
+                playLevelUpSound();
+                document.body.classList.add('konami-rainbow');
+                const pet = document.getElementById('pixelpal-sprite');
+                if(pet) pet.classList.add('konami-spin');
+                setTimeout(() => {
+                    document.body.classList.remove('konami-rainbow');
+                    if(pet) pet.classList.remove('konami-spin');
+                }, 5000);
+                showToast("CHEAT CODE ACTIVATED", "God mode enabled... just kidding.", "info");
+                konamiIndex = 0;
+            }
+        } else {
+            konamiIndex = 0;
+        }
+    });
+})();
+
+// Point 22: Parallax Mouse Tracking on HUD
+(function() {
+    document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 10;
+        const y = (e.clientY / window.innerHeight - 0.5) * 10;
+        const root = document.documentElement;
+        root.style.setProperty('--px', `${x}px`);
+        root.style.setProperty('--py', `${y}px`);
+    });
+})();
+
+// Point 23: Typewriter Sound for Logs
+function playTypewriterSound() {
+    if (!audioCtx || !soundEnabled) return;
+    try {
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(400 + Math.random() * 200, now);
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+    } catch(e) {}
+}
+
+// Point 24: Boss Key Screen Overlay
+(function() {
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const overlay = document.getElementById('boss-key-overlay');
+            if (overlay) {
+                overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+    });
+})();
+
+// Point 26: Weather Toggle Loop
+(function() {
+    setInterval(() => {
+        const weather = document.getElementById('weather-layer');
+        const badge = document.getElementById('session-state-badge');
+        if(!weather || !badge) return;
+        const stateText = badge.innerText.toUpperCase();
+        
+        weather.className = 'weather-layer'; // Reset
+        if (stateText.includes('BREAK') || stateText.includes('WARN')) {
+            weather.classList.add('weather-rain');
+        }
+    }, 1000);
+})();
+
+// Point 28: Daily Affirmations/Insults
+(function() {
+    const goodQuotes = ["You're doing great!", "Keep it up!", "Stay frosty.", "Pixel perfect!", "Focus level: over 9000!"];
+    const badQuotes = ["Stop slacking!", "Eyes on the screen!", "Are you even trying?", "Posture check!", "Put the phone away!"];
+    
+    setInterval(() => {
+        const bubble = document.getElementById('pet-speech-bubble');
+        const badge = document.getElementById('session-state-badge');
+        if(!bubble || !badge) return;
+        
+        if (Math.random() < 0.2) { // 20% chance every 10s to show bubble
+            const state = badge.innerText.toUpperCase();
+            bubble.style.display = 'block';
+            if (state.includes('WARN') || state.includes('CRITICAL')) {
+                bubble.innerText = badQuotes[Math.floor(Math.random() * badQuotes.length)];
+                bubble.style.color = "red";
+            } else {
+                bubble.innerText = goodQuotes[Math.floor(Math.random() * goodQuotes.length)];
+                bubble.style.color = "black";
+            }
+            
+            setTimeout(() => {
+                if(bubble) bubble.style.display = 'none';
+            }, 4000);
+        }
+    }, 10000);
+})();
+
+// Point 30: System Stats Monitor Flicker
+(function() {
+    setInterval(() => {
         const pwr = document.getElementById('fake-pwr');
         const mem = document.getElementById('fake-mem');
         if(!pwr || !mem) return;
@@ -1171,6 +1366,17 @@ function playTypewriterSound() {
         mem.innerText = (40 + Math.floor(Math.random() * 20)) + "%";
     }, 2500);
 })();
+
+// Point 31: Keystroke Counter Tracker
+(function() {
+    let keyCount = 0;
+    document.addEventListener('keydown', () => {
+        keyCount++;
+        const display = document.getElementById('stat-keystrokes');
+        if (display) display.innerText = keyCount;
+    });
+})();
+
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
     console.log("[Point 31-200] Loading massive feature set...");
