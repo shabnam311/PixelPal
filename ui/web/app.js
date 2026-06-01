@@ -2648,3 +2648,17 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 142: Focus Shield Toggle
+(function() {
+    setInterval(() => {
+        const sh = document.getElementById('focus-shield');
+        if(sh && lastKnownState && lastKnownState.session) {
+            if(lastKnownState.session.state === 'focus') {
+                sh.classList.add('focus-shield-active');
+            } else {
+                sh.classList.remove('focus-shield-active');
+            }
+        }
+    }, 1000);
+})();

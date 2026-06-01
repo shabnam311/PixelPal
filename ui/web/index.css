@@ -1362,3 +1362,8 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 140: Pet Shadow */
 .pet-shadow { position: absolute; width: 40px; height: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 0; animation: shadowPulse 2.8s infinite; pointer-events: none; }
 @keyframes shadowPulse { 0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.5; } 50% { transform: translateX(-50%) scale(1.1); opacity: 0.7; } }
+
+/* Point 142: Focus Shield */
+.focus-shield { position: absolute; width: 80px; height: 80px; border: 2px solid var(--neon-cyan); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 15px var(--neon-cyan), inset 0 0 10px var(--neon-cyan); z-index: 2; opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+.focus-shield-active { opacity: 0.6; animation: rotateShield 4s linear infinite; }
+@keyframes rotateShield { 0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); } 50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.05); } 100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); } }
