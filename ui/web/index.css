@@ -1120,3 +1120,19 @@ body {
 .pet-container svg {
     transition: opacity 0.15s ease-in-out, filter 0.15s ease-in-out, transform 0.15s ease-in-out;
 }
+
+/* Point 19: Pixel Sand-Hourglass */
+.hourglass-container {
+    animation: hourglassTurn 5s infinite;
+}
+@keyframes hourglassTurn {
+    0%, 45% { transform: rotate(0deg); }
+    50%, 95% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+}
+.sand-top { animation: sandDeplete 2.5s infinite linear; transform-origin: bottom; }
+.sand-bottom { animation: sandFill 2.5s infinite linear; transform-origin: bottom; }
+.sand-flow { animation: sandFlowing 2.5s infinite linear; }
+@keyframes sandDeplete { 0% { transform: scaleY(1); } 90%, 100% { transform: scaleY(0); } }
+@keyframes sandFill { 0% { transform: scaleY(0); } 90%, 100% { transform: scaleY(1); } }
+@keyframes sandFlowing { 0%, 10% { opacity: 0; } 10.1%, 89.9% { opacity: 1; } 90%, 100% { opacity: 0; } }

@@ -195,7 +195,16 @@
                                 </div>
                             </div>
                             
-                            <div class="timer-digits-container">
+                            <div class="timer-digits-container" style="position: relative;">
+                                <!-- Point 19: Hourglass Animation -->
+                                <div id="break-hourglass" class="hourglass-container" style="display: none; position: absolute; left: 10px; top: 15px;">
+                                    <svg width="24" height="24" viewBox="0 0 16 16" fill="var(--neon-yellow)">
+                                        <path d="M2 0h12v2l-4 6 4 6v2H2v-2l4-6-4-6V0z" opacity="0.3"/>
+                                        <path class="sand-top" d="M4 2h8l-2 3H6L4 2z"/>
+                                        <path class="sand-bottom" d="M6 11h4l2 3H4l2-3z"/>
+                                        <rect class="sand-flow" x="7" y="5" width="2" height="6"/>
+                                    </svg>
+                                </div>
                                 <div id="timer-display" class="timer-digits">45:00</div>
                                 <div id="session-state-badge" class="state-badge badge-idle">IDLE</div>
                             </div>

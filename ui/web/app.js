@@ -1006,4 +1006,14 @@ updateUI = function(data) {
             }
         }
     }
+    
+    // Point 19: Hourglass toggle
+    const hourglass = document.getElementById('break-hourglass');
+    if (hourglass) {
+        if (data.session.state === 'break') {
+            hourglass.style.display = 'block';
+        } else {
+            hourglass.style.display = 'none';
+        }
+    }
 }
