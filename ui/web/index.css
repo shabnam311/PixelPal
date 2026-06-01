@@ -913,3 +913,11 @@ body {
     100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
 }
 
+
+/* Point 7: Orbitron LCD Font for Timer */
+.timer-digits {
+    font-family: 'Orbitron', monospace !important;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
