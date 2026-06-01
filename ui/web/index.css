@@ -1326,3 +1326,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 
 /* Point 116: Badge Hover Scale */
 .level-badge:hover, .session-state-badge:hover, .time-mode-badge:hover { transform: scale(1.1); cursor: pointer; transition: transform 0.2s ease; }
+
+/* Point 119: Ambient Window Borders */
+@keyframes ambientBorder { 0% { box-shadow: inset 0 0 10px var(--neon-cyan); } 50% { box-shadow: inset 0 0 30px var(--neon-purple); } 100% { box-shadow: inset 0 0 10px var(--neon-cyan); } }
+.app-container { animation: ambientBorder 10s infinite alternate; }
