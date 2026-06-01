@@ -2565,3 +2565,26 @@ if(originalShowToast) {
         });
     }
 })();
+
+// Point 135: Reset Stats Button
+(function() {
+    const rBtn = document.getElementById('btn-reset-stats');
+    if(rBtn) {
+        let confirmPhase = 0;
+        rBtn.addEventListener('click', () => {
+            if(confirmPhase === 0) {
+                rBtn.innerText = 'ARE YOU SURE? CLICK AGAIN';
+                confirmPhase = 1;
+                setTimeout(() => { if(confirmPhase === 1) { rBtn.innerText = '?? RESET ALL STATS ??'; confirmPhase = 0; } }, 3000);
+            } else if(confirmPhase === 1) {
+                rBtn.innerText = 'REALLY SURE? LAST CHANCE';
+                confirmPhase = 2;
+                setTimeout(() => { if(confirmPhase === 2) { rBtn.innerText = '?? RESET ALL STATS ??'; confirmPhase = 0; } }, 3000);
+            } else {
+                localStorage.clear();
+                showToast('FACTORY RESET', 'All local data wiped. Restarting app...', 'error');
+                setTimeout(() => window.location.reload(), 2000);
+            }
+        });
+    }
+})();
