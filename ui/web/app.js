@@ -401,7 +401,34 @@ function togglePause() {
     const isPaused = lastKnownState && lastKnownState.session.state === "paused";
     fetch(isPaused ? '/api/resume' : '/api/pause', { method: 'POST' });
 }
-function calibratePosture() { playClickSound(); fetch('/api/calibrate', { method: 'POST' }); }
+// Point 20: 3-2-1 Calibration Countdown
+function calibratePosture() {
+    playClickSound();
+    const overlay = document.getElementById('calibration-countdown-overlay');
+    const text = document.getElementById('countdown-text');
+    if(overlay && text) {
+        overlay.classList.remove('hidden-alert');
+        let count = 3;
+        text.innerText = count;
+        
+        const interval = setInterval(() => {
+            count--;
+            if(count > 0) {
+                text.innerText = count;
+                playClickSound();
+            } else if (count === 0) {
+                text.innerText = 'SNAP!';
+                playLevelUpSound(); // Use as camera shutter sound
+            } else {
+                clearInterval(interval);
+                overlay.classList.add('hidden-alert');
+                fetch('/api/calibrate', { method: 'POST' });
+            }
+        }, 1000);
+    } else {
+        fetch('/api/calibrate', { method: 'POST' });
+    }
+}
 function dismissWarning() { playClickSound(); fetch('/api/dismiss-alert', { method: 'POST' }); }
 
 document.getElementById('btn-start').addEventListener('click', startFocus);

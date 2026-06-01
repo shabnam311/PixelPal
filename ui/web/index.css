@@ -1136,3 +1136,10 @@ body {
 @keyframes sandDeplete { 0% { transform: scaleY(1); } 90%, 100% { transform: scaleY(0); } }
 @keyframes sandFill { 0% { transform: scaleY(0); } 90%, 100% { transform: scaleY(1); } }
 @keyframes sandFlowing { 0%, 10% { opacity: 0; } 10.1%, 89.9% { opacity: 1; } 90%, 100% { opacity: 0; } }
+
+/* Point 20: Calibration Countdown */
+@keyframes pulseZoom {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0; }
+}
