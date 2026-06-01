@@ -2502,3 +2502,19 @@ if(originalShowToast) {
         }
     });
 })();
+
+// Point 131: Auto-Start Logic
+(function() {
+    let lastSesSt = '';
+    setInterval(() => {
+        const auto = document.getElementById('toggle-auto-start');
+        if(auto && auto.checked && typeof lastKnownState !== 'undefined' && lastKnownState && lastKnownState.session) {
+            const curr = lastKnownState.session.state;
+            if(curr === 'idle' && (lastSesSt === 'focus' || lastSesSt === 'break')) {
+                setTimeout(() => fetch('/api/start', { method: 'POST' }), 2000);
+                showToast('AUTO-START', 'Starting next session automatically...', 'info');
+            }
+            lastSesSt = curr;
+        }
+    }, 1000);
+})();
