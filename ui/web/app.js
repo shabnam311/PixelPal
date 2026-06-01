@@ -2737,3 +2737,17 @@ setInterval(() => {
         }
     }, 1000);
 })();
+
+// Point 148: Mute Indicator
+(function() {
+    setInterval(() => {
+        const mi = document.getElementById('mute-indicator');
+        if(mi) {
+            if(window.SFX_VOLUME === 0 || window.isMuted) {
+                mi.style.display = 'block';
+            } else {
+                mi.style.display = 'none';
+            }
+        }
+    }, 500);
+})();
