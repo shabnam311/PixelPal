@@ -2980,3 +2980,16 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 162: Copy Timer on Right-Click
+(function() {
+    const timer = document.querySelector('.timer-digits');
+    if(timer) {
+        timer.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            navigator.clipboard.writeText(timer.innerText).then(() => {
+                showToast('COPIED', \Time \$\{timer.innerText\} copied to clipboard.\, 'info');
+            });
+        });
+    }
+})();
