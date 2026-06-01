@@ -1233,3 +1233,9 @@ body {
 /* Point 68: Random CRT Flicker */
 @keyframes crtRandomFlicker { 0% { opacity: 1; } 5% { opacity: 0.8; } 10% { opacity: 1; } 15% { opacity: 0.9; } 20% { opacity: 1; } 100% { opacity: 1; } }
 .crt-flicker-active { animation: crtRandomFlicker 0.2s ease-in-out !important; }
+
+/* Point 69: Custom Scrollbar */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: var(--bg-system-dark); border-left: 1px solid var(--neon-green); }
+::-webkit-scrollbar-thumb { background: var(--neon-green); border: 2px solid var(--bg-system-dark); }
+::-webkit-scrollbar-thumb:hover { background: #fff; }
