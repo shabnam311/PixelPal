@@ -1487,6 +1487,23 @@ function playTypewriterSound() {
         pet.style.cursor = 'grab';
     }
 
+    // Point 50: Pet Falls Asleep on Idle
+    let idleTimer;
+    document.addEventListener('mousemove', resetIdle);
+    document.addEventListener('keydown', resetIdle);
+    function resetIdle() {
+        if(pet.classList.contains('anim-sleep')) {
+            pet.classList.remove('anim-sleep');
+            document.getElementById('sprite-caption').innerText = document.getElementById('set-pet-name').value.toUpperCase() + ' IS AWAKE';
+        }
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+            pet.classList.add('anim-sleep');
+            document.getElementById('sprite-caption').innerText = document.getElementById('set-pet-name').value.toUpperCase() + ' IS ASLEEP';
+        }, 300000); // 5 mins
+    }
+    resetIdle();
+
     function drag(e) {
         if (isDragging) {
             e.preventDefault();
