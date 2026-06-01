@@ -2238,3 +2238,20 @@ e the one that has to walk through it."', '"Ignorance is bliss."'];
         }
     }, 1000);
 })();
+
+// Point 106: Mouse Trail Effect
+(function() {
+    let lastTime = 0;
+    document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if(now - lastTime > 30) {
+            const p = document.createElement('div');
+            p.className = 'mouse-trail-particle';
+            p.style.left = e.clientX + 'px';
+            p.style.top = e.clientY + 'px';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 500);
+            lastTime = now;
+        }
+    });
+})();
