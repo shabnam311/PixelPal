@@ -3103,3 +3103,21 @@ setInterval(() => {
         }
     }, 1000);
 })();
+
+// Point 170: Idle Pet Snore
+(function() {
+    setInterval(() => {
+        const pet = document.getElementById('pixelpal-sprite');
+        if(pet && lastKnownState && lastKnownState.session && lastKnownState.session.state === 'idle') {
+            if(Math.random() > 0.7) {
+                const zz = document.createElement('div');
+                zz.className = 'snore-text';
+                zz.innerText = 'Zzz...';
+                zz.style.left = '60%';
+                zz.style.top = '10%';
+                pet.appendChild(zz);
+                setTimeout(() => zz.remove(), 2000);
+            }
+        }
+    }, 2000);
+})();
