@@ -687,3 +687,21 @@ function heartFill(element) {
     }, 1000);
 })();
 
+
+// Point 12: Settings Drawer
+function toggleSettingsDrawer() {
+    const drawer = document.getElementById('settings-drawer');
+    const backdrop = document.getElementById('settings-drawer-backdrop');
+    if(drawer && backdrop) {
+        if (drawer.classList.contains('open')) {
+            drawer.classList.remove('open');
+            backdrop.style.display = 'none';
+        } else {
+            drawer.classList.add('open');
+            backdrop.style.display = 'block';
+        }
+        playClickSound();
+    }
+}
+document.getElementById('btn-settings')?.addEventListener('click', toggleSettingsDrawer);
+

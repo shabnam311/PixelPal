@@ -989,3 +989,27 @@ body {
     background: radial-gradient(circle at 50% 0%, #1a237e, #000000) !important;
 }
 
+
+/* Point 12: Settings Drawer */
+.settings-drawer {
+    position: fixed; top: 0; right: -350px; width: 300px; height: 100vh;
+    background: #0d1117; border-left: 2px solid var(--neon-purple);
+    z-index: 100002; transition: right 0.3s ease-in-out;
+    display: flex; flex-direction: column; box-shadow: -5px 0 30px rgba(0,0,0,0.8);
+}
+.settings-drawer.open { right: 0; }
+.settings-backdrop {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5); z-index: 100001;
+}
+.settings-header {
+    padding: 15px; border-bottom: 2px solid #222; display: flex;
+    justify-content: space-between; font-size: 12px; color: var(--neon-purple);
+}
+.settings-body { padding: 15px; overflow-y: auto; flex: 1; }
+.settings-category { margin-bottom: 20px; }
+.settings-cat-title { font-size: 10px; color: var(--text-muted); margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 5px;}
+.settings-toggle { display: block; font-size: 10px; margin-bottom: 8px; cursor: pointer; }
+.settings-range { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 8px; align-items: center; }
+.settings-input { background: #000; border: 1px solid #333; color: var(--neon-green); width: 50px; font-family: inherit; font-size: 10px; padding: 2px; text-align: center; }
+
