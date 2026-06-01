@@ -13,6 +13,14 @@
     <div class="power-on-flash" id="power-on-flash"></div>
     <div class="scanlines"></div>
     <div class="scanline-sweep"></div>
+
+    <!-- Theme Switcher Widget -->
+    <div class="theme-switcher" id="theme-switcher">
+        <div class="theme-dot active" data-theme="neon-green" title="Neon Green"></div>
+        <div class="theme-dot" data-theme="synthwave-purple" title="Synthwave Purple"></div>
+        <div class="theme-dot" data-theme="cyberpunk-yellow" title="Cyberpunk Yellow"></div>
+        <div class="theme-dot" data-theme="arcade-red" title="Arcade Red"></div>
+    </div>
     
     <!-- True 100vw/100vh CSS Grid Dual Screen layout -->
     <div class="app-container">
@@ -49,7 +57,10 @@
                         <div class="screen-header">
                             <span class="pulse-icon">●</span> MONITOR FEED
                             <span class="active-tab-title" id="top-tab-title">TAB: RETRO PET</span>
-                            <button id="btn-mute" class="mute-btn" title="Toggle Sound">🔊</button>
+                            <div class="header-actions">
+                                <button id="btn-mute" class="mute-btn" title="Toggle Sound">🔊</button>
+                                <button id="btn-settings" class="mute-btn" title="Settings">⚙️</button>
+                            </div>
                         </div>
 
                         <!-- TOP SCREEN CONTENT AREA -->
@@ -226,6 +237,41 @@
                 <div class="branding-text" id="logo-glitch">👾 PIXELPAL SYSTEM</div>
             </div>
 
+        </div>
+    </div>
+
+    <!-- Settings Drawer (Point 12) -->
+    <div id="settings-drawer-backdrop" class="settings-backdrop" style="display:none;" onclick="toggleSettingsDrawer()"></div>
+    <div id="settings-drawer" class="settings-drawer">
+        <div class="settings-header">
+            <span>⚙️ SETTINGS</span>
+            <button id="btn-settings-close" class="mute-btn" onclick="toggleSettingsDrawer()">✕</button>
+        </div>
+        <div class="settings-body">
+            <div class="settings-category">
+                <h3 class="settings-cat-title">📡 MONITORS</h3>
+                <label class="settings-toggle"><input type="checkbox" id="set-gaze" checked> Gaze Tracker</label>
+                <label class="settings-toggle"><input type="checkbox" id="set-posture" checked> Posture Check</label>
+                <label class="settings-toggle"><input type="checkbox" id="set-specs" checked> UV Glasses</label>
+                <label class="settings-toggle"><input type="checkbox" id="set-phone" checked> Phone Detect</label>
+            </div>
+            <div class="settings-category">
+                <h3 class="settings-cat-title">⏱️ SESSION</h3>
+                <label class="settings-range">Focus (min): <input type="number" id="set-focus-min" value="45" min="5" max="120" class="settings-input"></label>
+                <label class="settings-range">Break (min): <input type="number" id="set-break-min" value="10" min="1" max="30" class="settings-input"></label>
+            </div>
+            <div class="settings-category">
+                <h3 class="settings-cat-title">🔔 ALERTS</h3>
+                <label class="settings-toggle"><input type="checkbox" id="set-sound" checked> Sound Effects</label>
+                <label class="settings-toggle"><input type="checkbox" id="set-popup" checked> Popup Alerts</label>
+                <label class="settings-range">Quiet Start: <input type="text" id="set-quiet-start" value="22:00" class="settings-input" maxlength="5"></label>
+                <label class="settings-range">Quiet End: <input type="text" id="set-quiet-end" value="08:00" class="settings-input" maxlength="5"></label>
+            </div>
+            <div class="settings-category">
+                <h3 class="settings-cat-title">🖥️ DISPLAY</h3>
+                <label class="settings-toggle"><input type="checkbox" id="set-scanlines" checked> Scanlines</label>
+                <label class="settings-toggle"><input type="checkbox" id="set-animations" checked> Animations</label>
+            </div>
         </div>
     </div>
 

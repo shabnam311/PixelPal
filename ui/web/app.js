@@ -550,3 +550,25 @@ document.getElementById('ob-btn-back')?.addEventListener('click', () => {
         });
     }
 })();
+
+// Point 3: Theme Switcher
+(function() {
+    const savedTheme = localStorage.getItem('pixelpal_theme') || 'neon-green';
+    document.body.setAttribute('data-theme', savedTheme);
+    
+    document.querySelectorAll('.theme-dot').forEach(dot => {
+        if (dot.dataset.theme === savedTheme) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+        dot.addEventListener('click', () => {
+            const theme = dot.dataset.theme;
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('pixelpal_theme', theme);
+            document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+            dot.classList.add('active');
+            playClickSound();
+        });
+    });
+})();
