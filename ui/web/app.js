@@ -2380,3 +2380,19 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 120: Pomodoro Streak Logic
+(function() {
+    setInterval(() => {
+        const sm = document.getElementById('streak-multiplier');
+        if(sm && typeof lastKnownState !== 'undefined' && lastKnownState && lastKnownState.stats) {
+            const streak = lastKnownState.stats.sessions_completed || 0;
+            if(streak > 0 && streak % 3 === 0) {
+                sm.style.display = 'block';
+                sm.innerText = 'STREAK x1.5';
+            } else {
+                sm.style.display = 'none';
+            }
+        }
+    }, 2000);
+})();
