@@ -1475,6 +1475,23 @@ function playTypewriterSound() {
     });
 })();
 
+// Point 37 & 38: Quick Mute & Theme Hotkeys
+(function() {
+    document.addEventListener('keydown', (e) => {
+        // Point 37: Ctrl+M to toggle sound
+        if(e.ctrlKey && e.key === 'm') {
+            soundEnabled = !soundEnabled;
+            showToast("AUDIO", "Sound " + (soundEnabled ? "ON" : "OFF"), "info");
+        }
+        
+        // Point 38: Alt+1..4 to swap themes instantly
+        if(e.altKey && e.key === '1') document.body.setAttribute('data-theme', 'neon-green');
+        if(e.altKey && e.key === '2') document.body.setAttribute('data-theme', 'synthwave-purple');
+        if(e.altKey && e.key === '3') document.body.setAttribute('data-theme', 'arcade-red');
+        if(e.altKey && e.key === '4') document.body.setAttribute('data-theme', 'cyberpunk-yellow');
+    });
+})();
+
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
     console.log("[Point 31-200] Loading massive feature set...");
