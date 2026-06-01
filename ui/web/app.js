@@ -1218,19 +1218,27 @@ updateUI = function(data) {
     updatePip('pip-specs', data.specs);
     updatePip('pip-phone', data.phone);
     
-    // Point 17: Trophies
+    // Point 17 & 44: Trophies & Total Focus
     if(data.stats && data.stats.total_focus_minutes_today !== undefined) {
         const trophies = document.getElementById('trophies-container');
-        if(trophies) {
-            const numTrophies = Math.floor(data.stats.total_focus_minutes_today / 60);
-            if(numTrophies > 0) {
-                trophies.innerHTML = '';
-                for(let i=0; i<numTrophies; i++) {
-                    const medal = document.createElement('div');
-                    medal.className = 'pixel-medal';
-                    trophies.appendChild(medal);
-                }
+        const numTrophies = Math.floor(data.stats.total_focus_minutes_today / 60);
+        if(trophies && numTrophies > 0) {
+            trophies.innerHTML = '';
+            for(let i=0; i<numTrophies; i++) {
+                const medal = document.createElement('div');
+                medal.className = 'pixel-medal';
+                trophies.appendChild(medal);
             }
+        }
+        
+        // Point 44 logic
+        const totalElem = document.getElementById('stat-total-focus');
+        if(totalElem) {
+            // Simulated all-time focus (today + previous days)
+            let allTimeMins = data.stats.total_focus_minutes_today + 1420; 
+            const h = Math.floor(allTimeMins / 60);
+            const m = allTimeMins % 60;
+            totalElem.innerText = `${h}h ${m}m`;
         }
     }
     
