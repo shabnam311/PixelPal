@@ -1,66 +1,96 @@
-# 👾 PIXELPAL
-**Your Pixel-Art Screen Habit Monitor**
+<div align="center">
 
-PIXELPAL is a 100% local, offline, desktop application designed to keep you focused, maintain healthy posture, and prevent digital eye strain. Built with a gamified retro "Nintendo DS" aesthetic, it acts as a digital pet that actively monitors your physical habits in real-time.
+# 👾 PIXELPAL 👾
+### *The Ultimate Cyberpunk Productivity Companion*
 
----
+[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Webview](https://img.shields.io/badge/PyWebView-FF2D78?style=for-the-badge&logo=windows&logoColor=white)](https://pywebview.flowrl.com/)
+[![Local AI](https://img.shields.io/badge/100%25_Local-AI-00FF94?style=for-the-badge&logo=ai&logoColor=black)](#)
 
-## 🌟 Core Features
+*Your personal Ghibli-inspired digital pet that uses local AI to fix your posture, save your eyes, and crush your distractions.*
 
-### 1. Gamified Visual Interface
-- **The PixelPal Pet**: A pixel-art, Ghibli-inspired "Totoro" companion that lives on your screen. It visually reacts to your behavior:
-  - **Happy State**: Bobs gently, wags tail, and displays a neon green glow when you are focused.
-  - **Warning State**: Starts sweating and shaking frantically if it detects bad habits.
-  - **Sleep State**: Snoozes with pixel "Z" bubbles during scheduled breaks.
-- **Zelda-style Heart Containers**: Your session health is represented by 5 chunky pixel hearts. Bad habits deplete your hearts, and maintaining focus slowly regenerates them.
-- **Retro Console Layout**: The UI mimics a classic dual-screen handheld console, complete with glowing LED strips, CRT scanlines, screen curvature, physical D-Pad tabs, and chunky A/B interaction buttons.
-- **Chiptune Audio**: Built-in Web Audio API synthesizers that play retro arpeggios, click sounds, and level-up jingles.
+[Download .EXE Release](#) | [Features](#features) | [How it Works](#architecture)
 
-### 2. AI-Powered Habit Monitors
-PixelPal uses your webcam and advanced local AI models to track 4 distinct physical habits. **All processing happens locally on your machine—no data is sent to the cloud.**
+<img src="https://i.pinimg.com/736x/24/44/61/244461086017795919.jpg" width="400" style="border-radius:10px; box-shadow: 0 0 20px #00FF94;">
 
-- **👀 Gaze Monitor (MediaPipe Face Mesh)**
-  - Calculates horizontal and vertical head-pose angles.
-  - Warns you if you are looking away from your monitor (e.g., staring into space) for extended periods during a focus session.
-- **🧍 Posture Monitor (MediaPipe Pose)**
-  - Uses a calibration system to capture your baseline "healthy" sitting position.
-  - Measures your nose-to-shoulder vertical distance to detect severe slouching or leaning unhealthily close to the screen.
-- **👓 Specs Monitor (Ollama + LLaVA Vision Model)**
-  - Uses local Generative AI to analyze frames every 15 seconds.
-  - Detects whether you are wearing your blue-light blocking glasses. If not, PixelPal gets upset!
-- **📱 Phone Monitor (Ollama + LLaVA Vision Model)**
-  - Scans for smartphone usage in your hands.
-  - Instantly flags if you get distracted by scrolling on your phone.
-
-### 3. Session & Productivity Management
-- **Pomodoro Timer**: Standard 25-minute focus blocks followed by 5-minute breaks.
-- **Custom Focus Mode**: Set an exact custom timer (e.g., 45 minutes) for deep work.
-- **Watch Mode**: Runs the AI monitors passively in the background without a strict timer constraint.
-- **Log System**: A typewriter-style retro console log that keeps a running history of your violations and achievements.
+</div>
 
 ---
 
-## ⚙️ How it Works (Architecture)
+## 🚀 WHY PIXELPAL?
 
-PIXELPAL is built using a modern, multi-threaded tech stack to ensure high performance while rendering a heavy frontend:
+Most productivity apps just give you a timer. PixelPal gives you a **companion**. 
 
-1. **The Brain (Python / FastAPI)**
-   - A multithreaded Python backend runs the OpenCV webcam capture loop and feeds frames to the MediaPipe and Ollama models.
-   - It acts as a local FastAPI web server (`localhost:8000`), maintaining state and enforcing warning logic/cooldowns.
-2. **The Nerves (WebSockets)**
-   - The backend pushes state updates (timer ticks, eye movement, heart depletion, alerts) to the UI 10+ times a second via a high-speed WebSocket connection.
-3. **The Face (HTML/CSS/JS + PyWebView)**
-   - The UI is a beautifully crafted vanilla web app (`index.html`, `index.css`, `app.js`).
-   - `PyWebView` wraps this local web server in a native Windows borderless container, making it feel like a standard `.exe` desktop application.
-4. **Standalone Packaging (PyInstaller)**
-   - The entire Python environment, AI dependencies, and web assets are bundled into a single `PixelPal.exe` file, meaning you don't even need Python installed to run it!
+Built with a **dark-neon cyberpunk pixel-art aesthetic**, PixelPal watches your physical habits in real-time. If you slouch, look at your phone, or take off your computer glasses, your PixelPal reacts, sweats, and loses health. Keep focused, and you both level up.
+
+**🔥 100% OFFLINE. 0% CLOUD STORAGE. CAMERA FOOTAGE IS NEVER SAVED.**  
+*Highly memory-efficient and battery-friendly architecture.*
 
 ---
 
-## 🛠️ Calibration & Setup
+## 🌟 CORE FEATURES
 
-1. **Booting Up**: Launch `PixelPal.exe`.
-2. **Postural Calibration**: Sit up straight, put on your glasses, look directly at the screen, and hit the **CALIBRATE** button. PixelPal takes a snapshot of your baseline posture to compare against during the session.
-3. **Start Focusing**: Hit **POMODORO** or **START** to begin. The AI monitors will immediately start tracking your behavior in the background.
+### 🎮 The Ultimate Retro Interface
+- **Dynamic Themes**: Switch instantly between *Neon Green, Synthwave Purple, Cyberpunk Yellow,* and *Arcade Red*.
+- **The PixelPal Pet**: A responsive pixel-art companion that breathes, bobs, dances, and panics based on your behavior.
+- **Classic HUD**: Zelda-style heart containers, chunky JRPG experience bars, and a CRT scanline toggle.
+- **Pixel Terminal**: A fully functional, color-coded ANSI terminal log that tracks your session milestones in real-time.
 
-*Stay focused, protect your eyes, and keep your PixelPal happy!*
+### 🧠 On-Device AI Monitors
+*No footage saved. No data collected. Processing happens in milliseconds.*
+
+| Monitor | Technology | What it Does |
+| :--- | :--- | :--- |
+| **👀 Gaze** | MediaPipe Face Mesh | Detects if you're staring off into space. |
+| **🧍 Posture** | MediaPipe Pose | Calibrates to your body and warns if you slouch. |
+| **👓 Specs** | LLaVA Vision Model | Ensures you wear your blue-light blockers. |
+| **📱 Phone** | LLaVA Vision Model | Instantly detects if you pick up your phone. |
+
+### ⚡ Gamified Productivity
+- **Pomodoro & Deep Focus**: Custom session durations.
+- **Level Up!**: Hit your goals to trigger confetti celebrations and chiptune level-up sounds.
+- **Toast Notifications**: Non-intrusive, cyberpunk-styled slide-in alerts.
+- **Quiet Mode**: Slide-out settings drawer to mute alarms and pause monitors on the fly.
+
+---
+
+## 🛠️ INSTALLATION & RUNNING
+
+No command prompt required. No "npm install". Just run the app!
+
+### Option 1: The `.EXE` (Recommended)
+1. Download `PixelPal.exe` from the latest release.
+2. Double click it. That's it. 
+*(No Python required, fully portable).*
+
+### Option 2: Running from Source
+If you want to tweak the neon CSS or add features:
+```bash
+# Clone the repo
+git clone https://github.com/shabnam311/PixelPal.git
+
+# Install dependencies (only needed once)
+pip install -r requirements.txt
+
+# Run the app
+python main.py
+```
+
+---
+
+## 🏗️ ARCHITECTURE (For Nerds)
+
+PixelPal is designed to be **lightweight** and **memory-efficient**.
+
+- **Backend**: `FastAPI` handles the local WebSocket server and asynchronous AI processing.
+- **Frontend**: Vanilla `HTML/CSS/JS` (No heavy React/Electron bloat here!) powered by `PyWebView` for a native Windows borderless feel.
+- **AI Engine**: Frames are captured by `OpenCV`, downscaled for memory efficiency, fed directly into RAM for `MediaPipe`/`Ollama`, and immediately discarded.
+
+---
+
+<div align="center">
+  <i>Stay focused, protect your eyes, and keep your PixelPal happy.</i>
+  <br>
+  👾 👾 👾
+</div>
