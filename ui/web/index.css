@@ -67,6 +67,12 @@
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="0" y="0" width="16" height="16" fill="black"/><rect x="2" y="2" width="12" height="12" fill="%2339ff14"/></svg>'), auto;
 }
 
+/* Point 56: Pixel Font on Inputs */
+input[type="text"], input[type="number"] {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
 body {
     background-color: var(--bg-system-dark);
     color: var(--text-white);
