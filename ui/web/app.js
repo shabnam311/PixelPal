@@ -1841,3 +1841,11 @@ setInterval(() => {
     const clock = document.getElementById('live-clock');
     if(clock) clock.innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
 }, 1000);
+
+// Point 68: Random CRT Flicker
+setInterval(() => {
+    if(Math.random() < 0.1) {
+        document.body.classList.add('crt-flicker-active');
+        setTimeout(() => document.body.classList.remove('crt-flicker-active'), 200);
+    }
+}, 3000);
