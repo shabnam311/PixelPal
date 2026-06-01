@@ -26,7 +26,7 @@ document.getElementById('btn-mute').addEventListener('click', (e) => {
 });
 
 // Sound Synthesizers (Advanced Phase 7)
-function playClickSound() {
+window.SFX_VOLUME = 1.0;`nfunction playClickSound() {
     if (!audioCtx || !soundEnabled) return;
     try {
         const now = audioCtx.currentTime;
@@ -2175,5 +2175,17 @@ setInterval(() => {
         const quotes = ['"Wake up, Neo..."', '"There is no spoon."', '"I can only show you the door. You
 e the one that has to walk through it."', '"Ignorance is bliss."'];
         qTxt.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+    }
+})();
+
+// Point 101: Volume Slider Event
+(function() {
+    const slider = document.getElementById('sfx-volume');
+    const volVal = document.getElementById('vol-val');
+    if(slider && volVal) {
+        slider.addEventListener('input', (e) => {
+            volVal.innerText = e.target.value + '%';
+            window.SFX_VOLUME = parseInt(e.target.value) / 100.0;
+        });
     }
 })();
