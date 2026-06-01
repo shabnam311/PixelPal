@@ -1184,3 +1184,11 @@ body {
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 .violation { animation: intenseShake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+
+/* Point 26: Weather Overlays */
+.weather-layer {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 10; opacity: 0.4; overflow: hidden;
+}
+.weather-rain { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="100"><rect x="4" y="0" width="1" height="20" fill="cyan" opacity="0.5"/></svg>'); animation: rainFall 0.5s linear infinite; }
+@keyframes rainFall { 0% { background-position: 0 0; } 100% { background-position: 10px 100vh; } }

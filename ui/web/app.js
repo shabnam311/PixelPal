@@ -1116,3 +1116,18 @@ function playTypewriterSound() {
         }
     });
 })();
+
+// Point 26: Weather Toggle Loop
+(function() {
+    setInterval(() => {
+        const weather = document.getElementById('weather-layer');
+        const badge = document.getElementById('session-state-badge');
+        if(!weather || !badge) return;
+        const stateText = badge.innerText.toUpperCase();
+        
+        weather.className = 'weather-layer'; // Reset
+        if (stateText.includes('BREAK') || stateText.includes('WARN')) {
+            weather.classList.add('weather-rain');
+        }
+    }, 1000);
+})();
