@@ -2085,3 +2085,33 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 93: Double Click Battery Toggle
+(function() {
+    let batMode = 0;
+    const bat = document.getElementById('real-battery');
+    if(bat) {
+        bat.addEventListener('dblclick', () => {
+            batMode = (batMode + 1) % 2;
+            bat.dataset.mode = batMode;
+            showToast('BATTERY', batMode === 0 ? 'Showing percentage' : 'Showing estimated time', 'info');
+        });
+    }
+    if ('getBattery' in navigator) {
+        navigator.getBattery().then(function(battery) {
+            function updateBatteryUI() {
+                if(!bat) return;
+                if(bat.dataset.mode == 1 && battery.dischargingTime && battery.dischargingTime !== Infinity) {
+                    const hrs = Math.floor(battery.dischargingTime / 3600);
+                    const mins = Math.floor((battery.dischargingTime % 3600) / 60);
+                    bat.innerText = \\$\{hrs\}h \$\{mins\}m\;
+                } else {
+                    bat.innerText = Math.round(battery.level * 100) + '%';
+                }
+            }
+            updateBatteryUI();
+            battery.addEventListener('levelchange', updateBatteryUI);
+            setInterval(updateBatteryUI, 5000);
+        });
+    }
+})();
