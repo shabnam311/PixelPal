@@ -1112,3 +1112,11 @@ body {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
 }
+
+/* Point 18: Smooth CSS Transitions Between States */
+.app-container, .console-panel, .screen-inner, .top-screen-content, .console-casing, .hud-card {
+    transition: background-color 0.4s ease-in-out, border-color 0.4s ease-in-out, box-shadow 0.4s ease-in-out !important;
+}
+.pet-container svg {
+    transition: opacity 0.15s ease-in-out, filter 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
