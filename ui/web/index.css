@@ -1420,3 +1420,6 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 170: Idle Snore Text */
 .snore-text { position: absolute; font-family: 'Press Start 2P', monospace; font-size: 8px; color: white; text-shadow: 1px 1px 0 black; animation: floatSnore 2s ease-out forwards; pointer-events: none; z-index: 10; }
 @keyframes floatSnore { 0% { opacity: 0; transform: translate(0, 0) scale(0.5); } 20% { opacity: 1; transform: translate(10px, -10px) scale(1); } 80% { opacity: 1; transform: translate(20px, -30px) scale(1.2); } 100% { opacity: 0; transform: translate(30px, -40px) scale(1.5); } }
+
+/* Point 172: Title Scanline Effect */
+.app-title { background: linear-gradient(0deg, var(--neon-green) 25%, #fff 50%, var(--neon-green) 75%); background-size: 100% 4px; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
