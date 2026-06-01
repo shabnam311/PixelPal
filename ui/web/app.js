@@ -1731,6 +1731,28 @@ function playWaterSound() {
     }, 2000);
 })();
 
+// Point 61: Focus XP Level Up Overlay
+(function() {
+    let lastXp = -1;
+    setInterval(() => {
+        const xpFill = document.getElementById('xp-bar-fill');
+        if(xpFill && xpFill.style.width) {
+            const currentXp = parseFloat(xpFill.style.width);
+            if (lastXp !== -1 && currentXp < lastXp && currentXp === 0) {
+                // If it wrapped around to 0, it means a level up
+                showToast("LEVEL UP!", "Your focus rank increased!", "info");
+                playLevelUpSound();
+            }
+            if (lastXp !== -1 && currentXp > lastXp && lastXp > 95 && currentXp >= 100) {
+                showToast("LEVEL UP!", "Your focus rank increased!", "info");
+                playLevelUpSound();
+                xpFill.style.width = '0%';
+            }
+            lastXp = currentXp;
+        }
+    }, 1000);
+})();
+
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
     console.log("[Point 31-200] Loading massive feature set...");
