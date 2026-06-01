@@ -2484,3 +2484,21 @@ if(originalShowToast) {
         });
     }
 })();
+
+// Point 129: Matrix Rain Easter Egg
+(function() {
+    let neoCode = ['n','e','o'];
+    let neoIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === neoCode[neoIdx]) {
+            neoIdx++;
+            if(neoIdx === neoCode.length) {
+                document.querySelector('.top-screen-content').classList.toggle('matrix-rain-active');
+                showToast("THE MATRIX", "Wake up, Neo...", "info");
+                neoIdx = 0;
+            }
+        } else {
+            neoIdx = 0;
+        }
+    });
+})();
