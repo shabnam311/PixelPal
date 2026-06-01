@@ -1243,3 +1243,7 @@ body {
 /* Point 70: Custom Text Selection */
 ::selection { background: var(--neon-green); color: black; }
 ::-moz-selection { background: var(--neon-green); color: black; }
+
+/* Point 78: Timer Final Minute Blink */
+@keyframes timerPanicBlink { 0% { opacity: 1; color: var(--neon-red); } 50% { opacity: 0.3; color: var(--neon-red); } 100% { opacity: 1; color: var(--neon-red); } }
+.timer-panic { animation: timerPanicBlink 1s infinite; }

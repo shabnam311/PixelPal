@@ -1238,7 +1238,7 @@ updateUI = function(data) {
             let allTimeMins = data.stats.total_focus_minutes_today + 1420; 
             const h = Math.floor(allTimeMins / 60);
             const m = allTimeMins % 60;
-            totalElem.innerText = `${h}h ${m}m`;`n        }`n    }`n    `n    // Point 65: Pomodoro Tomato Icon`n    const pomoIcon = document.getElementById('pomo-icon');`n    if(pomoIcon && data.session && data.session.state) {`n        if(data.session.state === 'focus' && document.getElementById('set-focus-min').value == 25) {`n            pomoIcon.style.display = 'inline';`n        } else {`n            pomoIcon.style.display = 'none';`n        }`n    }
+            totalElem.innerText = `${h}h ${m}m`;`n        }`n    }`n    `n    // Point 78: Final Minute Timer Panic`n    const timerDisp = document.getElementById('timer-display');`n    if(timerDisp && data.session && data.session.state === 'focus') {`n        if(data.session.time_left <= 60 && data.session.time_left > 0) {`n            timerDisp.classList.add('timer-panic');`n        } else {`n            timerDisp.classList.remove('timer-panic');`n        }`n    }`n        }`n    }`n    `n    // Point 65: Pomodoro Tomato Icon`n    const pomoIcon = document.getElementById('pomo-icon');`n    if(pomoIcon && data.session && data.session.state) {`n        if(data.session.state === 'focus' && document.getElementById('set-focus-min').value == 25) {`n            pomoIcon.style.display = 'inline';`n        } else {`n            pomoIcon.style.display = 'none';`n        }`n    }
         }
     }
     
