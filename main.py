@@ -569,14 +569,14 @@ if __name__ == "__main__":
         try:
             logger.info("PixelPal GUI dashboard window booting...")
             gui_window = webview.create_window(
-                "PIXELPAL v1.0 👾", 
+                "PIXELPAL v1.0", 
                 "http://localhost:8000", 
-                width=520, 
-                height=760, 
-                min_size=(520, 760),
-                resizable=False,
+                width=1024, 
+                height=768, 
+                min_size=(520, 600),
+                resizable=True,
                 fullscreen=False,
-                frameless=True,
+                frameless=False,
                 background_color="#0d1117",
             )
             webview.start()
