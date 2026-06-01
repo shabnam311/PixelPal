@@ -1378,10 +1378,26 @@ function playTypewriterSound() {
 // Point 31: Keystroke Counter Tracker
 (function() {
     let keyCount = 0;
-    document.addEventListener('keydown', () => {
+    document.addEventListener('keydown', (e) => {
         keyCount++;
         const display = document.getElementById('stat-keystrokes');
         if (display) display.innerText = keyCount;
+        
+        // Point 45: Hacker Typing Mode pixel flash
+        const badge = document.getElementById('session-state-badge');
+        if(badge && badge.innerText.toUpperCase().includes('FOCUS')) {
+            const pixel = document.createElement('div');
+            pixel.style.position = 'absolute';
+            pixel.style.width = '10px';
+            pixel.style.height = '10px';
+            pixel.style.backgroundColor = 'var(--neon-green)';
+            pixel.style.left = Math.random() * window.innerWidth + 'px';
+            pixel.style.top = Math.random() * window.innerHeight + 'px';
+            pixel.style.zIndex = '9999';
+            pixel.style.pointerEvents = 'none';
+            document.body.appendChild(pixel);
+            setTimeout(() => { pixel.remove(); }, 200);
+        }
     });
 })();
 
