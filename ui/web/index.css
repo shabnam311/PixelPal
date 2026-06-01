@@ -1313,3 +1313,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 110: Recording Red Dot */
 @keyframes recordPulse { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
 .recording-dot { display: inline-block; width: 6px; height: 6px; background: red; border-radius: 50%; animation: recordPulse 1s infinite; margin-right: 5px; vertical-align: middle; }
+
+/* Point 111: Timer Glitch Start */
+.timer-glitch-start { animation: timerGlitch 1s linear forwards; }
+@keyframes timerGlitch { 0% { opacity: 0; transform: skewX(20deg); text-shadow: 2px 2px red, -2px -2px blue; } 20% { opacity: 1; transform: skewX(-20deg); text-shadow: 5px 5px red, -5px -5px blue; } 40% { transform: skewX(10deg); text-shadow: 2px 2px red, -2px -2px blue; } 60% { transform: skewX(-10deg); text-shadow: 0 0 transparent; } 100% { transform: skewX(0deg); opacity: 1; } }
