@@ -3087,3 +3087,19 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 169: Session Streak Indicator
+(function() {
+    setInterval(() => {
+        const si = document.getElementById('streak-indicator');
+        if(si && lastKnownState && lastKnownState.stats) {
+            const streak = lastKnownState.stats.focus_sessions_today || 0;
+            if(streak > 1) {
+                si.style.display = 'block';
+                si.innerText = '?? ' + streak + 'x STREAK';
+            } else {
+                si.style.display = 'none';
+            }
+        }
+    }, 1000);
+})();
