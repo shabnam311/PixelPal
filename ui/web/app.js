@@ -2153,3 +2153,17 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 98: CRT Off Quit Animation
+(function() {
+    const btn = document.getElementById('btn-quit-app');
+    if(btn) {
+        btn.addEventListener('click', () => {
+            document.body.classList.add('crt-off-active');
+            playLevelUpSound(); // Use something for a sound
+            setTimeout(() => {
+                window.close(); // Ask OS to close window
+            }, 800);
+        });
+    }
+})();
