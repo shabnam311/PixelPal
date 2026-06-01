@@ -1382,3 +1382,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 153: Minimal HUD Mode */
 .minimal-hud .screen-header, .minimal-hud .console-box, .minimal-hud .badges-row { display: none !important; }
 .minimal-hud .timer-display { margin-top: 20vh; }
+
+/* Point 154: Screen Shake */
+@keyframes screenShake { 0% { transform: translate(0, 0); } 20% { transform: translate(-10px, 5px); } 40% { transform: translate(10px, -5px); } 60% { transform: translate(-10px, -5px); } 80% { transform: translate(10px, 5px); } 100% { transform: translate(0, 0); } }
+.screen-shake-active { animation: screenShake 0.4s ease-in-out !important; }

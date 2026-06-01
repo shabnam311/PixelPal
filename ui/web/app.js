@@ -2849,3 +2849,16 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 154: Screen Shake on Abort
+(function() {
+    const stopBtn = document.getElementById('btn-stop');
+    if(stopBtn) {
+        stopBtn.addEventListener('click', () => {
+            if(lastKnownState && lastKnownState.session && lastKnownState.session.state === 'focus') {
+                document.body.classList.add('screen-shake-active');
+                setTimeout(() => document.body.classList.remove('screen-shake-active'), 400);
+            }
+        });
+    }
+})();
