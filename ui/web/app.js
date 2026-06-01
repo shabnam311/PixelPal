@@ -444,3 +444,31 @@ document.getElementById('btn-os-close').addEventListener('click', () => {
         window.close();
     });
 });
+
+// Point 2: Fullscreen toggle
+let isFullscreen = localStorage.getItem('pixelpal_fullscreen') === 'true';
+
+function toggleFullscreen() {
+    isFullscreen = !isFullscreen;
+    localStorage.setItem('pixelpal_fullscreen', isFullscreen);
+    fetch('/api/fullscreen', { method: 'POST' }).catch(console.error);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (isFullscreen) {
+        setTimeout(() => {
+            fetch('/api/fullscreen', { method: 'POST' }).catch(console.error);
+        }, 500);
+    }
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'F11') {
+            e.preventDefault();
+            toggleFullscreen();
+        }
+    });
+
+    const fsBtn = document.getElementById('btn-os-fullscreen');
+    if(fsBtn) fsBtn.addEventListener('click', toggleFullscreen);
+});
+

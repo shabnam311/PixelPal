@@ -153,6 +153,13 @@ def api_minimize():
 def api_maximize():
     global gui_window
     if gui_window:
+        gui_window.maximize()
+    return {"status": "success"}
+
+@app.post("/api/fullscreen")
+def api_fullscreen():
+    global gui_window
+    if gui_window:
         gui_window.toggle_fullscreen()
     return {"status": "success"}
 
