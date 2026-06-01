@@ -3060,3 +3060,30 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 168: Pizza Easter Egg
+(function() {
+    let pzCode = ['p','i','z','z','a'];
+    let pzIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === pzCode[pzIdx]) {
+            pzIdx++;
+            if(pzIdx === pzCode.length) {
+                const pz = document.createElement('div');
+                pz.className = 'falling-pizza';
+                pz.innerText = '??';
+                const pet = document.getElementById('pixelpal-sprite');
+                if(pet) {
+                    const rect = pet.getBoundingClientRect();
+                    pz.style.left = (rect.left + rect.width/2 - 15) + 'px';
+                    document.body.appendChild(pz);
+                    setTimeout(() => pz.remove(), 2000);
+                    showToast("NOM NOM", "Pizza time!", "info");
+                }
+                pzIdx = 0;
+            }
+        } else {
+            pzIdx = 0;
+        }
+    });
+})();

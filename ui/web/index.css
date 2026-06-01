@@ -1412,3 +1412,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 167: Start Pulse */
 @keyframes startPulse { 0% { box-shadow: 0 0 0 0 var(--neon-green); } 100% { box-shadow: 0 0 50px 30px transparent; } }
 .start-pulse-active { animation: startPulse 0.8s ease-out !important; }
+
+/* Point 168: Pizza Drop */
+.falling-pizza { position: absolute; font-size: 30px; animation: pizzaDrop 2s ease-in forwards; z-index: 1000; pointer-events: none; }
+@keyframes pizzaDrop { 0% { top: -50px; transform: rotate(0deg); opacity: 1; } 80% { top: 60%; transform: rotate(360deg); opacity: 1; } 100% { top: 60%; transform: rotate(360deg) scale(0); opacity: 0; } }
