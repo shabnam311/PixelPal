@@ -1377,6 +1377,22 @@ function playTypewriterSound() {
     });
 })();
 
+// Point 32: Mouse Mileage Tracker
+(function() {
+    let mouseDist = 0;
+    let lastX = 0;
+    let lastY = 0;
+    document.addEventListener('mousemove', (e) => {
+        if(lastX !== 0) {
+            mouseDist += Math.sqrt(Math.pow(e.clientX - lastX, 2) + Math.pow(e.clientY - lastY, 2));
+            const display = document.getElementById('stat-mouse');
+            if (display) display.innerText = Math.floor(mouseDist / 100) + 'm';
+        }
+        lastX = e.clientX;
+        lastY = e.clientY;
+    });
+})();
+
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
     console.log("[Point 31-200] Loading massive feature set...");
