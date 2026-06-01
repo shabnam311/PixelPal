@@ -564,10 +564,13 @@ if __name__ == "__main__":
             gui_window = webview.create_window(
                 "PIXELPAL v1.0 👾", 
                 "http://localhost:8000", 
-                width=1000, 
-                height=780, 
+                width=520, 
+                height=760, 
+                min_size=(520, 760),
                 resizable=False,
-                fullscreen=True
+                fullscreen=False,
+                frameless=False,
+                background_color="#0d1117",
             )
             webview.start()
         except Exception as e:
