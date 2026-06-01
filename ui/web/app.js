@@ -1515,8 +1515,9 @@ function playTypewriterSound() {
         }
     }, 10000);
 
-    // Point 50: Pet Falls Asleep on Idle
+    // Point 50 & 76: Pet Falls Asleep & AFK Auto-Pause
     let idleTimer;
+    let afkTimer;
     document.addEventListener('mousemove', resetIdle);
     document.addEventListener('keydown', resetIdle);
     function resetIdle() {
@@ -1525,10 +1526,21 @@ function playTypewriterSound() {
             document.getElementById('sprite-caption').innerText = document.getElementById('set-pet-name').value.toUpperCase() + ' IS AWAKE';
         }
         clearTimeout(idleTimer);
+        clearTimeout(afkTimer);
+        
         idleTimer = setTimeout(() => {
             pet.classList.add('anim-sleep');
             document.getElementById('sprite-caption').innerText = document.getElementById('set-pet-name').value.toUpperCase() + ' IS ASLEEP';
-        }, 300000); // 5 mins
+        }, 300000); // 5 mins for sleep
+        
+        // Point 76: AFK Auto-Pause after 15 mins
+        afkTimer = setTimeout(() => {
+            const badge = document.getElementById('session-state-badge');
+            if (badge && badge.innerText.toUpperCase() === 'FOCUS') {
+                togglePause(); // pause the session
+                showToast("AFK DETECTED", "You were gone for 15 minutes. Session auto-paused.", "warn");
+            }
+        }, 900000); // 15 mins for AFK
     }
     resetIdle();
 
