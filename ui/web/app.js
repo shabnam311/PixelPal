@@ -733,6 +733,201 @@ function showToast(title, message, severity = 'info') {
         setTimeout(() => toast.remove(), 300);
     }, 4000);
 }
+        renderObStep();
+    } else {
+        localStorage.setItem('pixelpal_onboarded', 'true');
+        document.getElementById('onboarding-overlay').style.display = 'none';
+    }
+});
+
+document.getElementById('ob-btn-back')?.addEventListener('click', () => {
+    playClickSound();
+    if (obStep > 0) {
+        obStep--;
+        renderObStep();
+    }
+});
+
+// Hook onboarding to boot sequence completion
+(function() {
+    const origBootClick = document.getElementById('audio-unlock-overlay');
+    if (origBootClick) {
+        origBootClick.addEventListener('click', () => {
+            setTimeout(showOnboarding, 1800);
+        });
+    }
+})();
+
+// Point 3: Theme Switcher
+(function() {
+    const savedTheme = localStorage.getItem('pixelpal_theme') || 'neon-green';
+    document.body.setAttribute('data-theme', savedTheme);
+    
+    document.querySelectorAll('.theme-dot').forEach(dot => {
+        if (dot.dataset.theme === savedTheme) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+        dot.addEventListener('click', () => {
+            const theme = dot.dataset.theme;
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('pixelpal_theme', theme);
+            document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+            dot.classList.add('active');
+            playClickSound();
+        });
+    });
+})();
+
+// Point 5: Screen Flash + Pixel Explosion
+function triggerViolationFlash() {
+    const appContainer = document.querySelector('.app-container');
+    if(appContainer) {
+        appContainer.classList.add('violation');
+        setTimeout(() => appContainer.classList.remove('violation'), 1000);
+        
+        // Spawn 12 fragments
+        for(let i=0; i<12; i++) {
+            const frag = document.createElement('div');
+            frag.className = 'pixel-fragment';
+            frag.style.left = '50vw';
+            frag.style.top = '50vh';
+            
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 100 + Math.random() * 200;
+            const dx = Math.cos(angle) * dist + 'px';
+            const dy = Math.sin(angle) * dist + 'px';
+            frag.style.setProperty('--dx', dx);
+            frag.style.setProperty('--dy', dy);
+            
+            document.body.appendChild(frag);
+            setTimeout(() => frag.remove(), 1000);
+        }
+    }
+}
+
+
+// Point 6: CRT Scanline Overlay Toggle
+(function() {
+    const scanlinesEnabled = localStorage.getItem('pixelpal_scanlines') !== 'false';
+    const scanlineDivs = document.querySelectorAll('.scanlines, .scanline-sweep');
+    const toggleCb = document.getElementById('set-scanlines');
+    
+    function applyScanlines(enabled) {
+        scanlineDivs.forEach(div => div.style.display = enabled ? 'block' : 'none');
+        if(toggleCb) toggleCb.checked = enabled;
+    }
+    
+    applyScanlines(scanlinesEnabled);
+    
+    if(toggleCb) {
+        toggleCb.addEventListener('change', (e) => {
+            const enabled = e.target.checked;
+            applyScanlines(enabled);
+            localStorage.setItem('pixelpal_scanlines', enabled);
+        });
+    }
+})();
+
+
+// Point 8: Animated Heart Depletion
+function heartBreak(element) {
+    element.classList.add('heart-breaking');
+    setTimeout(() => {
+        element.classList.remove('full');
+        element.classList.add('empty');
+        element.classList.remove('heart-breaking');
+    }, 500);
+}
+function heartFill(element) {
+    element.classList.remove('empty');
+    element.classList.add('full');
+    element.classList.add('heart-filling');
+    setTimeout(() => element.classList.remove('heart-filling'), 1000);
+}
+
+
+// Point 9: Update XP Bar Hook
+(function() {
+    // We will override socket.onmessage to intercept stats
+    setTimeout(() => {
+        if(socket) {
+            const originalOnMessage = socket.onmessage;
+            socket.onmessage = (event) => {
+                if(originalOnMessage) originalOnMessage(event);
+                try {
+                    const data = JSON.parse(event.data);
+                    if(data.stats && data.stats.total_focus_minutes_today !== undefined) {
+                        const mins = data.stats.total_focus_minutes_today;
+                        const xpPct = (mins % 60) / 60 * 100;
+                        const xpFill = document.getElementById('xp-bar-fill');
+                        if(xpFill) xpFill.style.width = xpPct + '%';
+                    }
+                } catch(e) {}
+            };
+        }
+    }, 1000);
+})();
+
+
+// Point 10: Scene Backgrounds
+(function() {
+    setInterval(() => {
+        const topScreen = document.querySelector('.top-screen-content');
+        if(!topScreen) return;
+        const badge = document.getElementById('session-state-badge');
+        if(!badge) return;
+        const stateText = badge.innerText.toUpperCase();
+        
+        topScreen.classList.remove('scene-focus', 'scene-break', 'scene-warning', 'scene-idle');
+        
+        if (stateText.includes('FOCUS')) {
+            topScreen.classList.add('scene-focus');
+        } else if (stateText.includes('BREAK')) {
+            topScreen.classList.add('scene-break');
+        } else if (stateText.includes('WARN')) {
+            topScreen.classList.add('scene-warning');
+        } else {
+            topScreen.classList.add('scene-idle');
+        }
+    }, 1000);
+})();
+
+
+// Point 12: Settings Drawer
+function toggleSettingsDrawer() {
+    const drawer = document.getElementById('settings-drawer');
+    const backdrop = document.getElementById('settings-drawer-backdrop');
+    if(drawer && backdrop) {
+        if (drawer.classList.contains('open')) {
+            drawer.classList.remove('open');
+            backdrop.style.display = 'none';
+        } else {
+            drawer.classList.add('open');
+            backdrop.style.display = 'block';
+        }
+        playClickSound();
+    }
+}
+document.getElementById('btn-settings')?.addEventListener('click', toggleSettingsDrawer);
+
+// Point 14: Toast Notifications
+function showToast(title, message, severity = 'info') {
+    const container = document.getElementById('toast-container');
+    if(!container) return;
+    
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${severity}`;
+    toast.innerHTML = `<strong>${title}</strong><br>${message}`;
+    
+    container.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.classList.add('fade-out');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
 
 // Override alert popups with toasts
 const originalUpdateUIForToasts = updateUI;
@@ -744,5 +939,35 @@ updateUI = function(data) {
         
         // Hide the blocking alert overlay automatically since we're using toasts now
         document.getElementById('alert-overlay').classList.add('hidden-alert');
+    }
+    
+    // Point 15: Session Celebration
+    if (data.session.state === 'idle' && lastKnownState && lastKnownState.session.state === 'focus' && lastKnownState.session.time_left > 0 && data.session.time_left === 0) {
+        showCelebration();
+    }
+}
+
+// Point 15: Celebration Screen Trigger
+function showCelebration() {
+    const overlay = document.getElementById('celebration-overlay');
+    if(overlay) {
+        overlay.classList.remove('hidden-alert');
+        playLevelUpSound();
+        spawnConfetti();
+    }
+}
+function spawnConfetti() {
+    const container = document.querySelector('.confetti-container');
+    if(!container) return;
+    container.innerHTML = '';
+    const colors = ['#39ff14', '#ff2d78', '#ffd700', '#00e5ff', '#9b5de5'];
+    for(let i=0; i<50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        container.appendChild(confetti);
     }
 }

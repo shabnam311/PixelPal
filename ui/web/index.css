@@ -1058,3 +1058,27 @@ body {
 .toast.fade-out { animation: toastFadeOut 0.3s ease-in forwards; }
 @keyframes toastSlideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 @keyframes toastFadeOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+
+/* Point 15: Celebration Screen */
+.celebration-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.85); z-index: 100010;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer;
+}
+.celebration-content { text-align: center; }
+.level-up-text { font-family: 'Orbitron', sans-serif; font-size: 4rem; color: var(--neon-yellow); text-shadow: 0 0 20px var(--neon-yellow); margin-bottom: 20px; }
+.pixelpal-dance { animation: danceAnim 0.5s infinite alternate; }
+@keyframes danceAnim {
+    0% { transform: translateY(0) rotate(-10deg) scale(1); }
+    100% { transform: translateY(-20px) rotate(10deg) scale(1.1); }
+}
+.confetti {
+    position: absolute; width: 10px; height: 10px;
+    background-color: var(--neon-pink); opacity: 0;
+    animation: confettiFall 3s linear infinite;
+}
+@keyframes confettiFall {
+    0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 1; }
+}
