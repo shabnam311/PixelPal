@@ -2189,3 +2189,19 @@ e the one that has to walk through it."', '"Ignorance is bliss."'];
         });
     }
 })();
+
+// Point 103: Dynamic Pet Rename
+(function() {
+    const nameIn = document.getElementById('pet-name-input');
+    const nameDisp = document.getElementById('pet-name-display');
+    if(nameIn && nameDisp) {
+        const savedName = localStorage.getItem('pixelpal_pet_name') || 'Totoro';
+        nameIn.value = savedName;
+        nameDisp.innerText = savedName;
+        nameIn.addEventListener('input', (e) => {
+            const newName = e.target.value.substring(0, 12);
+            nameDisp.innerText = newName;
+            localStorage.setItem('pixelpal_pet_name', newName);
+        });
+    }
+})();
