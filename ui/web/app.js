@@ -2773,3 +2773,23 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 150: Title Scramble
+(function() {
+    const title = document.querySelector('.app-title');
+    if(title) {
+        const orig = title.innerText;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+        title.addEventListener('mouseenter', () => {
+            let iter = 0;
+            const intv = setInterval(() => {
+                title.innerText = orig.split('').map((c, i) => {
+                    if(i < iter) return orig[i];
+                    return chars[Math.floor(Math.random() * chars.length)];
+                }).join('');
+                if(iter >= orig.length) { clearInterval(intv); title.innerText = orig; }
+                iter += 1;
+            }, 30);
+        });
+    }
+})();
