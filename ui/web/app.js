@@ -2950,3 +2950,10 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 160: Settings Tooltips
+(function() {
+    document.querySelectorAll('.settings-drawer input, .settings-drawer select').forEach(el => {
+        if(!el.title) el.title = 'Adjust this setting to customize your experience';
+    });
+})();
