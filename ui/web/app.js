@@ -2612,3 +2612,21 @@ setInterval(() => {
         }
     }, 1000);
 })();
+
+// Point 139: Toggle Seconds Format
+(function() {
+    let rawSeconds = false;
+    const tDisp = document.getElementById('timer-display');
+    if(tDisp) {
+        tDisp.addEventListener('dblclick', () => {
+            rawSeconds = !rawSeconds;
+            showToast('FORMAT', rawSeconds ? 'Raw Seconds Format' : 'MM:SS Format', 'info');
+        });
+        setInterval(() => {
+            if(rawSeconds && lastKnownState && lastKnownState.session) {
+                const d = document.querySelector('.timer-digits');
+                if(d) d.innerText = lastKnownState.session.remaining_sec + 's';
+            }
+        }, 100);
+    }
+})();
