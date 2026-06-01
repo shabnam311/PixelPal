@@ -3028,3 +3028,24 @@ setInterval(() => {
         }
     }, 1000);
 })();
+
+// Point 166: Export Logs on Double Click
+(function() {
+    const conBox = document.querySelector('.console-box');
+    if(conBox) {
+        conBox.addEventListener('dblclick', () => {
+            const logs = document.querySelector('.console-logs');
+            if(logs) {
+                const text = Array.from(logs.children).map(c => c.innerText).join('\\n');
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'pixelpal_logs.txt';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('EXPORTED', 'Logs downloaded to text file.', 'info');
+            }
+        });
+    }
+})();
