@@ -1239,3 +1239,7 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg-system-dark); border-left: 1px solid var(--neon-green); }
 ::-webkit-scrollbar-thumb { background: var(--neon-green); border: 2px solid var(--bg-system-dark); }
 ::-webkit-scrollbar-thumb:hover { background: #fff; }
+
+/* Point 70: Custom Text Selection */
+::selection { background: var(--neon-green); color: black; }
+::-moz-selection { background: var(--neon-green); color: black; }
