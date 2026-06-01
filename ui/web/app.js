@@ -2396,3 +2396,20 @@ setInterval(() => {
         }
     }, 2000);
 })();
+
+// Point 123: Daily Goal Logic
+(function() {
+    const goalIn = document.getElementById('daily-goal-input');
+    const goalDisp = document.getElementById('daily-goal-display');
+    if(goalIn && goalDisp) {
+        const savedGoal = localStorage.getItem('pixelpal_daily_goal') || '4';
+        goalIn.value = savedGoal;
+        goalDisp.innerText = '/' + savedGoal;
+        goalIn.addEventListener('input', (e) => {
+            let val = parseInt(e.target.value) || 4;
+            if(val < 1) val = 1;
+            goalDisp.innerText = '/' + val;
+            localStorage.setItem('pixelpal_daily_goal', val);
+        });
+    }
+})();
