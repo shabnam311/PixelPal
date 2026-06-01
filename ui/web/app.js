@@ -696,7 +696,7 @@ function heartFill(element) {
                 try {
                     const data = JSON.parse(event.data);
                     if(data.stats && data.stats.total_focus_minutes_today !== undefined) {
-                        const mins = data.stats.total_focus_minutes_today;`n                        const sCount = document.getElementById('session-count');`n                        if(sCount && data.stats.sessions_completed !== undefined) sCount.innerText = data.stats.sessions_completed;
+                        const mins = data.stats.total_focus_minutes_today;`n                        const sCount = document.getElementById('session-count');`n                        if(sCount && data.stats.sessions_completed !== undefined) {`n                            const wasBelow100 = parseInt(sCount.innerText || '0') < 100;`n                            sCount.innerText = data.stats.sessions_completed;`n                            // Point 100: 100 Session Milestone Celebration`n                            if(wasBelow100 && data.stats.sessions_completed >= 100) {`n                                document.body.classList.add('milestone-100-active');`n                                showToast('CENTURY CLUB', 'You completed 100 sessions!!', 'info');`n                                setTimeout(() => document.body.classList.remove('milestone-100-active'), 6000);`n                            }`n                        }
                         const xpPct = (mins % 60) / 60 * 100;
                         const xpFill = document.getElementById('xp-bar-fill');
                         if(xpFill) xpFill.style.width = xpPct + '%';
@@ -891,7 +891,7 @@ function heartFill(element) {
                 try {
                     const data = JSON.parse(event.data);
                     if(data.stats && data.stats.total_focus_minutes_today !== undefined) {
-                        const mins = data.stats.total_focus_minutes_today;`n                        const sCount = document.getElementById('session-count');`n                        if(sCount && data.stats.sessions_completed !== undefined) sCount.innerText = data.stats.sessions_completed;
+                        const mins = data.stats.total_focus_minutes_today;`n                        const sCount = document.getElementById('session-count');`n                        if(sCount && data.stats.sessions_completed !== undefined) {`n                            const wasBelow100 = parseInt(sCount.innerText || '0') < 100;`n                            sCount.innerText = data.stats.sessions_completed;`n                            // Point 100: 100 Session Milestone Celebration`n                            if(wasBelow100 && data.stats.sessions_completed >= 100) {`n                                document.body.classList.add('milestone-100-active');`n                                showToast('CENTURY CLUB', 'You completed 100 sessions!!', 'info');`n                                setTimeout(() => document.body.classList.remove('milestone-100-active'), 6000);`n                            }`n                        }
                         const xpPct = (mins % 60) / 60 * 100;
                         const xpFill = document.getElementById('xp-bar-fill');
                         if(xpFill) xpFill.style.width = xpPct + '%';
@@ -2172,7 +2172,8 @@ setInterval(() => {
 (function() {
     const qTxt = document.getElementById('daily-quote-text');
     if(qTxt) {
-        const quotes = ['"Wake up, Neo..."', '"There is no spoon."', '"I can only show you the door. Youe the one that has to walk through it."', '"Ignorance is bliss."'];
+        const quotes = ['"Wake up, Neo..."', '"There is no spoon."', '"I can only show you the door. You
+e the one that has to walk through it."', '"Ignorance is bliss."'];
         qTxt.innerText = quotes[Math.floor(Math.random() * quotes.length)];
     }
 })();
