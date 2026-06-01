@@ -324,6 +324,8 @@
             <div class="settings-category">
                 <h3 class="settings-cat-title">🖥️ DISPLAY</h3>
                 <label class="settings-toggle"><input type="checkbox" id="set-scanlines" checked> Scanlines</label>
+                <!-- Point 42: CRT Scanline Opacity Slider -->
+                <label class="settings-range">CRT Opacity: <input type="range" id="crt-opacity-slider" min="0" max="1" step="0.1" value="0.5" class="settings-input" style="width:60px;" onchange="document.querySelector('.crt-vignette').style.opacity=this.value;"></label>
                 <label class="settings-toggle"><input type="checkbox" id="set-animations" checked> Animations</label>
             </div>
         </div>
