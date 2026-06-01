@@ -1877,3 +1877,17 @@ setInterval(() => {
         setTimeout(nextLine, 500);
     }
 })();
+
+// Point 72: Pet Speech Bubbles
+(function() {
+    const pet = document.getElementById('pixelpal-sprite');
+    const bubble = document.getElementById('pet-speech-bubble');
+    if(pet && bubble) {
+        const phrases = ['Stay focused!', 'You got this!', 'Water?', 'I am watching you.', 'Crunch time!'];
+        pet.addEventListener('click', () => {
+            bubble.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+            bubble.style.display = 'block';
+            setTimeout(() => bubble.style.display = 'none', 3000);
+        });
+    }
+})();
