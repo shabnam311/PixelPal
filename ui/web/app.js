@@ -600,3 +600,26 @@ function triggerViolationFlash() {
     }
 }
 
+
+// Point 6: CRT Scanline Overlay Toggle
+(function() {
+    const scanlinesEnabled = localStorage.getItem('pixelpal_scanlines') !== 'false';
+    const scanlineDivs = document.querySelectorAll('.scanlines, .scanline-sweep');
+    const toggleCb = document.getElementById('set-scanlines');
+    
+    function applyScanlines(enabled) {
+        scanlineDivs.forEach(div => div.style.display = enabled ? 'block' : 'none');
+        if(toggleCb) toggleCb.checked = enabled;
+    }
+    
+    applyScanlines(scanlinesEnabled);
+    
+    if(toggleCb) {
+        toggleCb.addEventListener('change', (e) => {
+            const enabled = e.target.checked;
+            applyScanlines(enabled);
+            localStorage.setItem('pixelpal_scanlines', enabled);
+        });
+    }
+})();
+
