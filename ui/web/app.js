@@ -2063,3 +2063,25 @@ setInterval(() => {
         bBar.style.width = '0%';
     }
 }, 1000);
+
+// Point 91: Dance Easter Egg
+(function() {
+    let danceCode = ['d','a','n','c','e'];
+    let danceIndex = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === danceCode[danceIndex]) {
+            danceIndex++;
+            if(danceIndex === danceCode.length) {
+                const p = document.getElementById('pixelpal-sprite');
+                if(p) {
+                    p.classList.add('anim-celebrate');
+                    setTimeout(() => p.classList.remove('anim-celebrate'), 5000);
+                }
+                showToast("DANCE MODE", "Party hard!", "info");
+                danceIndex = 0;
+            }
+        } else {
+            danceIndex = 0;
+        }
+    });
+})();
