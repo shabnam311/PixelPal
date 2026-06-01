@@ -2004,7 +2004,7 @@ setInterval(() => {
         bars.forEach(bar => {
             bar.style.height = (Math.random() * 80 + 20) + '%';
         });
-    } else if(bars.length > 0) {
+    } else if(bars.length > 0) {`n        document.getElementById('recording-dot').style.display = 'none';
         bars.forEach(bar => { bar.style.height = '10%'; });
     }
 }, 200);

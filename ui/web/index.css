@@ -1309,3 +1309,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 106: Mouse Trail */
 .mouse-trail-particle { position: absolute; width: 4px; height: 4px; background: var(--neon-green); pointer-events: none; z-index: 9999; animation: trailFade 0.5s linear forwards; }
 @keyframes trailFade { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0.1); } }
+
+/* Point 110: Recording Red Dot */
+@keyframes recordPulse { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+.recording-dot { display: inline-block; width: 6px; height: 6px; background: red; border-radius: 50%; animation: recordPulse 1s infinite; margin-right: 5px; vertical-align: middle; }
