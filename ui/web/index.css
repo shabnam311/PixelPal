@@ -1397,3 +1397,6 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 
 /* Point 161: Matrix bg animation */
 @keyframes moveBg { from { background-position: 0 0; } to { background-position: 0 100vh; } }
+
+/* Point 163: Barrel Roll */
+.barrel-roll { transition: transform 2s ease-in-out; transform: rotate(360deg) !important; }

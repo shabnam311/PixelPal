@@ -2993,3 +2993,27 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 163: Barrel Roll Easter Egg
+(function() {
+    let bCode = ['b','a','r','r','e','l'];
+    let bIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === bCode[bIdx]) {
+            bIdx++;
+            if(bIdx === bCode.length) {
+                document.body.classList.add('barrel-roll');
+                setTimeout(() => {
+                    document.body.classList.remove('barrel-roll');
+                    document.body.style.transition = 'none';
+                    document.body.style.transform = 'rotate(0deg)';
+                    setTimeout(() => document.body.style.transition = '', 50);
+                }, 2000);
+                showToast("DO A BARREL ROLL", "Whoa, dizzy.", "info");
+                bIdx = 0;
+            }
+        } else {
+            bIdx = 0;
+        }
+    });
+})();
