@@ -1695,7 +1695,7 @@ function playWaterSound() {
     } catch(e) {}
 }
 
-// Point 53: Battery API Polling
+    // Point 53 & 60: Battery API Polling & Fake System Bars
 (function() {
     if ('getBattery' in navigator) {
         navigator.getBattery().then(function(battery) {
@@ -1711,6 +1711,24 @@ function playWaterSound() {
         const b = document.getElementById('real-battery');
         if(b) b.innerText = '100% (AC)';
     }
+
+    // Point 60: Fake System Load Bars
+    setInterval(() => {
+        const pwr = document.getElementById('fake-pwr');
+        const mem = document.getElementById('fake-mem');
+        if(pwr) {
+            const load = Math.floor(Math.random() * 20) + 80;
+            let bar = "";
+            for(let i=0; i<10; i++) bar += (i < load/10) ? "█" : "░";
+            pwr.innerText = bar + " " + load + "%";
+        }
+        if(mem) {
+            const load = (Math.random() * 2 + 0.5).toFixed(1);
+            let bar = "";
+            for(let i=0; i<10; i++) bar += (i < load/0.4) ? "█" : "░";
+            mem.innerText = bar + " " + load + "GB";
+        }
+    }, 2000);
 })();
 
 // POINTS 101-200: Massive Logic & UX Additions
