@@ -2723,3 +2723,17 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 147: Paused Breathing Effect
+(function() {
+    setInterval(() => {
+        const timer = document.querySelector('.timer-digits');
+        if(timer && lastKnownState && lastKnownState.session) {
+            if(lastKnownState.session.state === 'paused' || lastKnownState.session.state === 'idle') {
+                timer.classList.add('timer-paused');
+            } else {
+                timer.classList.remove('timer-paused');
+            }
+        }
+    }, 1000);
+})();

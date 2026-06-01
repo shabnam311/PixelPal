@@ -1370,3 +1370,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 
 /* Point 144: Pacman Cursor */
 .pacman-cursor, .pacman-cursor * { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size:24px"><text y="20">??</text></svg>'), auto !important; }
+
+/* Point 147: Paused Breathing Effect */
+@keyframes textBreathe { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.98); } }
+.timer-paused { animation: textBreathe 3s ease-in-out infinite; color: var(--text-dim) !important; }
