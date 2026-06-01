@@ -2366,3 +2366,17 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 118: Click Pet to Hide HUD
+(function() {
+    const pet = document.getElementById('pixelpal-sprite');
+    let hudHidden = false;
+    if(pet) {
+        pet.addEventListener('click', (e) => {
+            // Avoid triggering during the 5-click petting logic if possible, or just let it overlay
+            hudHidden = !hudHidden;
+            const els = document.querySelectorAll('.screen-header, .hud-card, .console-box');
+            els.forEach(el => el.style.opacity = hudHidden ? '0' : '1');
+        });
+    }
+})();
