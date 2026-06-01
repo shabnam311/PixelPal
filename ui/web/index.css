@@ -890,3 +890,26 @@ body {
     animation: warningEdgeFlash 1s infinite;
 }
 
+
+/* Point 5: Screen Flash + Pixel Explosion on Alerts */
+@keyframes violationFlash {
+    0%, 100% { border-color: var(--console-shell-border); box-shadow: none; }
+    50% { border-color: var(--neon-pink); box-shadow: 0 0 50px var(--neon-pink), inset 0 0 50px var(--neon-pink); }
+}
+.app-container.violation .console-panel {
+    animation: violationFlash 0.5s 2;
+}
+.pixel-fragment {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: var(--neon-pink);
+    border-radius: 0;
+    pointer-events: none;
+    z-index: 9999;
+    animation: fragmentFly 1s forwards ease-out;
+}
+@keyframes fragmentFly {
+    0% { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+

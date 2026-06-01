@@ -572,3 +572,31 @@ document.getElementById('ob-btn-back')?.addEventListener('click', () => {
         });
     });
 })();
+
+// Point 5: Screen Flash + Pixel Explosion
+function triggerViolationFlash() {
+    const appContainer = document.querySelector('.app-container');
+    if(appContainer) {
+        appContainer.classList.add('violation');
+        setTimeout(() => appContainer.classList.remove('violation'), 1000);
+        
+        // Spawn 12 fragments
+        for(let i=0; i<12; i++) {
+            const frag = document.createElement('div');
+            frag.className = 'pixel-fragment';
+            frag.style.left = '50vw';
+            frag.style.top = '50vh';
+            
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 100 + Math.random() * 200;
+            const dx = Math.cos(angle) * dist + 'px';
+            const dy = Math.sin(angle) * dist + 'px';
+            frag.style.setProperty('--dx', dx);
+            frag.style.setProperty('--dy', dy);
+            
+            document.body.appendChild(frag);
+            setTimeout(() => frag.remove(), 1000);
+        }
+    }
+}
+
