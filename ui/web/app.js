@@ -1763,6 +1763,18 @@ function playWaterSound() {
             bg.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`;
         }
     });
+
+    // Point 63: Pixel Bomb Double Click
+    document.addEventListener('dblclick', (e) => {
+        if(e.target.id === 'timer-display') return; // Handled by Point 57
+        const bomb = document.createElement('div');
+        bomb.className = 'pixel-bomb';
+        bomb.style.left = (e.clientX - 5) + 'px';
+        bomb.style.top = (e.clientY - 5) + 'px';
+        document.body.appendChild(bomb);
+        setTimeout(() => bomb.remove(), 500);
+        playWaterSound(); // reuse the droplet sound
+    });
 })();
 
 // POINTS 101-200: Massive Logic & UX Additions
