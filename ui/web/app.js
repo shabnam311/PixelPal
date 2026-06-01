@@ -2518,3 +2518,18 @@ if(originalShowToast) {
         }
     }, 1000);
 })();
+
+// Point 132: Weekend Warrior
+(function() {
+    setInterval(() => {
+        const ww = document.getElementById('weekend-warrior-badge');
+        if(ww && typeof lastKnownState !== 'undefined' && lastKnownState && lastKnownState.stats) {
+            const day = new Date().getDay();
+            if((day === 0 || day === 6) && lastKnownState.stats.sessions_completed > 0) {
+                ww.style.display = 'block';
+            } else {
+                ww.style.display = 'none';
+            }
+        }
+    }, 2000);
+})();
