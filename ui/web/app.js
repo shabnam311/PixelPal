@@ -1462,6 +1462,17 @@ function playTypewriterSound() {
         }
     }
     pet.style.cursor = 'grab';
+
+    // Point 36: Double Click Pet to Spin
+    pet.addEventListener('dblclick', () => {
+        pet.style.transition = 'transform 0.5s ease-in-out';
+        pet.style.transform = "translate3d(" + xOffset + "px, " + yOffset + "px, 0) rotate(360deg)";
+        playLevelUpSound();
+        setTimeout(() => {
+            pet.style.transition = 'none';
+            pet.style.transform = "translate3d(" + xOffset + "px, " + yOffset + "px, 0) rotate(0deg)";
+        }, 500);
+    });
 })();
 
 // POINTS 101-200: Massive Logic & UX Additions
