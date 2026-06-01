@@ -1350,3 +1350,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 133: Zzz Particles */
 .zzz-particle { position: absolute; color: white; font-size: 14px; font-weight: bold; pointer-events: none; z-index: 999; animation: zzzFloat 2s ease-in forwards; }
 @keyframes zzzFloat { 0% { opacity: 0; transform: translateY(0) scale(0.5); } 20% { opacity: 1; transform: translateY(-10px) translateX(-5px) scale(1); } 100% { opacity: 0; transform: translateY(-40px) translateX(10px) scale(1.5); } }
+
+/* Point 136: Crosshair Cursor */
+.app-container { cursor: crosshair; }
+.app-container a, .app-container button, .app-container input, .app-container .level-badge { cursor: pointer; }
