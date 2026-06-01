@@ -2437,3 +2437,14 @@ if(originalShowToast) {
         }
     };
 }
+
+// Point 125: Auto-Close Settings Drawer on Outside Click
+(function() {
+    document.addEventListener('click', (e) => {
+        const drawer = document.getElementById('settings-drawer');
+        const gear = document.getElementById('btn-settings');
+        if(drawer && drawer.classList.contains('open') && !drawer.contains(e.target) && (!gear || !gear.contains(e.target))) {
+            drawer.classList.remove('open');
+        }
+    });
+})();
