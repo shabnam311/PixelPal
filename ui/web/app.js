@@ -2469,3 +2469,18 @@ if(originalShowToast) {
         }
     });
 })();
+
+// Point 127: Custom Focus Duration
+(function() {
+    const durIn = document.getElementById('custom-focus-duration');
+    if(durIn) {
+        const savedDur = localStorage.getItem('pixelpal_focus_duration') || '25';
+        durIn.value = savedDur;
+        durIn.addEventListener('change', (e) => {
+            const val = parseInt(e.target.value) || 25;
+            localStorage.setItem('pixelpal_focus_duration', val);
+            fetch('/api/settings', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ focus_duration_minutes: val }) });
+            showToast('DURATION UPDATED', 'Focus duration set to ' + val + ' minutes.', 'info');
+        });
+    }
+})();
