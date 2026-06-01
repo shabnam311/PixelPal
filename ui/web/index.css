@@ -921,3 +921,21 @@ body {
     letter-spacing: 2px;
 }
 
+
+/* Point 8: Animated Heart Depletion */
+@keyframes heartBreak {
+    0% { transform: scale(1) rotate(0); filter: brightness(1); }
+    20% { transform: scale(1.5) rotate(-10deg); filter: brightness(2); }
+    100% { transform: scale(0) rotate(45deg); opacity: 0; }
+}
+@keyframes heartFill {
+    0% { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%); }
+    100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+.heart-breaking {
+    animation: heartBreak 0.5s forwards ease-in;
+}
+.heart-filling {
+    animation: heartFill 1s forwards ease-out;
+}
+

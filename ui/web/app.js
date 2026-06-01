@@ -623,3 +623,20 @@ function triggerViolationFlash() {
     }
 })();
 
+
+// Point 8: Animated Heart Depletion
+function heartBreak(element) {
+    element.classList.add('heart-breaking');
+    setTimeout(() => {
+        element.classList.remove('full');
+        element.classList.add('empty');
+        element.classList.remove('heart-breaking');
+    }, 500);
+}
+function heartFill(element) {
+    element.classList.remove('empty');
+    element.classList.add('full');
+    element.classList.add('heart-filling');
+    setTimeout(() => element.classList.remove('heart-filling'), 1000);
+}
+
