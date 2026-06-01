@@ -1,7 +1,9 @@
-# PyInstaller / Build Artifacts
-build/
+# Build outputs
 dist/
+build/
 *.spec
+*.exe
+*.msi
 
 # Python
 __pycache__/
@@ -9,21 +11,32 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
-env/
+*.egg-info/
 venv/
+env/
 .venv/
-env.bak/
-venv.bak/
+.env
 
-# Local App Data & Logs
+# App data (user sessions, logs — never commit personal data)
 data/
 *.log
 
-# OS generated files
+# PyInstaller
+*.spec.bak
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
+
+# Node (if any frontend tooling remains)
+node_modules/
+
+# Secrets
+.env
+config.local.json
