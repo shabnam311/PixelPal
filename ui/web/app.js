@@ -2291,3 +2291,14 @@ setInterval(() => {
 }, 60000);
 // Initial call for Point 108
 (function(){ const evt = new Event('timeUpdate'); document.dispatchEvent(evt); setTimeout(()=>{const gDisp = document.getElementById('time-greeting'); if(gDisp){ const hr = new Date().getHours(); let g = 'Good Evening'; if(hr >= 5 && hr < 12) g = 'Good Morning'; else if(hr >= 12 && hr < 17) g = 'Good Afternoon'; const petName = localStorage.getItem('pixelpal_pet_name') || 'Totoro'; gDisp.innerText = g + ', ' + petName; }}, 100); })();
+
+// Point 109: Ctrl+M Mute All Hotkey
+(function() {
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.key.toLowerCase() === 'm') {
+            const muteBtn = document.getElementById('btn-mute');
+            if(muteBtn) muteBtn.click();
+            showToast('AUDIO', soundEnabled ? 'Audio unmuted.' : 'All audio muted.', 'info');
+        }
+    });
+})();
