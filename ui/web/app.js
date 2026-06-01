@@ -3179,3 +3179,16 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 175: Random Pet Glitch
+(function() {
+    setInterval(() => {
+        if(Math.random() < 0.01) {
+            const pet = document.getElementById('pixelpal-sprite');
+            if(pet) {
+                pet.classList.add('pet-glitch-active');
+                setTimeout(() => pet.classList.remove('pet-glitch-active'), 1000);
+            }
+        }
+    }, 60000);
+})();

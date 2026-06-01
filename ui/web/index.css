@@ -1427,3 +1427,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 174: Confetti Explosion */
 .confetti-particle { position: absolute; width: 5px; height: 5px; background: var(--neon-cyan); animation: confettiExplode 1s cubic-bezier(.11,-0.03,.97,.5) forwards; pointer-events: none; z-index: 10000; }
 @keyframes confettiExplode { 0% { opacity: 1; transform: translate(0, 0) rotate(0deg); } 100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(720deg); } }
+
+/* Point 175: Pet Glitch */
+@keyframes petGlitch { 0% { transform: translate(0) skew(0deg); } 20% { transform: translate(-5px, 5px) skew(10deg); filter: hue-rotate(90deg); } 40% { transform: translate(5px, -5px) skew(-10deg); filter: invert(100%); } 60% { transform: translate(-5px, -5px) skew(20deg); filter: none; } 80% { transform: translate(5px, 5px) skew(-20deg); filter: contrast(200%); } 100% { transform: translate(0) skew(0deg); filter: none; } }
+.pet-glitch-active { animation: petGlitch 0.2s linear infinite !important; }
