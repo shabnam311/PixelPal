@@ -1449,3 +1449,6 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 180: Laser Eye */
 .laser-beam { position: absolute; height: 4px; background: red; box-shadow: 0 0 10px red; top: 30px; left: 50%; z-index: 10000; animation: shootLaser 0.5s linear forwards; transform-origin: left center; pointer-events: none; }
 @keyframes shootLaser { 0% { width: 0; } 100% { width: 200vw; } }
+
+/* Point 181: Task Wavy Underline */
+.task-text:hover { text-decoration: underline wavy var(--neon-purple); cursor: pointer; }
