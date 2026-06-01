@@ -1404,6 +1404,21 @@ function playTypewriterSound() {
     }, 60000);
 })();
 
+// Point 34: Matrix Rain Visuals Toggle
+(function() {
+    let rainActive = false;
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.key === 'r') {
+            rainActive = !rainActive;
+            const rain = document.getElementById('matrix-rain');
+            if (rain) {
+                rain.style.display = rainActive ? 'block' : 'none';
+                showToast("VISUALS", "Matrix Rain " + (rainActive ? "ON" : "OFF"), "info");
+            }
+        }
+    });
+})();
+
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
     console.log("[Point 31-200] Loading massive feature set...");
