@@ -1247,3 +1247,7 @@ body {
 /* Point 78: Timer Final Minute Blink */
 @keyframes timerPanicBlink { 0% { opacity: 1; color: var(--neon-red); } 50% { opacity: 0.3; color: var(--neon-red); } 100% { opacity: 1; color: var(--neon-red); } }
 .timer-panic { animation: timerPanicBlink 1s infinite; }
+
+/* Point 79: Button Glitch Hover Effect */
+.primary-btn:hover { animation: btnGlitch 0.2s cubic-bezier(.25, .46, .45, .94) both infinite; }
+@keyframes btnGlitch { 0% { transform: translate(0) } 20% { transform: translate(-2px, 2px) } 40% { transform: translate(-2px, -2px) } 60% { transform: translate(2px, 2px) } 80% { transform: translate(2px, -2px) } 100% { transform: translate(0) } }
