@@ -2048,3 +2048,18 @@ setInterval(() => {
         }
     }
 }, 60000);
+
+// Point 90: Break Progress Bar
+setInterval(() => {
+    const bBar = document.getElementById('break-progress-bar');
+    if(bBar && lastKnownState && lastKnownState.session && lastKnownState.session.state === 'break') {
+        const total = 5 * 60; // Assume 5 mins for standard break tracking visualization
+        const left = lastKnownState.session.time_left;
+        const pct = Math.max(0, Math.min(100, ((total - left) / total) * 100));
+        bBar.style.width = pct + '%';
+        bBar.style.display = 'block';
+    } else if(bBar) {
+        bBar.style.display = 'none';
+        bBar.style.width = '0%';
+    }
+}, 1000);
