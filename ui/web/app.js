@@ -1589,6 +1589,24 @@ function playTypewriterSound() {
             konamiIndex = 0;
         }
     });
+
+    // Point 57: Double Click Timer to Reset
+    const timerDisplay = document.getElementById('timer-display');
+    if (timerDisplay) {
+        timerDisplay.addEventListener('dblclick', () => {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({type: "end_session"}));
+                setTimeout(() => {
+                    ws.send(JSON.stringify({
+                        type: "start_session",
+                        duration: document.getElementById('set-focus-min').value || 45
+                    }));
+                }, 100);
+                showToast("TIMER", "Session Reset!", "info");
+            }
+        });
+        timerDisplay.style.cursor = 'pointer';
+    }
 })();
 
 // Point 41: Click Pet to Shake Screen
