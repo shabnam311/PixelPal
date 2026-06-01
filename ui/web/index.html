@@ -433,6 +433,13 @@
         </div>
     </div>
 
+    <!-- Point 33: Hydration Overlay -->
+    <div id="hydration-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 100100; flex-direction: column; align-items: center; justify-content: center; color: cyan; font-family: 'Orbitron', monospace;">
+        <h1 style="font-size: 2rem; margin-bottom: 20px; animation: flash 1s infinite;">HYDRATION CRITICAL</h1>
+        <p style="margin-bottom: 30px; color: white;">PixelPal has determined you are dehydrated.</p>
+        <button onclick="document.getElementById('hydration-overlay').style.display='none'; playLevelUpSound();" class="primary-btn" style="border-color: cyan; color: cyan;">I DRANK WATER</button>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

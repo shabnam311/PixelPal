@@ -1393,6 +1393,17 @@ function playTypewriterSound() {
     });
 })();
 
+// Point 33: Hydration Check Pop-up
+(function() {
+    setInterval(() => {
+        // 5% chance every minute to ask for water
+        if (Math.random() < 0.05) {
+            const overlay = document.getElementById('hydration-overlay');
+            if (overlay) overlay.style.display = 'flex';
+        }
+    }, 60000);
+})();
+
 // POINTS 101-200: Massive Logic & UX Additions
 (function() {
     console.log("[Point 31-200] Loading massive feature set...");
