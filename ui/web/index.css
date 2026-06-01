@@ -1255,3 +1255,7 @@ body {
 /* Point 80: Barrel Roll */
 @keyframes barrelRoll { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 .do-a-barrel-roll { animation: barrelRoll 2s cubic-bezier(.25, .46, .45, .94) forwards !important; }
+
+/* Point 81: Matrix Rain Background */
+.matrix-rain-active { background: url('https://upload.wikimedia.org/wikipedia/commons/e/e6/Matrix_falling_code.jpg') !important; background-size: cover !important; animation: scanlines 1s linear infinite; }
+.matrix-rain-active * { text-shadow: 0 0 10px #0f0 !important; color: #0f0 !important; }

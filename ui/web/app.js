@@ -1935,3 +1935,21 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 81: Matrix Rain Easter Egg
+(function() {
+    let matrixCode = ['m','a','t','r','i','x'];
+    let matrixIndex = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === matrixCode[matrixIndex]) {
+            matrixIndex++;
+            if(matrixIndex === matrixCode.length) {
+                document.querySelector('.app-container').classList.toggle('matrix-rain-active');
+                showToast("MATRIX", "Welcome to the real world.", "info");
+                matrixIndex = 0;
+            }
+        } else {
+            matrixIndex = 0;
+        }
+    });
+})();
