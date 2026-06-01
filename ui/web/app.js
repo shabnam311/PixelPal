@@ -2276,3 +2276,18 @@ e the one that has to walk through it."', '"Ignorance is bliss."'];
         });
     }
 })();
+
+// Point 108: Dynamic Greeting
+setInterval(() => {
+    const gDisp = document.getElementById('time-greeting');
+    if(gDisp) {
+        const hr = new Date().getHours();
+        let g = 'Good Evening';
+        if(hr >= 5 && hr < 12) g = 'Good Morning';
+        else if(hr >= 12 && hr < 17) g = 'Good Afternoon';
+        const petName = localStorage.getItem('pixelpal_pet_name') || 'Totoro';
+        gDisp.innerText = g + ', ' + petName;
+    }
+}, 60000);
+// Initial call for Point 108
+(function(){ const evt = new Event('timeUpdate'); document.dispatchEvent(evt); setTimeout(()=>{const gDisp = document.getElementById('time-greeting'); if(gDisp){ const hr = new Date().getHours(); let g = 'Good Evening'; if(hr >= 5 && hr < 12) g = 'Good Morning'; else if(hr >= 12 && hr < 17) g = 'Good Afternoon'; const petName = localStorage.getItem('pixelpal_pet_name') || 'Totoro'; gDisp.innerText = g + ', ' + petName; }}, 100); })();
