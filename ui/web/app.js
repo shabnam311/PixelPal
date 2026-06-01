@@ -640,3 +640,26 @@ function heartFill(element) {
     setTimeout(() => element.classList.remove('heart-filling'), 1000);
 }
 
+
+// Point 9: Update XP Bar Hook
+(function() {
+    // We will override socket.onmessage to intercept stats
+    setTimeout(() => {
+        if(socket) {
+            const originalOnMessage = socket.onmessage;
+            socket.onmessage = (event) => {
+                if(originalOnMessage) originalOnMessage(event);
+                try {
+                    const data = JSON.parse(event.data);
+                    if(data.stats && data.stats.total_focus_minutes_today !== undefined) {
+                        const mins = data.stats.total_focus_minutes_today;
+                        const xpPct = (mins % 60) / 60 * 100;
+                        const xpFill = document.getElementById('xp-bar-fill');
+                        if(xpFill) xpFill.style.width = xpPct + '%';
+                    }
+                } catch(e) {}
+            };
+        }
+    }, 1000);
+})();
+
