@@ -2793,3 +2793,22 @@ setInterval(() => {
         });
     }
 })();
+
+// Point 151: Rage Click Detection
+(function() {
+    let clickCount = 0;
+    let lastClick = 0;
+    document.addEventListener('click', (e) => {
+        const now = Date.now();
+        if(now - lastClick < 400) {
+            clickCount++;
+            if(clickCount >= 5) {
+                showToast("WOAH THERE", "Take a deep breath! Everything is okay.", "warning");
+                clickCount = 0;
+            }
+        } else {
+            clickCount = 1;
+        }
+        lastClick = now;
+    });
+})();
