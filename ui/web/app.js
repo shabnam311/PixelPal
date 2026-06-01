@@ -2711,3 +2711,15 @@ setInterval(() => {
         }
     };
 })();
+
+// Point 146: Keyboard Shortcut T for Settings
+(function() {
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === 't' && document.activeElement.tagName !== 'INPUT') {
+            const drawer = document.getElementById('settings-drawer');
+            if(drawer) {
+                drawer.classList.toggle('open');
+            }
+        }
+    });
+})();
