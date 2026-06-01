@@ -3121,3 +3121,26 @@ setInterval(() => {
         }
     }, 2000);
 })();
+
+// Point 171: Snow Easter Egg
+(function() {
+    let snCode = ['s','n','o','w'];
+    let snIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === snCode[snIdx]) {
+            snIdx++;
+            if(snIdx === snCode.length) {
+                const s = document.createElement('div');
+                s.style.position = 'fixed'; s.style.top = '0'; s.style.left = '0'; s.style.width = '100vw'; s.style.height = '100vh';
+                s.style.background = 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCI+PGNpcmNsZSBjeD0iMTUiIGN5PSIxNSIgcj0iMiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==) repeat';
+                s.style.pointerEvents = 'none'; s.style.animation = 'moveBg 5s linear infinite'; s.style.zIndex = '9999';
+                document.body.appendChild(s);
+                showToast("WINTER WONDERLAND", "Let it snow!", "info");
+                setTimeout(() => s.remove(), 10000);
+                snIdx = 0;
+            }
+        } else {
+            snIdx = 0;
+        }
+    });
+})();
