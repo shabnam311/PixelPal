@@ -230,7 +230,7 @@ function updateUI(data) {
     document.getElementById('timer-display').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         
     // Badge status
-    const badge = document.getElementById('session-state-badge');
+    const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
     badge.innerText = session.state.toUpperCase();
     badge.className = `state-badge badge-${session.state.toLowerCase()}`;
     
@@ -713,7 +713,7 @@ function heartFill(element) {
     setInterval(() => {
         const topScreen = document.querySelector('.top-screen-content');
         if(!topScreen) return;
-        const badge = document.getElementById('session-state-badge');
+        const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
         if(!badge) return;
         const stateText = badge.innerText.toUpperCase();
         
@@ -908,7 +908,7 @@ function heartFill(element) {
     setInterval(() => {
         const topScreen = document.querySelector('.top-screen-content');
         if(!topScreen) return;
-        const badge = document.getElementById('session-state-badge');
+        const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
         if(!badge) return;
         const stateText = badge.innerText.toUpperCase();
         
@@ -1121,7 +1121,7 @@ function playTypewriterSound() {
 (function() {
     setInterval(() => {
         const weather = document.getElementById('weather-layer');
-        const badge = document.getElementById('session-state-badge');
+        const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
         if(!weather || !badge) return;
         const stateText = badge.innerText.toUpperCase();
         
@@ -1139,7 +1139,7 @@ function playTypewriterSound() {
     
     setInterval(() => {
         const bubble = document.getElementById('pet-speech-bubble');
-        const badge = document.getElementById('session-state-badge');
+        const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
         if(!bubble || !badge) return;
         
         if (Math.random() < 0.2) { // 20% chance every 10s to show bubble
@@ -1353,7 +1353,7 @@ function playTypewriterSound() {
 (function() {
     setInterval(() => {
         const weather = document.getElementById('weather-layer');
-        const badge = document.getElementById('session-state-badge');
+        const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
         if(!weather || !badge) return;
         const stateText = badge.innerText.toUpperCase();
         
@@ -1371,7 +1371,7 @@ function playTypewriterSound() {
     
     setInterval(() => {
         const bubble = document.getElementById('pet-speech-bubble');
-        const badge = document.getElementById('session-state-badge');
+        const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
         if(!bubble || !badge) return;
         
         if (Math.random() < 0.2) { // 20% chance every 10s to show bubble
@@ -1413,7 +1413,7 @@ function playTypewriterSound() {
         if (display) display.innerText = keyCount;
         
         // Point 45: Hacker Typing Mode pixel flash
-        const badge = document.getElementById('session-state-badge');
+        const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
         if(badge && badge.innerText.toUpperCase().includes('FOCUS')) {
             const pixel = document.createElement('div');
             pixel.style.position = 'absolute';
@@ -1535,7 +1535,7 @@ function playTypewriterSound() {
         
         // Point 76: AFK Auto-Pause after 15 mins
         afkTimer = setTimeout(() => {
-            const badge = document.getElementById('session-state-badge');
+            const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
             if (badge && badge.innerText.toUpperCase() === 'FOCUS') {
                 togglePause(); // pause the session
                 showToast("AFK DETECTED", "You were gone for 15 minutes. Session auto-paused.", "warn");
@@ -1590,7 +1590,7 @@ function playTypewriterSound() {
 
     document.addEventListener('keydown', (e) => {
         // Point 66: Esc Key Violation during Focus
-        const badge = document.getElementById('session-state-badge');
+        const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
         if (e.key === 'Escape' && badge && badge.innerText.toUpperCase() === 'FOCUS') {
             if (typeof triggerViolationFlash === 'function') triggerViolationFlash();
             showToast("VIOLATION", "Stay focused! No escaping!", "crit");
@@ -1682,7 +1682,7 @@ function playTypewriterSound() {
 // Point 40: Blinking REC light toggle on session state
 (function() {
     setInterval(() => {
-        const badge = document.getElementById('session-state-badge');
+        const badge = document.getElementById('session-state-badge');`n        // Point 77: Break Overtime Log`n        if(data.session_state === 'BREAK' && breakStartTime > 0 && !isOvertimeLogged) {`n            if(Date.now() - breakStartTime > 300000) {`n                logToConsole("CRIT: BREAK OVERTIME DETECTED. Get back to work!", "red");`n                isOvertimeLogged = true;`n            }`n        }
         const rec = document.querySelector('.blinking-led');
         if(!badge || !rec) return;
         const stateText = badge.innerText.toUpperCase();
