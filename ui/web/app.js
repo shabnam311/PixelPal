@@ -2205,3 +2205,11 @@ e the one that has to walk through it."', '"Ignorance is bliss."'];
         });
     }
 })();
+
+// Point 104: Pet Occasional Blinking
+(function() {
+    const p = document.getElementById('pixelpal-sprite');
+    if(p) {
+        p.classList.add('anim-blink');
+    }
+})();

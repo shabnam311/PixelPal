@@ -1301,3 +1301,7 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 /* Point 100: Milestone 100 Animation */
 @keyframes milestone100Anim { 0% { filter: hue-rotate(0deg) contrast(1); transform: scale(1); } 50% { filter: hue-rotate(180deg) contrast(2); transform: scale(1.1); box-shadow: inset 0 0 100px var(--neon-purple); } 100% { filter: hue-rotate(360deg) contrast(1); transform: scale(1); } }
 .milestone-100-active { animation: milestone100Anim 2s ease-in-out 3; }
+
+/* Point 104: Pet Blink */
+@keyframes petBlink { 0%, 96%, 98%, 100% { filter: brightness(1); transform: scaleY(1); } 97% { filter: brightness(0.5); transform: scaleY(0.1); } }
+.anim-blink { animation: petBlink 5s infinite; }
