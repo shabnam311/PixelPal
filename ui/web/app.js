@@ -2255,3 +2255,24 @@ e the one that has to walk through it."', '"Ignorance is bliss."'];
         }
     });
 })();
+
+// Point 107: Golden Pomodoro Easter Egg
+(function() {
+    let pomClicks = 0;
+    let pomTimer;
+    const tIcon = document.getElementById('pomodoro-icon');
+    if(tIcon) {
+        tIcon.addEventListener('click', () => {
+            pomClicks++;
+            clearTimeout(pomTimer);
+            pomTimer = setTimeout(() => pomClicks = 0, 1000);
+            if(pomClicks >= 3) {
+                pomClicks = 0;
+                tIcon.innerText = '???';
+                tIcon.style.filter = 'hue-rotate(60deg) saturate(300%) drop-shadow(0 0 10px gold)';
+                showToast('GOLDEN TOMATO', 'You found the legendary pomodoro!', 'info');
+                playLevelUpSound();
+            }
+        });
+    }
+})();
