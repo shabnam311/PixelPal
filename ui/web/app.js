@@ -2302,3 +2302,23 @@ setInterval(() => {
         }
     });
 })();
+
+// Point 111: Timer Glitch Start
+(function() {
+    let lastSt = '';
+    setInterval(() => {
+        const badge = document.getElementById('session-state-badge');
+        if(badge) {
+            const curr = badge.innerText.toUpperCase();
+            if(curr === 'FOCUS' && lastSt !== 'FOCUS') {
+                const td = document.getElementById('timer-display');
+                if(td) {
+                    td.classList.remove('timer-glitch-start');
+                    void td.offsetWidth;
+                    td.classList.add('timer-glitch-start');
+                }
+            }
+            lastSt = curr;
+        }
+    }, 500);
+})();
