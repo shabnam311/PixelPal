@@ -13,12 +13,14 @@ try:
 except ImportError:
     msvcrt = None
 
+from core.paths import DATA_DIR
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler(os.path.join("data", "pixelpal.log") if os.path.exists("data") else "pixelpal.log"),
+        logging.FileHandler(os.path.join(DATA_DIR, "pixelpal.log") if os.path.exists(DATA_DIR) else "pixelpal.log"),
         logging.StreamHandler(sys.stdout)
     ]
 )
@@ -208,8 +210,9 @@ def play_native_beeps(sound_file):
 
 # Helper to read recent log lines
 def get_recent_log_lines(count=15):
+    from core.paths import LOG_DIR
     today_str = date.today().isoformat()
-    log_file = os.path.join("data", "logs", f"{today_str}.log")
+    log_file = os.path.join(LOG_DIR, f"{today_str}.log")
     if not os.path.exists(log_file):
         return []
     try:
@@ -266,6 +269,13 @@ def webcam_loop():
     
     # Open camera index 0
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW if os.name == 'nt' else cv2.CAP_ANY)
+    
+    # Wait up to 5 seconds for camera to become available
+    timeout = time.time() + 5.0
+    while not cap.isOpened() and time.time() < timeout:
+        time.sleep(0.5)
+        cap = cv2.VideoCapture(0, cv2.CAP_DSHOW if os.name == 'nt' else cv2.CAP_ANY)
+
     if not cap.isOpened():
         logger.error("CRITICAL: Camera index 0 could not be opened.")
         log_event("SYSTEM_ERROR", "Webcam could not be opened")
@@ -381,9 +391,6 @@ def session_complete_callback(minutes, milestones, is_pomodoro):
     for m in milestones:
         # Show unlock popup
         show_popup("MILESTONE UNLOCKED! 🏆", f"{m['name']}: {m['description']}", severity="INFO")
-        
-    if tray_icon:
-        tray_icon.set_state("happy")
 
 def break_complete_callback(is_pomodoro):
     global last_sound_trigger
@@ -405,6 +412,8 @@ def cleanup_and_exit():
     # Close monitors
     gaze_monitor.close()
     posture_monitor.close()
+    specs_monitor.close()
+    phone_monitor.close()
     
     # Stop tray icon
     if tray_icon:
@@ -416,12 +425,40 @@ def cleanup_and_exit():
 if __name__ == "__main__":
     import multiprocessing
     multiprocessing.freeze_support()
+    
+    from core.paths import LOCK_FILE, CONFIG_FILE
+    import atexit
+    
+    # Single-instance lock
+    try:
+        if os.path.exists(LOCK_FILE):
+            try:
+                os.remove(LOCK_FILE)
+            except OSError:
+                print("Another instance of PixelPal is already running!")
+                sys.exit(1)
+                
+        lock_fd = open(LOCK_FILE, 'w')
+        lock_fd.write(str(os.getpid()))
+        
+        if msvcrt:
+            msvcrt.locking(lock_fd.fileno(), msvcrt.LK_NBLCK, 1)
+            
+        def remove_lock():
+            try:
+                lock_fd.close()
+                os.remove(LOCK_FILE)
+            except:
+                pass
+        atexit.register(remove_lock)
+    except Exception as e:
+        print("Another instance of PixelPal is already running!")
+        sys.exit(1)
+
     init_folders()
     
     # Load configuration
-    config_path = "config.json"
-    if not os.path.exists(config_path):
-        config_path = get_resource_path("config.json")
+    config_path = CONFIG_FILE
         
     if os.path.exists(config_path):
         with open(config_path, "r") as f:

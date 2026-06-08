@@ -3323,3 +3323,25 @@ setInterval(() => {
         }
     }, 1000);
 })();
+
+// Point 184: Gravity Easter Egg
+(function() {
+    let gCode = ['g','r','a','v','i','t','y'];
+    let gIdx = 0;
+    document.addEventListener('keydown', (e) => {
+        if(e.key.toLowerCase() === gCode[gIdx]) {
+            gIdx++;
+            if(gIdx === gCode.length) {
+                const pet = document.getElementById('pixelpal-sprite');
+                if(pet) {
+                    pet.classList.add('gravity-fall');
+                    setTimeout(() => pet.classList.remove('gravity-fall'), 3000);
+                    showToast("GRAVITY LOST", "Pet fell through the floor.", "error");
+                }
+                gIdx = 0;
+            }
+        } else {
+            gIdx = 0;
+        }
+    });
+})();

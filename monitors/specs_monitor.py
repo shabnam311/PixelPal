@@ -102,3 +102,7 @@ class SpecsMonitor:
         if self.last_result == "no":
             return "off"
         return "unknown"
+
+    def close(self):
+        """Cleanup resources."""
+        self.enabled = False

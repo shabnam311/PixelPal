@@ -1,9 +1,7 @@
 import os
 import json
 from datetime import datetime, date
-
-STATS_FILE = os.path.join("data", "stats.json")
-LOGS_DIR = os.path.join("data", "logs")
+from core.paths import DATA_DIR, LOG_DIR, STATS_FILE
 
 DEFAULT_STATS = {
     "sessions_completed_today": 0,
@@ -25,8 +23,8 @@ MILESTONES_LIST = [
 ]
 
 def init_folders():
-    os.makedirs("data", exist_ok=True)
-    os.makedirs(LOGS_DIR, exist_ok=True)
+    os.makedirs(DATA_DIR, exist_ok=True)
+    os.makedirs(LOG_DIR, exist_ok=True)
     if not os.path.exists(STATS_FILE):
         with open(STATS_FILE, "w") as f:
             json.dump(DEFAULT_STATS, f, indent=2)
@@ -63,6 +61,9 @@ def load_stats():
             stats["last_active_date"] = today_str
             updated = True
             
+            # Clean up old logs periodically when a new day starts
+            cleanup_old_logs()
+            
         if updated:
             save_stats(stats)
             
@@ -73,16 +74,28 @@ def load_stats():
 
 def save_stats(stats):
     init_folders()
+    tmp_path = STATS_FILE + ".tmp"
     try:
-        with open(STATS_FILE, "w") as f:
+        with open(tmp_path, "w") as f:
             json.dump(stats, f, indent=2)
+        # Verify the temp file is valid JSON
+        with open(tmp_path, "r") as f:
+            json.load(f)
+        # Atomic rename
+        os.replace(tmp_path, STATS_FILE)
     except Exception as e:
         print(f"Error saving stats: {e}")
+        # Clean up temp file
+        try:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+        except:
+            pass
 
 def log_event(event_type, description=""):
     init_folders()
     today_str = date.today().isoformat()
-    log_file = os.path.join(LOGS_DIR, f"{today_str}.log")
+    log_file = os.path.join(LOG_DIR, f"{today_str}.log")
     time_str = datetime.now().strftime("%H:%M:%S")
     
     log_line = f"[{time_str}] [{event_type.upper()}] {description}\n"
@@ -101,17 +114,8 @@ def add_session(minutes):
     # Update streak logic
     today_str = date.today().isoformat()
     if stats["last_active_date"] == today_str:
-        # If they already did a session today, streak is maintained.
-        # If it was 0 before doing this first session today, increment streak!
-        # Wait, if their last active date was yesterday, and today is a new day,
-        # when they complete their first session of the day, their streak increments by 1.
         pass
         
-    # Check if we should increment streak
-    # Let's say streak increments on the first session completed of any new day
-    # We can track whether they've already completed a session today.
-    # If they completed a session today and sessions_completed_today was 1 (after increment),
-    # then they just started their streak for today!
     if stats["sessions_completed_today"] == 1:
         stats["current_streak"] += 1
         
@@ -144,7 +148,6 @@ def add_violation(violation_type):
     key = None
     if violation_type == "phone":
         key = "phone_pickups_today"
-        # Phone pickups break streak!
         stats["current_streak"] = 0
     elif violation_type == "specs":
         key = "times_specs_off_today"
@@ -155,3 +158,18 @@ def add_violation(violation_type):
         stats[key] += 1
         save_stats(stats)
         log_event("VIOLATION", f"Violation detected: {violation_type}")
+
+def cleanup_old_logs(max_age_days=30):
+    """Delete log files older than max_age_days."""
+    try:
+        cutoff = date.today().toordinal() - max_age_days
+        for fname in os.listdir(LOG_DIR):
+            if fname.endswith('.log'):
+                try:
+                    fdate = date.fromisoformat(fname.replace('.log', ''))
+                    if fdate.toordinal() < cutoff:
+                        os.remove(os.path.join(LOG_DIR, fname))
+                except (ValueError, OSError):
+                    pass
+    except Exception:
+        pass

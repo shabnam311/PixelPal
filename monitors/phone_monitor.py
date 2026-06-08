@@ -106,3 +106,7 @@ class PhoneMonitor:
     def reset_status(self):
         """Used to reset phone state after it has been warned/acknowledged."""
         self.last_result = "no"
+
+    def close(self):
+        """Cleanup resources."""
+        self.enabled = False

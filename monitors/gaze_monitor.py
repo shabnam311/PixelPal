@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import logging
+import time
 from datetime import datetime
 
 logger = logging.getLogger("GazeMonitor")
@@ -14,6 +15,12 @@ class GazeMonitor:
         # Thresholds
         self.yaw_threshold = 30.0    # degrees to turn left/right
         self.pitch_threshold = 25.0  # degrees to look up/down
+        
+        # Gaze state machine
+        self.gaze_away_since = None
+        self.grace_seconds = self.config.get('grace_seconds', 10)
+        self.soft_warn_seconds = self.config.get('soft_warn_seconds', 10) 
+        self.hard_warn_seconds = self.config.get('hard_warn_seconds', 30)
         
         # State tracking
         self.last_check_time = 0
@@ -59,6 +66,9 @@ class GazeMonitor:
         """
         if not self.enabled or self.face_mesh is None:
             return "disabled", 0.0, 0.0
+            
+        if frame is None:
+            return "not_detected", 0.0, 0.0
             
         h, w, c = frame.shape
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -114,17 +124,21 @@ class GazeMonitor:
         yaw = float(euler_angles[1][0])
         roll = float(euler_angles[2][0])
         
-        # Standardize yaw/pitch signs and scale
-        # Looking straight ahead should yield close to 0, 0
-        # If yaw is > 30 or < -30, user is looking away left/right
-        # If pitch is > 25 or < -25, user is looking up/down
-        
         abs_yaw = abs(yaw)
         abs_pitch = abs(pitch)
         
         if abs_yaw > self.yaw_threshold or abs_pitch > self.pitch_threshold:
-            status = "away"
+            if self.gaze_away_since is None:
+                self.gaze_away_since = time.time()
+            away_duration = time.time() - self.gaze_away_since
+            if away_duration < self.grace_seconds:
+                status = "looking"  # grace period
+            elif away_duration < self.grace_seconds + self.soft_warn_seconds:
+                status = "soft_warn"
+            else:
+                status = "away"
         else:
+            self.gaze_away_since = None
             status = "looking"
             
         return status, yaw, pitch

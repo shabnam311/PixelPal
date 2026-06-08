@@ -1452,3 +1452,6 @@ body[data-theme='midnight'] { --bg-system-dark: #110000; --bg-screen: #000000; -
 
 /* Point 181: Task Wavy Underline */
 .task-text:hover { text-decoration: underline wavy var(--neon-purple); cursor: pointer; }
+
+/* Point 184: Zero Gravity Fall */
+.gravity-fall { transform: translateY(300px) rotate(180deg) !important; transition: transform 2s ease-in !important; }

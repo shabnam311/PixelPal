@@ -1,29 +1,33 @@
 # core/paths.py
+"""Centralised path management for PixelPal. All data is stored relative to the
+application root directory for portability."""
 import os
 import sys
 
-def get_app_data_dir() -> str:
-    """Returns %APPDATA%/PixelPal on Windows, ~/.pixelpal elsewhere."""
-    if os.name == "nt":
-        base = os.environ.get("APPDATA", os.path.expanduser("~"))
+def get_app_root() -> str:
+    """Returns the root directory of the PixelPal application.
+    In PyInstaller mode: directory containing the .exe
+    In dev mode: directory containing main.py (project root)
+    """
+    if getattr(sys, 'frozen', False):
+        # Running as compiled exe
+        return os.path.dirname(sys.executable)
     else:
-        base = os.path.expanduser("~")
-    path = os.path.join(base, "PixelPal")
-    os.makedirs(path, exist_ok=True)
-    return path
+        # Running as script — go up from core/ to project root
+        return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def get_resource_path(relative_path: str) -> str:
     """Get path to bundled resource (works in dev and PyInstaller)."""
-    base = getattr(sys, "_MEIPASS", os.path.dirname(os.path.abspath(__file__)))
-    # Go up one level since core/ is a subdirectory
-    root = os.path.dirname(base) if os.path.basename(base) == "core" else base
-    return os.path.join(root, relative_path)
+    base = getattr(sys, '_MEIPASS', get_app_root())
+    return os.path.join(base, relative_path)
 
-APP_DATA_DIR = get_app_data_dir()
-LOG_DIR      = os.path.join(APP_DATA_DIR, "logs")
-STATS_FILE   = os.path.join(APP_DATA_DIR, "stats.json")
-CONFIG_FILE  = get_resource_path("config.json")
-LOCK_FILE    = os.path.join(os.environ.get("TEMP", APP_DATA_DIR), "pixelpal.lock")
+APP_ROOT    = get_app_root()
+DATA_DIR    = os.path.join(APP_ROOT, "data")
+LOG_DIR     = os.path.join(DATA_DIR, "logs")
+STATS_FILE  = os.path.join(DATA_DIR, "stats.json")
+CONFIG_FILE = os.path.join(APP_ROOT, "config.json")
+LOCK_FILE   = os.path.join(DATA_DIR, "pixelpal.lock")
+BASELINE_FILE = os.path.join(DATA_DIR, "posture_baseline.json")
 
-# Ensure directories exist
+# Ensure data directories exist on import
 os.makedirs(LOG_DIR, exist_ok=True)

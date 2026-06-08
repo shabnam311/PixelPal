@@ -6,6 +6,7 @@ class SessionManager:
     def __init__(self, config):
         self.config = config
         self.state = "idle"         # idle, focus, break, paused
+        self.saved_state = "focus"  # saved state for pause/resume
         self.mode = "normal"        # normal, pomodoro
         self.time_left = 0
         self.total_duration = 0
@@ -16,6 +17,10 @@ class SessionManager:
         self.pomo_stage = "work"    # work, break
         self.pomo_cycles = 0
         
+        # Hearts (HP) system
+        self.hearts = 5.0
+        self.max_hearts = 5.0
+        
         # Threading lock
         self.lock = threading.Lock()
         self.last_tick_time = time.time()
@@ -25,6 +30,16 @@ class SessionManager:
         self.on_break_complete = None
         self.on_state_change = None
 
+    def damage(self, amount=0.5):
+        """Reduce hearts when bad habits are detected."""
+        with self.lock:
+            self.hearts = max(0.0, self.hearts - amount)
+            
+    def heal(self, amount=0.1):
+        """Regenerate hearts during clean focus time."""
+        with self.lock:
+            self.hearts = min(self.max_hearts, self.hearts + amount)
+
     def start_focus(self, minutes):
         with self.lock:
             self.state = "focus"
@@ -32,6 +47,7 @@ class SessionManager:
             self.total_duration = minutes * 60
             self.time_left = self.total_duration
             self.last_tick_time = time.time()
+            self.hearts = self.max_hearts
             log_event("SESSION_START", f"Started standard focus session for {minutes} minutes")
         self._notify_state_change()
 
@@ -43,6 +59,7 @@ class SessionManager:
             self.total_duration = self.pomo_work_time
             self.time_left = self.total_duration
             self.last_tick_time = time.time()
+            self.hearts = self.max_hearts
             log_event("SESSION_START", f"Started Pomodoro mode. Work stage: {self.pomo_work_time // 60} minutes")
         self._notify_state_change()
 
@@ -82,14 +99,12 @@ class SessionManager:
         self._notify_state_change()
 
     def tick(self):
-        """Ticks the timer. Call this inside the main application loop every ~1 second."""
         now = time.time()
         elapsed = int(now - self.last_tick_time)
         if elapsed < 1:
             return None
             
         self.last_tick_time = now
-        
         trigger_event = None
         
         with self.lock:
@@ -107,22 +122,26 @@ class SessionManager:
         return trigger_event
 
     def _handle_timer_completion(self):
-        """Transitions states when timer hits 0. Returns string event to fire."""
         if self.state == "focus":
             focused_mins = self.total_duration // 60
             unlocked_milestones = add_session(focused_mins)
             
             if self.mode == "pomodoro":
                 self.pomo_cycles += 1
-                # Transition to pomodoro break
                 self.state = "break"
                 self.pomo_stage = "break"
-                self.total_duration = self.pomo_break_time
+                
+                # Long break every 4 cycles
+                if self.pomo_cycles % 4 == 0:
+                    self.total_duration = self.pomo_break_time * 3  # 15 min long break
+                    log_event("BREAK_START", f"Long break! Pomodoro cycle {self.pomo_cycles} complete.")
+                else:
+                    self.total_duration = self.pomo_break_time
+                    log_event("SESSION_COMPLETE", f"Pomodoro work cycle {self.pomo_cycles} complete. Starting break.")
+                    
                 self.time_left = self.total_duration
-                log_event("SESSION_COMPLETE", f"Pomodoro work cycle {self.pomo_cycles} complete. Starting break.")
                 
                 if self.on_session_complete:
-                    # Run callback in thread to avoid blocking lock
                     threading.Thread(target=self.on_session_complete, args=(focused_mins, unlocked_milestones, True)).start()
                 return "pomodoro_work_complete"
             else:
@@ -136,11 +155,11 @@ class SessionManager:
                 
         elif self.state == "break":
             if self.mode == "pomodoro":
-                # Transition back to pomodoro work
                 self.state = "focus"
                 self.pomo_stage = "work"
                 self.total_duration = self.pomo_work_time
                 self.time_left = self.total_duration
+                self.hearts = self.max_hearts
                 log_event("BREAK_COMPLETE", "Pomodoro break complete. Starting next work cycle.")
                 
                 if self.on_break_complete:
@@ -165,7 +184,8 @@ class SessionManager:
                 "time_left": self.time_left,
                 "total_duration": self.total_duration,
                 "pomodoro_stage": self.pomo_stage if self.mode == "pomodoro" else None,
-                "pomodoro_cycles": self.pomo_cycles if self.mode == "pomodoro" else 0
+                "pomodoro_cycles": self.pomo_cycles if self.mode == "pomodoro" else 0,
+                "hearts": self.hearts
             }
 
     def register_callbacks(self, on_session_complete, on_break_complete, on_state_change=None):
