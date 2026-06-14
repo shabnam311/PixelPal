@@ -1,0 +1,17 @@
+{
+  "sessions_completed_today": 0,
+  "pomodoros_completed_today": 0,
+  "total_focus_minutes_today": 0,
+  "phone_pickups_today": 0,
+  "times_specs_off_today": 0,
+  "posture_warnings_today": 0,
+  "current_streak": 0,
+  "last_active_date": "",
+  "milestones": [],
+  "history": [],
+  "personal_bests": {
+    "longest_session": 0,
+    "max_streak": 0,
+    "most_sessions_in_day": 0
+  }
+}

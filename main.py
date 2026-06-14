@@ -3,7 +3,9 @@ import sys
 import time
 import json
 import threading
-import argparse
+import threading
+import time
+import json
 import logging
 from datetime import datetime, date
 
@@ -223,14 +225,9 @@ def get_recent_log_lines(count=15):
         return []
 
 # WebSocket Broadcaster Loop
-def websocket_broadcast_loop():
-    global last_sound_trigger
+@app.on_event("startup")
+async def start_broadcaster():
     import asyncio
-    
-    # We must run asyncio loop in this thread
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    
     async def broadcast():
         global last_sound_trigger, active_alert
         while running:
@@ -251,14 +248,14 @@ def websocket_broadcast_loop():
                 last_sound_trigger = None
                 
                 # Send to all clients
-                tasks = []
                 for client in list(websocket_clients):
-                    tasks.append(client.send_json(payload))
-                if tasks:
-                    await asyncio.gather(*tasks, return_exceptions=True)
+                    try:
+                        await client.send_json(payload)
+                    except Exception:
+                        pass
             await asyncio.sleep(1)
             
-    loop.run_until_complete(broadcast())
+    asyncio.create_task(broadcast())
 
 # Webcam processing background thread
 def webcam_loop():
@@ -287,6 +284,7 @@ def webcam_loop():
     # Optimize camera parameters
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
     
     logger.info("Webcam stream started successfully.")
     
@@ -302,7 +300,7 @@ def webcam_loop():
     while running:
         ret, frame = cap.read()
         if not ret:
-            time.sleep(0.03)
+            time.sleep(0.1)
             continue
             
         with latest_frame_lock:
@@ -310,37 +308,40 @@ def webcam_loop():
             
         now = time.time()
         
+        # Resize frame for monitors to improve performance
+        small_frame = cv2.resize(frame, (320, 240))
+        
         # 1. Check calibration request
         if calibrate_requested:
             calibrate_requested = False
-            success = posture_monitor.calibrate(frame)
+            success = posture_monitor.calibrate(small_frame)
             calibration_result = success
             calibration_event.set()
             
         # 2. Gaze check interval
         if now - last_gaze_check > gaze_monitor.check_interval:
             last_gaze_check = now
-            status, _, _ = gaze_monitor.process_frame(frame)
+            status, _, _ = gaze_monitor.process_frame(small_frame)
             with state_lock:
                 gaze_status = status
                 
         # 3. Posture check interval
         if now - last_posture_check > posture_monitor.check_interval:
             last_posture_check = now
-            status, _ = posture_monitor.process_frame(frame)
+            status, _ = posture_monitor.process_frame(small_frame)
             with state_lock:
                 posture_status = status
                 
         # 4. Specs & Phone Check (Trigger async verification internally)
-        specs_monitor.check_async(frame)
-        phone_monitor.check_async(frame)
+        specs_monitor.check_async(small_frame)
+        phone_monitor.check_async(small_frame)
         
         with state_lock:
             specs_status = specs_monitor.get_status()
             phone_status = phone_monitor.get_status()
             
         # Limit CPU usage slightly
-        time.sleep(0.03)
+        time.sleep(0.1)
         
     cap.release()
     logger.info("Webcam stream released.")
@@ -421,8 +422,30 @@ def cleanup_and_exit():
         
     os._exit(0)
 
+def handle_terminal_input():
+    if msvcrt.kbhit():
+        try:
+            key = msvcrt.getch().decode('utf-8', errors='ignore').lower()
+            if key == 'q':
+                cleanup_and_exit()
+            elif key == 'p':
+                status = session_manager.get_status()
+                if status["state"] == "paused":
+                    session_manager.resume()
+                elif status["state"] in ["focus", "break"]:
+                    session_manager.pause()
+            elif key == 's':
+                session_manager.start_focus(45)
+            elif key == 'o':
+                session_manager.start_pomodoro()
+            elif key == 'c':
+                posture_monitor.calibrate(latest_frame) if latest_frame is not None else False
+        except Exception as e:
+            logger.debug(f"Input handling error: {e}")
+
 # Entry point
 if __name__ == "__main__":
+    global gui_window
     import multiprocessing
     multiprocessing.freeze_support()
     
@@ -474,16 +497,9 @@ if __name__ == "__main__":
             "alerts": {"sound_enabled": True, "popup_enabled": True, "max_warnings_before_cooldown": 3, "quiet_hours_start": "22:00", "quiet_hours_end": "08:00"},
             "ui": {"theme": "neon_green", "tray_icon_enabled": True, "terminal_refresh_seconds": 1}
         }
-        
-    # Setup argument parser
-    parser = argparse.ArgumentParser(description="PIXELPAL - Retro Pixel Focus App")
-    parser.add_argument("mode", choices=["start", "pomodoro", "watch", "stats", "calibrate"], nargs="?", default="watch",
-                        help="Action mode: start (standard timer), pomodoro (work/break loops), watch (monitor only), stats (view metrics), calibrate (posture baseline)")
-    parser.add_argument("minutes", type=int, nargs="?", default=config["session"]["default_minutes"],
-                        help="Focus session duration in minutes (used with 'start' mode)")
-    parser.add_argument("--cli", action="store_true", default=False,
-                        help="Run in CLI Terminal HUD mode instead of GUI Window mode")
-    args = parser.parse_args()
+    # App defaults
+    cli_mode = False
+    action_mode = "watch"
 
     # Initializing Monitors & Core
     session_manager = SessionManager(config)
@@ -504,39 +520,10 @@ if __name__ == "__main__":
         tray_icon = TrayIcon(session_manager, cleanup_and_exit)
         tray_icon.run_async()
 
-    # Parse and Execute Initial Action Modes
-    if args.mode == "stats":
-        stats = load_stats()
-        print("\n=== PIXELPAL HABIT STATS ===")
-        print(f"🔥 Current Focus Streak: {stats['current_streak']} days")
-        print(f"📦 Focus Sessions Completed Today: {stats['sessions_completed_today']}")
-        print(f"⌛ Total Focus Time Today: {stats['total_focus_minutes_today']} minutes")
-        print(f"📱 Phone Pickups Detected: {stats['phone_pickups_today']}")
-        print(f"👓 Times UV Specs Detected Off: {stats['times_specs_off_today']}")
-        print(f"🧍 Posture slouch warnings: {stats['posture_warnings_today']}")
-        print("\nUnlocked Trophies:")
-        for m_id in stats.get("milestones", []):
-            print(f" 🏆 Unlocked Milestone: {m_id}")
-        cleanup_and_exit()
-        
     # Start Webcam Thread
     webcam_thread = threading.Thread(target=webcam_loop, daemon=True)
     webcam_thread.start()
 
-    # Calibrate Posture baseline before starting if selected
-    if args.mode == "calibrate":
-        print("\n[CALIBRATION] Please sit up straight, look at the camera, and stay still...")
-        time.sleep(2)
-        # Try to capture from thread
-        success = posture_monitor.calibrate(latest_frame) if latest_frame is not None else False
-        if success:
-            print("[CALIBRATION] Success! Baseline vertical posture saved.")
-            # Play success chiptune
-            play_native_beeps("levelup.wav")
-            time.sleep(1)
-        else:
-            print("[CALIBRATION] Failed! Make sure webcam is working and face is in frame.")
-        cleanup_and_exit()
 
     # Start FastAPI server thread
     def start_api_server():
@@ -548,21 +535,12 @@ if __name__ == "__main__":
     api_thread = threading.Thread(target=start_api_server, daemon=True)
     api_thread.start()
 
-    # Start WebSocket Broadcaster thread
-    ws_thread = threading.Thread(target=websocket_broadcast_loop, daemon=True)
-    ws_thread.start()
-
-    # Apply Startup Mode Action
-    if args.mode == "start":
-        session_manager.start_focus(args.minutes)
-    elif args.mode == "pomodoro":
-        session_manager.start_pomodoro()
-    elif args.mode == "watch":
-        log_event("MONITOR", "Started monitoring engine (watch mode)")
+    # Default Action
+    log_event("MONITOR", "Started monitoring engine (watch mode)")
 
     # Open local dashboard automatically in browser or open in PyWebView GUI window
     use_gui = False
-    if not args.cli:
+    if not cli_mode:
         try:
             import webview
             use_gui = True
@@ -668,24 +646,3 @@ if __name__ == "__main__":
             logger.info("Keyboard interrupt received.")
         finally:
             cleanup_and_exit()
-
-def handle_terminal_input():
-    if msvcrt.kbhit():
-        try:
-            key = msvcrt.getch().decode('utf-8', errors='ignore').lower()
-            if key == 'q':
-                cleanup_and_exit()
-            elif key == 'p':
-                status = session_manager.get_status()
-                if status["state"] == "paused":
-                    session_manager.resume()
-                elif status["state"] in ["focus", "break"]:
-                    session_manager.pause()
-            elif key == 's':
-                session_manager.start_focus(45)
-            elif key == 'o':
-                session_manager.start_pomodoro()
-            elif key == 'c':
-                posture_monitor.calibrate(latest_frame) if latest_frame is not None else False
-        except Exception as e:
-            logger.debug(f"Input handling error: {e}")

@@ -1,42 +1,31 @@
-# Build outputs
-dist/
-build/
-*.spec
-*.exe
-*.msi
+# Environments
+venv/
+.venv/
+env/
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
 *.egg-info/
-venv/
-env/
-.venv/
-.env
-
-# App data (user sessions, logs — never commit personal data)
-data/
-*.log
+.pytest_cache/
 
 # PyInstaller
-*.spec.bak
+dist/
+build/
+*.spec
 
-# IDE
-.vscode/
+# Application Data
+data/logs/*
+!data/logs/.gitkeep
+data/stats/*
+!data/stats/.gitkeep
+data/calibration/*
+!data/calibration/.gitkeep
+*.lock
+pixelpal.log
+
+# IDEs
 .idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Node (if any frontend tooling remains)
-node_modules/
-
-# Secrets
-.env
-config.local.json
+.vscode/

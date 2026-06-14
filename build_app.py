@@ -47,8 +47,10 @@ def build(onefile=False, clean=False):
         "--name", "PixelPal",
         "--icon", "icon.ico",
 
-        # Bundle the web UI
+        # Bundle the web UI and assets
         "--add-data", f"ui/web{sep}ui/web",
+        "--add-data", f"ui/assets{sep}ui/assets",
+        "--add-data", f"data{sep}data",
         "--add-data", f"config.json{sep}.",
         "--add-data", f"icon.ico{sep}.",
 

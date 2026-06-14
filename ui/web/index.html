@@ -3,62 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PIXELPAL v1.0 👾 Focus Companion</title>
-    <!-- Retro Pixel Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Courier+Prime&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <title>PIXELPAL v1.0 — Focus Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
-<body>`n    <!-- Point 121: Level Up Flash Overlay -->`n    <!-- Point 143: Pet Context Menu -->`n    <div id="pet-context-menu" style="display:none; position:fixed; background:var(--bg-system-dark); border:1px solid var(--neon-cyan); padding:5px; color:var(--text-main); font-family:'Press Start 2P', monospace; font-size:8px; z-index:11000; box-shadow: 2px 2px 0 var(--neon-cyan); cursor:pointer;">`n        <div style="padding:5px;">?? Feed (Soon)</div>`n    </div>`n    <!-- Point 130: Achievements Modal -->`n    <div id="achievements-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:300px; background:var(--bg-system-dark); border:2px solid var(--neon-purple); z-index:10000; padding:15px; color:var(--text-main); font-family:'Press Start 2P', monospace;">`n        <h3 style="margin-top:0; color:var(--neon-purple); text-align:center; font-size:12px;">?? BADGES</h3>`n        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; text-align:center;">`n            <div style="border:1px dashed var(--border-dim); padding:10px;"><div style="font-size:24px; margin-bottom:5px;">?</div><div style="font-size:8px;">First Focus</div></div>`n            <div style="border:1px dashed var(--border-dim); padding:10px;"><div style="font-size:24px; margin-bottom:5px;">??</div><div style="font-size:8px;">Level 5</div></div>`n            <div style="border:1px dashed var(--border-dim); padding:10px;"><div style="font-size:24px; margin-bottom:5px;">?</div><div style="font-size:8px;">3-Streak</div></div>`n            <div style="border:1px dashed var(--border-dim); padding:10px;"><div style="font-size:24px; margin-bottom:5px;">??</div><div style="font-size:8px;">Golden Pom</div></div>`n        </div>`n        <button onclick="document.getElementById('achievements-modal').style.display='none';" style="width:100%; margin-top:15px; background:var(--neon-purple); color:black; border:none; padding:8px; cursor:pointer; font-family:inherit; font-size:10px;">CLOSE</button>`n    </div>`n    <div id="level-up-flash-overlay"></div>
-    <!-- Ambient Overlays -->
+<body>
+    <!-- Power-on flash -->
     <div class="power-on-flash" id="power-on-flash"></div>
-    <div class="scanlines"></div>
-    <div class="scanline-sweep"></div>
+    <!-- CRT Scanlines -->
+    <div class="scanlines" id="scanlines-overlay"></div>
 
-    <!-- Theme Switcher Widget -->
+    <!-- Theme Switcher Dots -->
     <div class="theme-switcher" id="theme-switcher">
         <div class="theme-dot active" data-theme="neon-green" title="Neon Green"></div>
         <div class="theme-dot" data-theme="synthwave-purple" title="Synthwave Purple"></div>
         <div class="theme-dot" data-theme="cyberpunk-yellow" title="Cyberpunk Yellow"></div>
         <div class="theme-dot" data-theme="arcade-red" title="Arcade Red"></div>
     </div>
-    
-    <!-- True 100vw/100vh CSS Grid Dual Screen layout -->
-    <div class="app-container">
 
-
-        <!-- Physical Handheld Console Casing -->
+    <!-- ==================== MAIN APP ==================== -->
+    <div class="app-container" id="app-container">
         <div class="console-casing">
-            
             <!-- Corner Screws -->
             <div class="screw screw-tl"></div>
             <div class="screw screw-tr"></div>
             <div class="screw screw-bl"></div>
             <div class="screw screw-br"></div>
 
-            <!-- LED Accent Strips -->
+            <!-- LED Strips -->
             <div class="led-strip strip-top"></div>
             <div class="led-strip strip-bottom"></div>
 
-            <!-- TOP HALF: 55% Height Screen Panel -->
+            <!-- ========== TOP SCREEN ========== -->
             <div class="console-panel top-panel-case">
                 <div class="screen-bezel top-bezel">
                     <div class="screen-inner top-screen" id="top-screen">
-                        
-                        <!-- CRT Screen Glare, Vignette, Particles -->
                         <div class="screen-glare"></div>
                         <div class="vignette"></div>
+
+                        <!-- Floating particles -->
                         <div class="particles">
                             <div class="particle p1"></div><div class="particle p2"></div>
                             <div class="particle p3"></div><div class="particle p4"></div>
                             <div class="particle p5"></div><div class="particle p6"></div>
-                            <div class="particle p7"></div><div class="particle p8"></div>
                         </div>
 
-                        <div class="screen-header">`n                    <span class="recording-dot" id="recording-dot" style="display:none;" title="Monitors Active"></span>
-                            <div style="display: flex; align-items: center; gap: 10px;">
+                        <!-- Screen Header -->
+                        <div class="screen-header">
+                            <div style="display:flex; align-items:center; gap:8px;">
                                 <span class="pulse-icon">●</span>
                                 <span>MONITOR FEED</span>
-                                <!-- Point 16: Monitor Status Icons -->
                                 <div class="header-status-icons" id="header-status-icons">
                                     <div class="status-pip" id="pip-gaze" title="Gaze">👁️</div>
                                     <div class="status-pip" id="pip-posture" title="Posture">🧍</div>
@@ -66,133 +60,123 @@
                                     <div class="status-pip" id="pip-phone" title="Phone">📱</div>
                                 </div>
                             </div>
-                            <span class="active-tab-title" id="top-tab-title">TAB: RETRO PET</span>
+                            <span class="active-tab-title" id="top-tab-title">COMPANION</span>
                             <div class="header-actions">
-                                <button id="btn-mute" class="mute-btn" data-tooltip="Toggle Sound" title="">🔊</button>
-                                <button id="btn-settings" class="mute-btn" data-tooltip="Settings" title="">⚙️</button>
+                                <button id="btn-mute" class="icon-btn" title="Toggle Sound">🔊</button>
+                                <button id="btn-settings" class="icon-btn" title="Settings">⚙️</button>
                             </div>
                         </div>
 
-                        <!-- TOP SCREEN CONTENT AREA -->
-                        <div class="top-screen-content" style="position: relative;">
-                            <!-- Point 26: Weather Layer -->
-                            <div id="weather-layer" class="weather-layer"></div>
-                            
-                            <!-- Point 34: Matrix Rain Toggle -->
-                            <div id="matrix-rain" class="matrix-rain" style="display: none;"></div>
+                        <!-- TOP SCREEN VIEWS -->
+                        <div class="top-screen-content" id="top-screen-content">
 
-                            <!-- Point 30 & 53: System Stats Monitor & Battery -->
-                            <div id="sys-stats" style="position: absolute; top: 10px; left: 10px; z-index: 50; font-family: 'Courier New', monospace; font-size: 10px; color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); pointer-events: none;">
-                                <div>SYS_PWR: <span id="fake-pwr">98%</span></div>
-                                <div>MEM_USE: <span id="fake-mem">1.2GB</span></div>
-                                <div style="color: cyan;">BATTERY: <span id="real-battery">--%</span></div>`n                                <div style="color: var(--neon-purple);">SESSIONS: <span id="session-count">0</span> <span id="daily-goal-display" style="color:var(--neon-green); font-size:10px;">/4</span></div>`n                                <div style="color: #ff0;">UPTIME: <span id="system-uptime">00:00:00</span></div>
-                            </div>
-
-                            <!-- Point 99: Daily Quote Marquee -->`n                            <div class="quote-marquee"><span id="daily-quote-text">Loading daily motivation...</span></div>`n                            <!-- Point 67: Live Clock HUD -->`n                            <div id="live-clock" style="position: absolute; bottom: 10px; left: 10px; z-index: 50; font-family: 'Courier New', monospace; font-size: 12px; color: var(--neon-green); text-shadow: 0 0 5px var(--neon-green); pointer-events: none; font-weight: bold;">--:--:--</div>`n                            <!-- View 1: Companion View -->`n                            <!-- Point 86: Focus EQ Visualizer -->`n                            <div id="focus-eq" style="position: absolute; right: 10px; bottom: 10px; display: flex; gap: 2px; height: 20px; align-items: flex-end;">`n                                <div class="eq-bar" style="width: 5px; background: var(--neon-green); height: 20%;"></div>`n                                <div class="eq-bar" style="width: 5px; background: var(--neon-green); height: 50%;"></div>`n                                <div class="eq-bar" style="width: 5px; background: var(--neon-green); height: 80%;"></div>`n                                <div class="eq-bar" style="width: 5px; background: var(--neon-green); height: 30%;"></div>`n                            </div><div class='crt-vignette'></div><div class='matrix-rain'></div><div id='radar-ui' style='position: absolute; bottom: 10px; right: 10px; width: 50px; height: 50px; border: 2px solid var(--neon-green); border-radius: 50%; opacity: 0.5; pointer-events: none; z-index: 40; border-top-color: transparent; animation: hourglassTurn 2s linear infinite;'></div><div style='position: absolute; top: 10px; right: 50px; z-index: 50; font-family: monospace; color: red; font-size: 10px; pointer-events: none;'><div class='blinking-led'></div> REC</div>
+                            <!-- View 1: Companion -->
                             <div id="view-companion" class="screen-view active-view">
                                 <div class="pixel-viewport">
-                                    <div id="pixelpal-sprite" class="sprite-happy">
-                                        <!-- Point 28: Speech Bubble -->
-                                        <div id="pet-speech-bubble" style="display: none; position: absolute; top: -60px; left: 50px; background: white; color: black; padding: 10px; border: 2px solid black; border-radius: 10px; font-family: 'Courier New', monospace; font-weight: bold; z-index: 100; max-width: 150px; font-size: 12px; box-shadow: 2px 2px 0px rgba(0,0,0,0.5);">
-                                            You can do it!
-                                            <div style="position: absolute; bottom: -10px; left: 20px; width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid black;"></div>
-                                            <div style="position: absolute; bottom: -7px; left: 22px; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid white;"></div>
-                                        </div>
-
-                                        <!-- Dynamic Sweat Drops -->
+                                    <!-- Pet Speech Bubble -->
+                                    <div id="pet-speech-bubble" class="speech-bubble" style="display:none;">
+                                        <span id="speech-text">You can do it!</span>
+                                    </div>
+                                    <!-- Totoro SVG Sprite -->
+                                    <div id="pixelpal-sprite" class="sprite-idle">
+                                        <svg viewBox="0 0 16 16" width="200" height="200" shape-rendering="crispEdges">
+                                            <!-- Ears -->
+                                            <rect x="4" y="1" width="1" height="2" fill="#7f7f7f"/>
+                                            <rect x="3" y="2" width="2" height="1" fill="#7f7f7f"/>
+                                            <rect x="11" y="1" width="1" height="2" fill="#7f7f7f"/>
+                                            <rect x="11" y="2" width="2" height="1" fill="#7f7f7f"/>
+                                            <!-- Body -->
+                                            <rect x="4" y="3" width="8" height="1" fill="#7f7f7f"/>
+                                            <rect x="3" y="4" width="10" height="1" fill="#7f7f7f"/>
+                                            <rect x="2" y="5" width="12" height="9" fill="#7f7f7f"/>
+                                            <rect x="3" y="14" width="10" height="1" fill="#7f7f7f"/>
+                                            <!-- Feet -->
+                                            <rect x="3" y="15" width="2" height="1" fill="#555"/>
+                                            <rect x="11" y="15" width="2" height="1" fill="#555"/>
+                                            <!-- White Tummy -->
+                                            <rect x="5" y="8" width="6" height="1" fill="#f5f2e9"/>
+                                            <rect x="4" y="9" width="8" height="5" fill="#f5f2e9"/>
+                                            <!-- Markings -->
+                                            <rect x="5" y="10" width="1" height="1" fill="#595959"/>
+                                            <rect x="7" y="10" width="2" height="1" fill="#595959"/>
+                                            <rect x="10" y="10" width="1" height="1" fill="#595959"/>
+                                            <rect x="6" y="12" width="1" height="1" fill="#595959"/>
+                                            <rect x="9" y="12" width="1" height="1" fill="#595959"/>
+                                            <!-- Eyes -->
+                                            <rect x="4" y="5" width="2" height="2" fill="#fff"/>
+                                            <rect x="5" y="6" width="1" height="1" fill="#0d0d0d" id="pupil-l"/>
+                                            <rect x="10" y="5" width="2" height="2" fill="#fff"/>
+                                            <rect x="10" y="6" width="1" height="1" fill="#0d0d0d" id="pupil-r"/>
+                                            <!-- Nose -->
+                                            <rect x="7" y="6" width="2" height="1" fill="#0d0d0d"/>
+                                            <!-- Cheeks -->
+                                            <rect x="3" y="7" width="1" height="1" fill="#ff9ebb" class="rosy-cheeks"/>
+                                            <rect x="12" y="7" width="1" height="1" fill="#ff9ebb" class="rosy-cheeks"/>
+                                            <!-- Whiskers -->
+                                            <rect x="1" y="6" width="2" height="1" fill="#444"/>
+                                            <rect x="1" y="8" width="2" height="1" fill="#444"/>
+                                            <rect x="13" y="6" width="2" height="1" fill="#444"/>
+                                            <rect x="13" y="8" width="2" height="1" fill="#444"/>
+                                        </svg>
+                                        <!-- Sweat drops -->
                                         <div class="sweat-drop s1"></div>
                                         <div class="sweat-drop s2"></div>
-                                        <div class="sweat-drop s3"></div>
-
-                                        <!-- Massive 220x220 Totoro Pixel Character -->
-                                        <svg viewBox="0 0 16 16" width="220" height="220" shape-rendering="crispEdges">
-                                            <!-- Ears -->
-                                            <rect x="4" y="1" width="1" height="2" fill="#7f7f7f" />
-                                            <rect x="3" y="2" width="2" height="1" fill="#7f7f7f" />
-                                            <rect x="11" y="1" width="1" height="2" fill="#7f7f7f" />
-                                            <rect x="11" y="2" width="2" height="1" fill="#7f7f7f" />
-                                            <!-- Body -->
-                                            <rect x="4" y="3" width="8" height="1" fill="#7f7f7f" />
-                                            <rect x="3" y="4" width="10" height="1" fill="#7f7f7f" />
-                                            <rect x="2" y="5" width="12" height="9" fill="#7f7f7f" />
-                                            <rect x="3" y="14" width="10" height="1" fill="#7f7f7f" />
-                                            <!-- Feet -->
-                                            <rect x="3" y="15" width="2" height="1" fill="#555555" />
-                                            <rect x="11" y="15" width="2" height="1" fill="#555555" />
-                                            <!-- White Tummy -->
-                                            <rect x="5" y="8" width="6" height="1" fill="#f5f2e9" />
-                                            <rect x="4" y="9" width="8" height="5" fill="#f5f2e9" />
-                                            <!-- Markings -->
-                                            <rect x="5" y="10" width="1" height="1" fill="#595959" />
-                                            <rect x="7" y="10" width="2" height="1" fill="#595959" />
-                                            <rect x="10" y="10" width="1" height="1" fill="#595959" />
-                                            <rect x="6" y="12" width="1" height="1" fill="#595959" />
-                                            <rect x="9" y="12" width="1" height="1" fill="#595959" />
-                                            <!-- Eyes -->
-                                            <g id="totoro-eyes">
-                                                <rect x="4" y="5" width="2" height="2" fill="#ffffff" />
-                                                <rect x="5" y="6" width="1" height="1" fill="#0d0d0d" id="pupil-l" />
-                                                <rect x="10" y="5" width="2" height="2" fill="#ffffff" />
-                                                <rect x="10" y="6" width="1" height="1" fill="#0d0d0d" id="pupil-r" />
-                                            </g>
-                                            <!-- Nose -->
-                                            <rect x="7" y="6" width="2" height="1" fill="#0d0d0d" />
-                                            <!-- Cheeks -->
-                                            <rect x="3" y="7" width="1" height="1" fill="#ff9ebb" class="rosy-cheeks" />
-                                            <rect x="12" y="7" width="1" height="1" fill="#ff9ebb" class="rosy-cheeks" />
-                                            <!-- Whiskers -->
-                                            <rect x="1" y="6" width="2" height="1" fill="#444444" />
-                                            <rect x="1" y="8" width="2" height="1" fill="#444444" />
-                                            <rect x="13" y="6" width="2" height="1" fill="#444444" />
-                                            <rect x="13" y="8" width="2" height="1" fill="#444444" />
-                                        </svg>
-                                        <div class="stats-panel">
+                                    </div>
+                                    <div id="sprite-caption" class="retro-caption">PIXELPAL IS SLEEPING...</div>
+                                    <!-- Stats Row -->
+                                    <div class="stats-panel">
                                         <div class="stat-item">
                                             <div class="stat-value" id="stat-streak">0</div>
-                                            <div class="stat-label">DAY STREAK</div>
+                                            <div class="stat-label">STREAK</div>
                                         </div>
                                         <div class="stat-item">
-                                            <div class="stat-value" id="stat-focus-time">0h 0m</div>
-                                            <div class="stat-label">TODAY FOCUS</div>
+                                            <div class="stat-value" id="stat-focus-time">0m</div>
+                                            <div class="stat-label">FOCUS</div>
                                         </div>
                                         <div class="stat-item">
-                                            <div class="stat-value" id="stat-keystrokes">0</div>
-                                            <div class="stat-label">KEYSTROKES</div>
-                                        </div>
-                                        <div class="stat-item">
-                                            <div class="stat-value" id="stat-mouse">0</div>
-                                            <div class="stat-label">MOUSE DIST</div>
-                                        </div>
-                                        <!-- Point 44: Total Focus Hours -->
-                                        <div class="stat-item">
-                                            <div class="stat-value" id="stat-total-focus">0h 0m</div>
-                                            <div class="stat-label">ALL-TIME FOCUS</div>
+                                            <div class="stat-value" id="stat-sessions">0</div>
+                                            <div class="stat-label">SESSIONS</div>
                                         </div>
                                     </div>
-                                    <div id="sprite-caption" class="retro-caption">PIXELPAL TOTORO IS ASLEEP</div>
                                 </div>
                             </div>
 
                             <!-- View 2: Sensors -->
                             <div id="view-sensors" class="screen-view">
-                                <div class="sensors-list-hud">
-                                    <div class="hud-card" id="card-gaze"><div class="hud-label">GAZE TRACKER</div><div class="hud-status" id="status-gaze">👁️ TRACKING</div></div>
-                                    <div class="hud-card" id="card-posture"><div class="hud-label">POSTURE CHECK</div><div class="hud-status" id="status-posture">🧍 GOOD</div></div>
-                                    <div class="hud-card" id="card-specs"><div class="hud-label">UV GLASSES</div><div class="hud-status" id="status-specs">👓 ON</div></div>
-                                    <div class="hud-card" id="card-phone"><div class="hud-label">PHONE DETECT</div><div class="hud-status" id="status-phone">📵 CLEAR</div></div>
+                                <div class="sensors-grid">
+                                    <div class="hud-card" id="card-gaze">
+                                        <div class="hud-icon">👁️</div>
+                                        <div class="hud-label">GAZE</div>
+                                        <div class="hud-status" id="status-gaze">TRACKING</div>
+                                    </div>
+                                    <div class="hud-card" id="card-posture">
+                                        <div class="hud-icon">🧍</div>
+                                        <div class="hud-label">POSTURE</div>
+                                        <div class="hud-status" id="status-posture">GOOD</div>
+                                    </div>
+                                    <div class="hud-card" id="card-specs">
+                                        <div class="hud-icon">👓</div>
+                                        <div class="hud-label">SPECS</div>
+                                        <div class="hud-status" id="status-specs">ON</div>
+                                    </div>
+                                    <div class="hud-card" id="card-phone">
+                                        <div class="hud-icon">📱</div>
+                                        <div class="hud-label">PHONE</div>
+                                        <div class="hud-status" id="status-phone">CLEAR</div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- View 3: Stats -->
                             <div id="view-stats" class="screen-view">
-                                <div class="detailed-stats-tab">
-                                    <div class="stats-grid">
-                                        <div class="stat-box"><div class="stat-num text-yellow" id="tab-streak">🔥 0</div><div class="stat-lbl">DAILY STREAK</div></div>
-                                        <div class="stat-box"><div class="stat-num text-green" id="tab-sessions">📦 0</div><div class="stat-lbl">SESSIONS TODAY</div></div>
-                                        <div class="stat-box"><div class="stat-num text-purple" id="tab-posture">🧍 0</div><div class="stat-lbl">SLOUCH WARNS</div></div>
-                                        <div class="stat-box"><div class="stat-num text-pink" id="tab-phone">📱 0</div><div class="stat-lbl">PHONE PICKUPS</div></div>
-                                    </div>
-                                    <div class="trophies-badge-row" id="trophies-container"><span class="locked-lbl">TROPHIES: [ NONE YET ]</span></div>
+                                <div class="stats-grid-full">
+                                    <div class="stat-box"><div class="stat-num" id="tab-streak">🔥 0</div><div class="stat-lbl">STREAK</div></div>
+                                    <div class="stat-box"><div class="stat-num" id="tab-sessions">📦 0</div><div class="stat-lbl">SESSIONS</div></div>
+                                    <div class="stat-box"><div class="stat-num" id="tab-posture">🧍 0</div><div class="stat-lbl">SLOUCH WARNS</div></div>
+                                    <div class="stat-box"><div class="stat-num" id="tab-phone">📱 0</div><div class="stat-lbl">PHONE PICKUPS</div></div>
+                                </div>
+                                <div class="trophies-row" id="trophies-container">
+                                    <span class="locked-lbl">TROPHIES: [ NONE YET ]</span>
                                 </div>
                             </div>
                         </div>
@@ -200,19 +184,14 @@
                 </div>
             </div>
 
-            <!-- PHYSICAL CENTER HINGE -->
-            <div class="console-hinge">
-                <div class="hinge-bar"></div>
-            </div>
+            <!-- HINGE -->
+            <div class="console-hinge"><div class="hinge-bar"></div></div>
 
-            <!-- BOTTOM HALF: 45% Height Controls & HUD -->
+            <!-- ========== BOTTOM SCREEN ========== -->
             <div class="console-panel bottom-panel-case">
-                
-                <!-- Left D-Pad Controls -->
+                <!-- Left D-Pad -->
                 <div class="case-side-left">
-                    <!-- Left Speaker Grills -->
-                    <div class="speaker-grill grill-left"><span></span><span></span><span></span><span></span></div>
-                    
+                    <div class="speaker-grill"><span></span><span></span><span></span><span></span></div>
                     <div class="dpad-container">
                         <div class="dpad-btn dpad-up" id="dpad-up"></div>
                         <div class="dpad-btn dpad-left" id="dpad-left"></div>
@@ -222,105 +201,90 @@
                     </div>
                 </div>
 
-                <!-- Center Touch Screen -->
+                <!-- Center Screen -->
                 <div class="screen-bezel bottom-bezel">
                     <div class="screen-inner bottom-screen">
                         <div class="screen-glare"></div>
-                        
+
                         <div class="timer-hud-container">
+                            <!-- Hearts Row -->
                             <div class="hearts-row">
-                                <span class="hearts-label font-pixel">HP</span>
+                                <span class="hearts-label">HP</span>
                                 <div id="hearts-container" class="hearts-box">
-                                    <div class="pixel-heart full"></div><div class="pixel-heart full"></div>
-                                    <div class="pixel-heart full"></div><div class="pixel-heart full"></div>
+                                    <div class="pixel-heart full"></div>
+                                    <div class="pixel-heart full"></div>
+                                    <div class="pixel-heart full"></div>
+                                    <div class="pixel-heart full"></div>
                                     <div class="pixel-heart full"></div>
                                 </div>
                             </div>
-                            
-                            <div class="timer-digits-container" style="position: relative;">
-                                <!-- Point 19: Hourglass Animation -->
-                                <div id="break-hourglass" class="hourglass-container" style="display: none; position: absolute; left: 10px; top: 15px;">
-                                    <svg width="24" height="24" viewBox="0 0 16 16" fill="var(--neon-yellow)">
-                                        <path d="M2 0h12v2l-4 6 4 6v2H2v-2l4-6-4-6V0z" opacity="0.3"/>
-                                        <path class="sand-top" d="M4 2h8l-2 3H6L4 2z"/>
-                                        <path class="sand-bottom" d="M6 11h4l2 3H4l2-3z"/>
-                                        <rect class="sand-flow" x="7" y="5" width="2" height="6"/>
-                                    </svg>
-                                </div>
-                                <!-- Point 54: Session Title Input -->
-                                <input type="text" id="session-title" placeholder="TASK: NONE" value="" style="background: transparent; border: none; color: var(--neon-green); font-family: 'Courier New', Courier, monospace; text-align: center; width: 100%; outline: none; margin-bottom: 5px; font-weight: bold; font-size: 14px; text-shadow: 0 0 5px var(--neon-green);" />
-                                <div id="timer-display" class="timer-digits"><span id="pomo-icon" style="display:none; color: var(--neon-red); text-shadow: 0 0 5px var(--neon-red);">?? </span>45:00</div>
+
+                            <!-- Timer Display -->
+                            <div class="timer-digits-container">
+                                <div id="timer-display" class="timer-digits">45:00</div>
                                 <div id="session-state-badge" class="state-badge badge-idle">IDLE</div>
-                                <!-- Point 48: Next Break Countdown -->
-                                <div id="next-break-display" style="font-size: 14px; margin-top: 10px; color: var(--neon-purple); text-shadow: 0 0 5px var(--neon-purple); display: none;">
-                                    NEXT BREAK IN: <span id="next-break-time">--:--</span>
-                                </div>
                             </div>
                         </div>
 
-                        <!-- Point 9: XP Progress Bar -->
+                        <!-- XP Bar -->
                         <div class="xp-bar-container">
                             <div class="xp-label">EXP</div>
                             <div class="xp-bar-track">
-                                <div class="xp-bar-fill" id="xp-bar-fill" style="width: 0%"></div>
+                                <div class="xp-bar-fill" id="xp-bar-fill" style="width:0%"></div>
                             </div>
                         </div>
 
+                        <!-- Console Logs -->
                         <div class="console-box">
                             <div class="console-title">SYSTEM LOGS</div>
                             <div id="console-logs" class="console-content">
-                                <div class="log-line text-purple typewriter">[SYSTEM] System initialized. Ready.</div>
+                                <div class="log-line text-green">[ SYSTEM ] Initialized. Ready.</div>
                             </div>
                         </div>
 
+                        <!-- Action Buttons -->
                         <div class="hud-buttons-row">
-                            <button class="pixel-btn btn-green" id="btn-start" data-tooltip="Start Focus Session">START FOCUS</button>
-                            <button class="pixel-btn btn-purple" id="btn-pomo" data-tooltip="Start Pomodoro">POMODORO</button>
-                            <button class="pixel-btn btn-yellow" id="btn-pause" data-tooltip="Pause Session" disabled>PAUSE</button>
-                            <button class="pixel-btn btn-pink" id="btn-calibrate" data-tooltip="Calibrate Camera">CALIBRATE</button>
+                            <button class="pixel-btn btn-green" id="btn-start">START FOCUS</button>
+                            <button class="pixel-btn btn-purple" id="btn-pomo">POMODORO</button>
+                            <button class="pixel-btn btn-yellow" id="btn-pause" disabled>PAUSE</button>
+                            <button class="pixel-btn btn-pink" id="btn-calibrate">CALIBRATE</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Action Buttons -->
+                <!-- Right ABXY Buttons -->
                 <div class="case-side-right">
-                    <!-- Right Speaker Grills -->
-                    <div class="speaker-grill grill-right"><span></span><span></span><span></span><span></span></div>
-
+                    <div class="speaker-grill"><span></span><span></span><span></span><span></span></div>
                     <div class="abxy-group">
-                        <div class="abxy-btn btn-x" id="btn-console-x"><span>X</span><div class="dot"></div></div>
-                        <div class="abxy-btn btn-y" id="btn-console-y"><span>Y</span><div class="dot"></div></div>
-                        <div class="abxy-btn btn-a" id="btn-console-a"><span>A</span><div class="dot"></div></div>
-                        <div class="abxy-btn btn-b" id="btn-console-b"><span>B</span><div class="dot"></div></div>
+                        <div class="abxy-btn btn-x" id="btn-console-x"><span>X</span></div>
+                        <div class="abxy-btn btn-y" id="btn-console-y"><span>Y</span></div>
+                        <div class="abxy-btn btn-a" id="btn-console-a"><span>A</span></div>
+                        <div class="abxy-btn btn-b" id="btn-console-b"><span>B</span></div>
                     </div>
-                    
                     <div class="hardware-led-container">
                         <div class="led-label">PWR</div>
                         <div class="led-light online" id="led-power"></div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Lower Edge Row -->
+            <!-- Bottom Edge -->
             <div class="console-lower-edge">
                 <div class="menu-btn-container">
                     <button class="oval-btn" id="btn-console-select"><span>SELECT</span></button>
                     <button class="oval-btn" id="btn-console-start"><span>START</span></button>
                 </div>
-                <!-- Glitch Marquee Text -->
                 <div class="branding-text" id="logo-glitch">👾 PIXELPAL SYSTEM</div>
             </div>
-
         </div>
     </div>
 
-    <!-- Settings Drawer (Point 12) -->
-    <div id="settings-drawer-backdrop" class="settings-backdrop" style="display:none;" onclick="toggleSettingsDrawer()"></div>
+    <!-- ========== SETTINGS DRAWER ========== -->
+    <div id="settings-backdrop" class="settings-backdrop" style="display:none;"></div>
     <div id="settings-drawer" class="settings-drawer">
-        <div class="settings-header">`n            <span id="save-indicator" style="opacity:0; transition:opacity 0.2s; color:var(--neon-green); font-size:12px; margin-right:10px;">?? SAVED</span>
+        <div class="settings-header">
             <span>⚙️ SETTINGS</span>
-            <button id="btn-settings-close" class="mute-btn" onclick="toggleSettingsDrawer()">✕</button>
+            <button id="btn-settings-close" class="icon-btn">✕</button>
         </div>
         <div class="settings-body">
             <div class="settings-category">
@@ -334,128 +298,82 @@
                 <h3 class="settings-cat-title">⏱️ SESSION</h3>
                 <label class="settings-range">Focus (min): <input type="number" id="set-focus-min" value="45" min="5" max="120" class="settings-input"></label>
                 <label class="settings-range">Break (min): <input type="number" id="set-break-min" value="10" min="1" max="30" class="settings-input"></label>
-                <!-- Point 43: Custom Pet Name -->
-                <label class="settings-range">Pet Name: <input type="text" id="set-pet-name" value="PIXELPAL TOTORO" class="settings-input" style="width:100px;" oninput="document.getElementById('sprite-caption').innerText = this.value.toUpperCase() + ' IS ASLEEP';"></label>
             </div>
             <div class="settings-category">
                 <h3 class="settings-cat-title">🔔 ALERTS</h3>
                 <label class="settings-toggle"><input type="checkbox" id="set-sound" checked> Sound Effects</label>
                 <label class="settings-toggle"><input type="checkbox" id="set-popup" checked> Popup Alerts</label>
-                <label class="settings-range">Quiet Start: <input type="text" id="set-quiet-start" value="22:00" class="settings-input" maxlength="5"></label>
-                <label class="settings-range">Quiet End: <input type="text" id="set-quiet-end" value="08:00" class="settings-input" maxlength="5"></label>
             </div>
             <div class="settings-category">
                 <h3 class="settings-cat-title">🖥️ DISPLAY</h3>
-                <label class="settings-toggle"><input type="checkbox" id="set-scanlines" checked> Scanlines</label>
-                <!-- Point 42: CRT Scanline Opacity Slider -->
-                <label class="settings-range">CRT Opacity: <input type="range" id="crt-opacity-slider" min="0" max="1" step="0.1" value="0.5" class="settings-input" style="width:60px;" onchange="document.querySelector('.crt-vignette').style.opacity=this.value;"></label>
+                <label class="settings-toggle"><input type="checkbox" id="set-scanlines" checked> CRT Scanlines</label>
                 <label class="settings-toggle"><input type="checkbox" id="set-animations" checked> Animations</label>
             </div>
         </div>
     </div>
 
-    <!-- Alert Dialog -->
-    <div id="alert-overlay" class="hidden-alert">
-        <div class="alert-dialog-wrapper">
-            <div class="alert-dialog">
-                <div class="dialog-corner corner-tl"></div><div class="dialog-corner corner-tr"></div>
-                <div class="dialog-corner corner-bl"></div><div class="dialog-corner corner-br"></div>
-                <h2 id="alert-title">⚠️ ALERT</h2>
-                <p id="alert-desc">Alert message</p>
-                <div class="dialog-button-row">
-                    <button class="pixel-btn btn-green" id="btn-alert-dismiss">[ DISMISS ]</button>
-                </div>
+    <!-- ========== ALERT DIALOG ========== -->
+    <div id="alert-overlay" class="overlay-hidden">
+        <div class="alert-dialog">
+            <h2 id="alert-title">⚠️ ALERT</h2>
+            <p id="alert-desc">Alert message</p>
+            <button class="pixel-btn btn-green" id="btn-alert-dismiss">[ DISMISS ]</button>
+        </div>
+    </div>
+
+    <!-- ========== TOAST CONTAINER ========== -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ========== BOOT OVERLAY ========== -->
+    <div id="audio-unlock-overlay" class="boot-overlay">
+        <div class="boot-terminal" id="boot-terminal">
+            <div class="boot-lines" id="boot-lines"></div>
+            <div class="boot-prompt" id="boot-prompt-msg" style="text-align: center; margin-top: auto; padding-bottom: 40px;">
+                <h2 class="blink-text" style="font-family: var(--pixel-font); font-size: 18px; text-shadow: 0 0 20px var(--neon-green); color: var(--neon-green);">BOOT SYSTEM</h2>
+                <p style="font-family: var(--pixel-font); font-size: 10px; color: var(--text-dim); margin-top: 10px;">CLICK TO INITIALIZE</p>
             </div>
         </div>
     </div>
 
-    <!-- Point 14: Toast Container -->
-    <div id="toast-container" class="toast-container"></div>
-    
-    <!-- Audio Context Unlock Overlay -->
-    <div id="audio-unlock-overlay" class="audio-unlock">
-        <div class="unlock-prompt">
-            <h2 class="blink-fast">BOOT SYSTEM</h2>
-            <p>CLICK TO INITIALIZE</p>
-        </div>
-    </div>
-
-    <!-- Onboarding First-Run Wizard (Point 11) -->
+    <!-- ========== ONBOARDING OVERLAY ========== -->
     <div id="onboarding-overlay" class="onboarding-overlay" style="display:none;">
         <div class="onboarding-dialog">
-            <div class="onboarding-border-corner ob-tl"></div>
-            <div class="onboarding-border-corner ob-tr"></div>
-            <div class="onboarding-border-corner ob-bl"></div>
-            <div class="onboarding-border-corner ob-br"></div>
-            <div class="onboarding-step-indicator">
-                <span class="ob-dot ob-dot-active" id="ob-dot-0"></span>
+            <div class="onboarding-dots">
+                <span class="ob-dot ob-active" id="ob-dot-0"></span>
                 <span class="ob-dot" id="ob-dot-1"></span>
                 <span class="ob-dot" id="ob-dot-2"></span>
                 <span class="ob-dot" id="ob-dot-3"></span>
             </div>
-            <div id="onboarding-content" class="onboarding-content">
-                <div class="ob-icon">⚔️</div>
-                <h2 id="ob-title" class="ob-title"></h2>
-                <p id="ob-desc" class="ob-desc"></p>
+            <div class="ob-icon-box"><span id="ob-icon">⚔️</span></div>
+            <h2 id="ob-title" class="ob-title"></h2>
+            <p id="ob-desc" class="ob-desc"></p>
+            <div class="ob-actions">
+                <button id="ob-btn-back" class="pixel-btn btn-yellow" style="display:none;">◀ BACK</button>
+                <button id="ob-btn-next" class="pixel-btn btn-green">NEXT ▶</button>
             </div>
-            <div class="onboarding-actions">
-                <button id="ob-btn-back" class="pixel-btn btn-yellow ob-btn" style="display:none;">◀ BACK</button>
-                <button id="ob-btn-next" class="pixel-btn btn-green ob-btn">NEXT ▶</button>
-            </div>
-            <div class="ob-hint">▼ PRESS A TO CONTINUE ▼</div>
         </div>
     </div>
 
-    <!-- Point 15: Celebration Screen -->
-    <div id="celebration-overlay" class="celebration-overlay hidden-alert" onclick="this.classList.add('hidden-alert')">
-        <div class="confetti-container"></div>
+    <!-- ========== CELEBRATION OVERLAY ========== -->
+    <div id="celebration-overlay" class="overlay-hidden celebration-overlay">
         <div class="celebration-content">
-            <h1 class="level-up-text blink-fast">LEVEL UP!</h1>
-            <div class="pixelpal-dance">
-                <svg width="150" height="150" viewBox="0 0 32 32">
-                    <rect x="10" y="8" width="12" height="16" fill="#7f7f7f" />
-                    <rect x="8" y="10" width="16" height="12" fill="#7f7f7f" />
-                    <rect x="10" y="14" width="12" height="10" fill="#a0a0a0" />
-                    <rect id="dance-eye-l" x="11" y="11" width="2" height="2" fill="#fff" />
-                    <rect id="dance-eye-r" x="19" y="11" width="2" height="2" fill="#fff" />
-                    <rect x="11.5" y="11.5" width="1" height="1" fill="#000" />
-                    <rect x="19.5" y="11.5" width="1" height="1" fill="#000" />
-                    <rect x="15" y="13" width="2" height="1" fill="#000" />
-                    <rect x="11" y="6" width="2" height="3" fill="#7f7f7f" />
-                    <rect x="19" y="6" width="2" height="3" fill="#7f7f7f" />
-                </svg>
-            </div>
+            <h1 class="level-up-text blink-text">LEVEL UP!</h1>
             <p>Session Complete!</p>
-            <p style="font-size: 12px; margin-top: 10px; color: var(--neon-yellow);">Click anywhere to continue</p>
+            <p class="small-text">Click anywhere to continue</p>
         </div>
-    </div>
-    
-    <!-- Point 20: Calibration Countdown Overlay -->
-    <div id="calibration-countdown-overlay" class="celebration-overlay hidden-alert" style="z-index: 100020;">
-        <div class="countdown-content" style="text-align: center;">
-            <div id="countdown-text" style="font-family: 'Orbitron', monospace; font-size: 8rem; color: var(--neon-green); text-shadow: 0 0 30px var(--neon-green); animation: pulseZoom 1s infinite;">3</div>
-            <p style="color: var(--neon-purple); font-size: 1rem; margin-top: 20px;">HOLD STILL...</p>
-        </div>
-    </div>
-    
-    <!-- Point 24: Boss Key Overlay -->
-    <div id="boss-key-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: white; z-index: 999999; color: black; font-family: Arial, sans-serif; overflow: hidden;">
-        <div style="background: #217346; color: white; padding: 10px; font-weight: bold;">Book1 - Excel</div>
-        <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px;">
-            <tr style="background: #f3f2f1; text-align: center; border: 1px solid #c8c6c4;"><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
-            <tr style="border: 1px solid #c8c6c4;"><td style="background: #f3f2f1; text-align: center; width: 30px;">1</td><td style="border: 1px solid #e1dfdd; padding: 5px;">Q3 Revenue</td><td style="border: 1px solid #e1dfdd; padding: 5px;">$45,200</td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td></tr>
-            <tr style="border: 1px solid #c8c6c4;"><td style="background: #f3f2f1; text-align: center;">2</td><td style="border: 1px solid #e1dfdd; padding: 5px;">Q4 Projections</td><td style="border: 1px solid #e1dfdd; padding: 5px;">$51,500</td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td></tr>
-            <tr style="border: 1px solid #c8c6c4;"><td style="background: #f3f2f1; text-align: center;">3</td><td style="border: 1px solid #e1dfdd; padding: 5px;">YoY Growth</td><td style="border: 1px solid #e1dfdd; padding: 5px;">+14%</td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td></tr>
-            <tr style="border: 1px solid #c8c6c4;"><td style="background: #f3f2f1; text-align: center;">4</td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td></tr>
-            <tr style="border: 1px solid #c8c6c4;"><td style="background: #f3f2f1; text-align: center;">5</td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td><td style="border: 1px solid #e1dfdd; padding: 5px;"></td></tr>
-        </table>
     </div>
 
-    <!-- Point 33: Hydration Overlay -->
-    <div id="hydration-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 100100; flex-direction: column; align-items: center; justify-content: center; color: cyan; font-family: 'Orbitron', monospace;">
-        <h1 style="font-size: 2rem; margin-bottom: 20px; animation: flash 1s infinite;">HYDRATION CRITICAL</h1>
-        <p style="margin-bottom: 30px; color: white;">PixelPal has determined you are dehydrated.</p>
-        <button onclick="document.getElementById('hydration-overlay').style.display='none'; playWaterSound();" class="primary-btn" style="border-color: cyan; color: cyan;">I DRANK WATER</button>
+    <!-- ========== CALIBRATION COUNTDOWN ========== -->
+    <div id="calibration-overlay" class="overlay-hidden calibration-overlay">
+        <div id="countdown-text" class="countdown-number">3</div>
+        <p class="countdown-label">HOLD STILL...</p>
+    </div>
+
+    <!-- ========== STATUS TICKER ========== -->
+    <div class="status-ticker-container">
+        <div class="ticker-content" id="status-ticker">
+            SYSTEM BOOTING... AWAITING SENSOR DATA...
+        </div>
     </div>
 
     <script src="app.js"></script>
